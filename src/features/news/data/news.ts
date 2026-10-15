@@ -1,17 +1,6 @@
 import type { NewsItem } from "@/src/types/domain";
 
-const lorem =
-  "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
-
-export const news: NewsItem[] = Array.from({ length: 24 }).map((_, index) => ({
-  slug: `medical-update-${index + 1}`,
-  title: `Medical Update ${index + 1} Lorem Ipsum`,
-  subtitle: `${lorem}.`,
-  date: `2026-04-${String((index % 28) + 1).padStart(2, "0")}`,
-  image: "/placeholders/news.svg",
-  content: [
-    `${lorem} ${lorem}.`,
-    `${lorem} ${lorem}.`,
-    `${lorem} ${lorem}.`,
-  ],
-}));
+export const news: NewsItem[] = [
+  { slug: "fond-uz-patients", title: "Как FondUz помогает найти подходящую медицинскую программу", subtitle: "Понятный маршрут от направления лечения до контактов профильной организации.", date: "2026-10-01", image: "/placeholders/news.svg", content: ["Платформа FondUz систематизирует направления медицинской помощи, чтобы пациентам и их близким было проще найти профильную организацию.", "Перед обращением уточните условия поддержки и подготовьте медицинские документы."] },
+  { slug: "patient-support", title: "Что подготовить перед обращением за помощью", subtitle: "Короткий список документов и сведений для первого обращения.", date: "2026-09-15", image: "/placeholders/news.svg", content: ["Подготовьте актуальные выписки, результаты обследований, контактный телефон и краткое описание запроса.", "Состав документов зависит от организации и программы; подтвердите перечень напрямую."] },
+];

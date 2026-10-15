@@ -1,4 +1,4 @@
-import { prices } from "@/src/features/prices/data/prices";
+import { getPrices } from "@/src/lib/content";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { PricesHero } from "./components/PricesHero";
 import { PricesContainer } from "./components/PricesContainer";
@@ -9,6 +9,7 @@ export default async function PricesPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("prices");
+  const prices = await getPrices(locale);
 
   return (
     <div className="pb-16 md:pb-24">

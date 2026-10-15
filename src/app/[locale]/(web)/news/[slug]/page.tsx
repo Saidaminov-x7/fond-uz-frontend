@@ -1,5 +1,5 @@
 import { Container } from "@/src/components/ui/Container";
-import { news } from "@/src/features/news/data/news";
+import { getNews } from "@/src/lib/content";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { NewsDetailContent } from "./components/NewsDetailContent";
@@ -13,7 +13,7 @@ export default async function NewsDetailsPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("news");
   
-  const item = news.find((entry) => entry.slug === slug);
+  const item = (await getNews(locale)).find((entry) => entry.slug === slug);
   if (!item) notFound();
 
   return (

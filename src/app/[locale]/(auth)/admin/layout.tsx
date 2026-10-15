@@ -14,12 +14,13 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
-    const isLoggedIn = localStorage.getItem("isLoggedIn");
-    if (!isLoggedIn) {
-      router.replace("/login");
-    } else {
-      setIsReady(true);
-    }
+    let active = true;
+    void fetch("/api/auth/session", { cache: "no-store" }).then((response) => {
+      if (!active) return;
+      if (response.ok) setIsReady(true);
+      else router.replace("/login");
+    }).catch(() => router.replace("/login"));
+    return () => { active = false; };
   }, [router]);
 
   const toggleLanguage = () => {
@@ -28,8 +29,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   };
 
   const handleLogout = () => {
-    localStorage.removeItem("isLoggedIn");
-    router.push("/login");
+    void fetch("/api/auth/logout", { method: "POST" }).finally(() => router.push("/login"));
   };
 
   if (!isReady) return null;

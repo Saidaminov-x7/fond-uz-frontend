@@ -33,6 +33,7 @@ export function MotionViewport({
   staggerChildren,
   ...props
 }: Props) {
+  const reduceMotion = typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const variants: Variants = {
     initial: {
       opacity: 0,
@@ -54,8 +55,8 @@ export function MotionViewport({
 
   return (
     <motion.div
-      initial="initial"
-      whileInView="animate"
+      initial={reduceMotion ? false : "initial"}
+      whileInView={reduceMotion ? undefined : "animate"}
       viewport={{ once: true, margin: "-100px" }}
       variants={variants}
       {...props}

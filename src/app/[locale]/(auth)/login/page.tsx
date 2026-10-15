@@ -39,7 +39,6 @@ export default function LoginPage() {
       const contentType = res.headers.get("content-type");
       if (res.ok) {
         // Success! Redirect to admin dashboard
-        localStorage.setItem("isLoggedIn", "true");
         router.push("/admin");
       } else if (contentType && contentType.includes("application/json")) {
         const data = await res.json();

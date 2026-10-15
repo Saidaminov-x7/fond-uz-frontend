@@ -50,8 +50,9 @@ export function ContactForm({
     defaultValues: { name: "", email: "", message: "" },
   });
 
-  const onSubmit = (data: FormValues) => {
-    console.log("Contact form submitted:", data);
+  const onSubmit = async (data: FormValues) => {
+    const response = await fetch("/api/contacts", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
+    if (!response.ok) throw new Error("Не удалось отправить сообщение");
     reset();
     setSuccess(successMessage);
     setTimeout(() => setSuccess(""), 5000);

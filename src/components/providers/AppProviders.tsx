@@ -3,9 +3,9 @@
 import { ThemeProvider } from "next-themes";
 import type { ReactNode } from "react";
 
-export function AppProviders({ children }: { children: ReactNode }) {
+export function AppProviders({ children, nonce }: { children: ReactNode; nonce?: string }) {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+    <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange nonce={nonce}>
       {children}
     </ThemeProvider>
   );

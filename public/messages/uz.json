@@ -1,0 +1,264 @@
+{
+  "common": {
+    "brand": "FondUz",
+    "view": "Batafsil",
+    "viewAll": "Barchasini ko'rish",
+    "backToList": "Ro'yxatga qaytish"
+  },
+  "notFound": {
+    "title": "Sahifa topilmadi",
+    "description": "Siz so'ragan sahifa mavjud emas yoki ko'chirilgan.",
+    "backHome": "Bosh sahifaga"
+  },
+  "nav": {
+    "home": "Bosh sahifa",
+    "about": "Loyiha haqida",
+    "services": "Tibbiy yo'nalishlar",
+    "doctors": "Shifokorlar",
+    "prices": "Narxlar",
+    "news": "Yangiliklar",
+    "contacts": "Aloqa",
+    "faqs": "Savol-javob"
+  },
+  "home": {
+    "heroTitle": "Tibbiy yordam topishda ko'mak",
+    "heroSubtitle": "Tibbiy yo'nalishlarni o'rganing va yordam bera oladigan tashkilotlar bilan bog'laning.",
+    "heroCta": "Yo'nalishlarni ko'rish",
+    "activityTitle": "FondUz qanday yordam beradi",
+    "activityText": "FondUz tibbiy yordam dasturlari haqida ma'lumotni yagona tushunarli qo'llanmada jamlaydi. Yo'nalishni tanlang, tashkilotlarni ko'rib chiqing va shartlarni aniqlash uchun ularga bevosita murojaat qiling.",
+    "newsTitle": "So‘nggi yangiliklar",
+    "newsSubtitle": "Platforma yangiliklari va foydali tavsiyalar.",
+    "faqsTitle": "Ko‘p so‘raladigan savollar",
+    "faqsSubtitle": "Yordam topish va tashkilotlarga murojaat qilish haqida javoblar.",
+    "viewAllNews": "Barcha yangiliklar",
+    "viewAllFaqs": "Barcha savollar",
+    "heroEyebrow": "Tibbiy yordamga tushunarli yo‘l",
+    "heroSecondaryCta": "Qanday ishlaydi",
+    "heroImageAlt": "Samarqanddagi Registon maydoni tong paytida",
+    "heroCountry": "O‘zbekiston",
+    "highlightOne": "Tibbiy yo‘nalishlar va mavjud dasturlarni bir joyda o‘rganing.",
+    "highlightTwo": "Tashkilotlar haqidagi ma’lumotlarni ko‘rib, mosini tanlang.",
+    "highlightThree": "Shartlarni aniqlash uchun tashkilot bilan bevosita bog‘laning."
+  },
+  "about": {
+    "title": "FondUz loyihasi haqida",
+    "subtitle": "Tibbiy dasturlar va tashkilotlar bo'yicha tushunarli qo'llanma.",
+    "body": "Bemorlar va ularning yaqinlariga mos yordam dasturlarini topish va tashkilotlar bilan bog'lanishda yordam beramiz."
+  },
+  "services": {
+    "title": "Tibbiy yo'nalishlar",
+    "subtitle": "Yordam turlarini o'rganing va kerakli tashkilotlarni toping.",
+    "fundsCount": "Tashkilotlar: {count}",
+    "emptyPartners": "Hamkor tashkilotlar ro'yxati hali to'ldirilmagan. Ma'lumot uchun FondUz jamoasiga murojaat qiling.",
+    "open": "Batafsil",
+    "back": "Barcha yo‘nalishlar",
+    "partnerTitle": "Tashkilotlar",
+    "phone": "Telefon",
+    "website": "Veb-sayt",
+    "extraInfo": "Yordam shartlarini tashkilotning o'zidan aniqlang."
+  },
+  "doctors": {
+    "title": "Mutaxassislar",
+    "subtitle": "Davolanish yo'nalishini tanlash bo'yicha maslahat.",
+    "open": "Mutaxassis profili",
+    "email": "Elektron pochta",
+    "phone": "Telefon"
+  },
+  "prices": {
+    "title": "Xizmatlar va narxlar",
+    "subtitle": "Amaldagi narxlar va yordam shartlarini tibbiyot tashkilotidan aniqlang.",
+    "toggleList": "Ro‘yxat",
+    "toggleCards": "Kartalar",
+    "includes": "Tarkibiga kiradi"
+  },
+  "news": {
+    "title": "Yangiliklar va tavsiyalar",
+    "subtitle": "Bemorlar uchun yangilik va foydali ma’lumotlar.",
+    "open": "Batafsil",
+    "back": "Barcha yangiliklar"
+  },
+  "contacts": {
+    "title": "Biz bilan bog‘laning",
+    "subtitle": "Savolingizni yuboring, kerakli aloqa ma'lumotini topishga yordam beramiz.",
+    "phoneLabel": "Telefon",
+    "emailLabel": "Elektron pochta",
+    "addressLabel": "Manzil",
+    "phoneValue": "+998 71 200 00 00",
+    "emailValue": "info@fond.uz",
+    "addressValue": "Toshkent, O‘zbekiston"
+  },
+  "faqs": {
+    "title": "Ko‘p so‘raladigan savollar",
+    "subtitle": "Platforma haqida asosiy savollarga javoblar.",
+    "items": [
+      {
+        "question": "Yo'nalishim bo'yicha fondni qanday topsam bo'ladi?",
+        "answer": "Yo'nalishlar bo'limini oching, mutaxassislikni tanlang va shartlarni aniqlash uchun tashkilotga murojaat qiling."
+      },
+      {
+        "question": "Moliyalashtirish qarorini FondUz qabul qiladimi?",
+        "answer": "FondUz ma'lumot va aloqalarni topishga yordam beradi. Yordam qarorini har bir tashkilot o'zi qabul qiladi."
+      },
+      {
+        "question": "Qanday hujjatlarni tayyorlash kerak?",
+        "answer": "Odatda tibbiy xulosalar va tekshiruv natijalari kerak. Aniq ro'yxatni tashkilotdan so'rang."
+      }
+    ]
+  },
+  "forms": {
+    "name": "Ism",
+    "email": "Elektron pochta",
+    "message": "Xabar",
+    "submit": "Xabar yuborish",
+    "success": "Rahmat. Xabaringiz yuborildi."
+  },
+  "errors": {
+    "nameRequired": "Ismingizni kiriting",
+    "emailInvalid": "To‘g‘ri elektron pochta manzilini kiriting",
+    "messageMin": "Xabar kamida 10 ta belgidan iborat bo‘lishi kerak"
+  },
+  "footer": {
+    "pages": "Sahifalar",
+    "contacts": "Aloqa",
+    "description": "Tibbiy dasturlar va ixtisoslashgan tashkilotlarni topishga ko'maklashamiz.",
+    "copyright": "Barcha huquqlar himoyalangan."
+  },
+  "Common": {
+    "themeLight": "Yorug‘ mavzu",
+    "themeDark": "Qorong‘i mavzu"
+  },
+  "Navigation": {
+    "home": "Bosh sahifa",
+    "about": "Loyiha haqida",
+    "services": "Yo'nalishlar",
+    "blog": "Yangiliklar",
+    "doctors": "Shifokorlar",
+    "prices": "Narxlar",
+    "contact": "Aloqa",
+    "faq": "Savol-javob",
+    "searchPlaceholder": "Qidirish"
+  },
+  "SearchPage": {
+    "title": "Saytdan qidirish",
+    "submit": "Qidirish",
+    "queryLabel": "Qidiruv so‘rovi",
+    "placeholder": "Shifokorlar, yo‘nalishlar, yangiliklar…",
+    "resultsFound": "Qidiruv natijalari",
+    "noResults": "Hech narsa topilmadi",
+    "backToHome": "Bosh sahifaga",
+    "loading": "Qidirilmoqda…",
+    "hint": "Yo'nalish yoki xizmat nomini kiriting",
+    "serviceNames": "Tibbiy yo'nalishlar"
+  },
+  "Auth": {
+    "login": "Admin paneliga kirish",
+    "email": "Elektron pochta",
+    "password": "Parol",
+    "submit": "Kirish",
+    "noAccount": "Hisobingiz yo‘qmi?",
+    "register": "Ro‘yxatdan o‘tish mavjud emas",
+    "subTitle": "FondUz ma’lumotlarini boshqarish"
+  },
+  "BlogPage": {
+    "title": "Yangiliklar va tavsiyalar",
+    "sub": "Foydali ma’lumotlar va yangilanishlar",
+    "readMore": "Batafsil",
+    "newsletterTitle": "FondUz yangiliklari",
+    "newsletterSub": "Yangi maqolalarni elektron pochtangizga oling.",
+    "newsletterEmailPh": "Elektron pochta",
+    "newsletterCta": "Obuna bo‘lish",
+    "articles": "Maqolalar"
+  },
+  "FAQPage": {
+    "title": "Ko‘p so‘raladigan savollar",
+    "sub": "Ko‘p beriladigan savollarga javoblar"
+  },
+  "records": {
+    "services": {
+      "kardiologiya": {
+        "name": "Kardiologiya"
+      },
+      "neyroxirurgiya": {
+        "name": "Neyroxirurgiya"
+      },
+      "onkologiya": {
+        "name": "Onkologiya"
+      },
+      "reabilitatsiya": {
+        "name": "Reabilitatsiya"
+      }
+    },
+    "news": {
+      "fond-uz-patients": {
+        "title": "FondUz tibbiy yordam dasturini topishga qanday ko'mak beradi",
+        "subtitle": "Tibbiy yo'nalishdan yordam bera oladigan tashkilotgacha aniq yo'l.",
+        "content": [
+          "FondUz tibbiy yordam dasturlari haqidagi ma'lumotlarni jamlaydi. Bu bemorlar va ularning yaqinlariga mos tashkilotlarni topishni osonlashtiradi.",
+          "Tashkilotga murojaat qilishdan oldin uning talablarini aniqlang va so'ralgan tibbiy hujjatlarni tayyorlang."
+        ]
+      },
+      "patient-support": {
+        "title": "Yordam so'rashdan oldin nimalarni tayyorlash kerak",
+        "subtitle": "Tashkilot bilan ilk suhbat uchun qisqa ro'yxat.",
+        "content": [
+          "Yaqinda olingan tibbiy xulosalar, tekshiruv natijalari, siz bilan bog'lanish mumkin bo'lgan telefon raqami va murojaatingizning qisqa tavsifini tayyorlang.",
+          "Talablar tashkilot va dasturga qarab farq qiladi. Aniq ro'yxatni tashkilotning o'zidan so'rang."
+        ]
+      }
+    },
+    "faqs": [
+      {
+        "question": "Yo'nalishim bo'yicha tashkilotni qanday topsam bo'ladi?",
+        "answer": "Tibbiy yo'nalishlar bo'limini oching, kerakli yo'nalishni tanlang va talablarni aniqlash uchun ko'rsatilgan tashkilotga murojaat qiling."
+      },
+      {
+        "question": "Moliyaviy yordam haqida qarorni FondUz qabul qiladimi?",
+        "answer": "FondUz ma'lumot va aloqalarni topishga yordam beradi. Yordam haqida qarorni har bir tashkilot mustaqil qabul qiladi."
+      },
+      {
+        "question": "Qaysi hujjatlarni tayyorlash kerak?",
+        "answer": "Odatda tibbiy xulosa va tekshiruv natijalari so'raladi. Aniq ro'yxatni tanlagan tashkilotingizdan tasdiqlang."
+      }
+    ],
+    "doctors": {
+      "alisher-karimov": {
+        "name": "Alisher Karimov",
+        "profession": "Kardiologiya",
+        "bio": "Kardiologiya dasturlari va bemorlarga muvofiqlashtirilgan yordam bo'yicha mutaxassis."
+      },
+      "malika-rahimova": {
+        "name": "Malika Rahimova",
+        "profession": "Neyroxirurgiya",
+        "bio": "Bemorlarni yo'naltirish va murakkab muolajalar bo'yicha yordam maslahatchisi."
+      }
+    },
+    "prices": {
+      "consultation": {
+        "title": "Mutaxassis maslahati",
+        "price": "Tibbiyot tashkilotidan aniqlang",
+        "includes": [
+          "Dastlabki maslahat",
+          "Kerakli hujjatlar ro'yxati"
+        ]
+      },
+      "diagnostics": {
+        "title": "Diagnostika dasturi",
+        "price": "Tibbiyot tashkilotidan aniqlang",
+        "includes": [
+          "Tekshiruvlarni shifokor belgilaydi",
+          "Narxni klinika tasdiqlaydi"
+        ]
+      }
+    }
+  },
+  "privacy": {
+    "title": "Maxfiylik siyosati",
+    "sub": "FondUz ma’lumotlarni qanday qayta ishlaydi",
+    "section1Title": "Yig‘iladigan ma’lumotlar",
+    "section1Desc": "Murojaatingizga javob berish uchun shakllarda yuborgan ma’lumotlardan foydalanamiz.",
+    "section2Title": "Ma’lumotlardan foydalanish",
+    "section2Desc": "Ma’lumotlaringiz so‘ralgan yordamni ko‘rsatish va siz bilan bog‘lanish uchun ishlatiladi.",
+    "section3Title": "Ma’lumotlar xavfsizligi",
+    "section3Desc": "Ma’lumotlarni ruxsatsiz kirishdan himoya qilish uchun tegishli choralarni ko‘ramiz."
+  }
+}

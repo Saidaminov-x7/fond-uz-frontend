@@ -1,36 +1,13 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FondUz Frontend
 
-## Getting Started
+Responsive Next.js 15 site with Russian, English, and Uzbek locales, server-rendered content, optimized imagery, and an admin login/API proxy.
 
-First, run the development server:
+## Run locally
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Install dependencies with `npm ci`, configure `API_URL` to the backend origin, provide a 32+ character `JWT_SECRET` for admin sessions, and run `npm run dev`. If API requests are restricted to the Cloudflare Worker, configure the matching server-only `CLOUDFLARE_ORIGIN_SECRET`.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Locale dictionaries live in `src/messages/{ru,en,uz}.json`; matching static copies are served from `public/messages/`. Run `npm run i18n:check` after editing translations. The hero image optimizer is `npm run images:optimize`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Deploy this folder as its own Vercel project. Configure server-only `API_URL`, `JWT_SECRET`, and optional `CLOUDFLARE_ORIGIN_SECRET`. Add the resulting origin to the API's `CORS_ORIGINS`. Do not expose secrets through `NEXT_PUBLIC_*` variables or commit `.env` files.

@@ -1,6 +1,6 @@
 import { Container } from "@/src/components/ui/Container";
 import { Pagination } from "@/src/components/ui/Pagination";
-import { doctors } from "@/src/features/doctors/data/doctors";
+import { getDoctors } from "@/src/lib/content";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { DoctorsHero } from "./components/DoctorsHero";
 import { DoctorsGrid } from "./components/DoctorsGrid";
@@ -16,6 +16,7 @@ export default async function DoctorsPage({ params, searchParams }: Props) {
   const { page } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("doctors");
+  const doctors = await getDoctors(locale);
 
   const { items: pageDoctors, totalPages, currentPage } = getPaginatedItems(
     doctors,

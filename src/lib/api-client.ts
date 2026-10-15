@@ -11,7 +11,7 @@ export async function apiGetJson<T>(path: string): Promise<T | null> {
   try {
     const res = await fetch(url, {
       next: { revalidate: 60 },
-      headers: { Accept: "application/json" },
+      headers: { Accept: "application/json", ...(typeof window === "undefined" && process.env.CLOUDFLARE_ORIGIN_SECRET ? { "X-FondUz-Origin": process.env.CLOUDFLARE_ORIGIN_SECRET } : {}) },
     });
     if (!res.ok) return null;
     return (await res.json()) as T;

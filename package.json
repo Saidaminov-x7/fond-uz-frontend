@@ -6,13 +6,15 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint && node -e \"console.log('LINT_PASSED')\"",
+    "typecheck": "tsc --noEmit && node -e \"console.log('TYPECHECK_PASSED')\"",
+    "i18n:check": "node scripts/audit-i18n.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
     "framer-motion": "^12.38.0",
-    "next": "15.5.14",
-    "next-intl": "^4.9.0",
+    "next": "^15.5.28",
+    "next-intl": "^4.14.9",
     "next-themes": "^0.4.6",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -26,8 +28,11 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "15.5.14",
+    "eslint-config-next": "^15.5.28",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "allowScripts": { "@swc/core": true, "sharp": true }
+  ,"overrides": { "postcss": "^8.5.30", "braces": "^3.0.3", "fast-glob": "^3.3.3", "sharp": "^0.35.5", "micromatch": "^4.0.8" },
+  "optionalDependencies": { "@swc/core-win32-x64-msvc": "^1.16.18", "@swc/core-linux-x64-gnu": "^1.16.18" }
 }

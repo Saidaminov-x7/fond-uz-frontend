@@ -1,5 +1,5 @@
 import { Container } from "@/src/components/ui/Container";
-import { doctors } from "@/src/features/doctors/data/doctors";
+import { getDoctors } from "@/src/lib/content";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { DoctorInfo } from "./components/DoctorInfo";
@@ -14,7 +14,7 @@ export default async function DoctorDetailsPage({ params }: Props) {
   const t = await getTranslations("doctors");
   const tc = await getTranslations("common");
   
-  const doctor = doctors.find((item) => item.id === id);
+  const doctor = (await getDoctors(locale)).find((item) => item.id === id);
   if (!doctor) notFound();
 
   return (

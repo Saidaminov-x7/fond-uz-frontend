@@ -16,13 +16,12 @@ export default async function HomePage({ params }: Props) {
   const t = await getTranslations("home");
   const tc = await getTranslations("common");
 
-  const newsCards = getHomePreviewNews();
-  const faqItems = getHomePreviewFaqs();
+  const [newsCards, faqItems] = await Promise.all([getHomePreviewNews(locale), getHomePreviewFaqs(locale)]);
 
   return (
     <div>
-      <HeroSection title={t("heroTitle")} subtitle={t("heroSubtitle")} actionLabel={t("heroCta")} />
-      <ActivitySection title={t("activityTitle")} text={t("activityText")} />
+      <HeroSection title={t("heroTitle")} subtitle={t("heroSubtitle")} actionLabel={t("heroCta")} eyebrow={t("heroEyebrow")} secondaryLabel={t("heroSecondaryCta")} imageAlt={t("heroImageAlt")} />
+      <ActivitySection title={t("activityTitle")} text={t("activityText")} highlights={[t("highlightOne"), t("highlightTwo"), t("highlightThree")]} />
       <NewsPreviewSection
         title={t("newsTitle")}
         subtitle={t("newsSubtitle")}

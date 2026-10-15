@@ -1,0 +1,211 @@
+{
+  "common": {
+    "brand": "FondUz",
+    "view": "Learn more",
+    "viewAll": "View all",
+    "backToList": "Back to list"
+  },
+  "notFound": {
+    "title": "Page not found",
+    "description": "The requested page does not exist or has moved.",
+    "backHome": "Home"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "services": "Care areas",
+    "doctors": "Doctors",
+    "prices": "Costs",
+    "news": "News",
+    "contacts": "Contact",
+    "faqs": "FAQ"
+  },
+  "home": {
+    "heroTitle": "Find support for medical care",
+    "heroSubtitle": "Explore care programs and contact organizations that can help.",
+    "heroCta": "Explore care areas",
+    "activityTitle": "How FondUz helps",
+    "activityText": "FondUz brings medical support programs together in one clear guide. Choose a care area, review available organizations, and contact them directly to confirm eligibility and next steps.",
+    "newsTitle": "Latest news",
+    "newsSubtitle": "Platform updates and practical guidance.",
+    "faqsTitle": "Frequently asked questions",
+    "faqsSubtitle": "Answers about finding care and contacting organizations.",
+    "viewAllNews": "All news",
+    "viewAllFaqs": "All questions",
+    "heroEyebrow": "A clearer path to medical support",
+    "heroSecondaryCta": "How it works",
+    "heroImageAlt": "Registan Square in Samarkand at sunrise",
+    "heroCountry": "Uzbekistan",
+    "highlightOne": "Explore care areas and available programs in one place.",
+    "highlightTwo": "Review organization information and choose what fits.",
+    "highlightThree": "Contact an organization directly to confirm eligibility."
+  },
+  "about": {
+    "title": "About FondUz",
+    "subtitle": "A clear guide to medical programs and organizations.",
+    "body": "We help patients and families find relevant support programs and contact the organizations directly."
+  },
+  "services": {
+    "title": "Medical care areas",
+    "subtitle": "Explore care areas and find relevant organizations.",
+    "fundsCount": "Organizations: {count}",
+    "emptyPartners": "Partner organizations have not been added yet. Contact the FondUz team for information.",
+    "open": "Learn more",
+    "back": "All care areas",
+    "partnerTitle": "Organizations",
+    "phone": "Phone",
+    "website": "Website",
+    "extraInfo": "Contact the organization directly to confirm support terms."
+  },
+  "doctors": {
+    "title": "Specialists",
+    "subtitle": "Expert guidance for finding a care pathway.",
+    "open": "Specialist profile",
+    "email": "Email",
+    "phone": "Phone"
+  },
+  "prices": {
+    "title": "Costs and services",
+    "subtitle": "Ask the medical organization to confirm current costs and support terms.",
+    "toggleList": "List",
+    "toggleCards": "Cards",
+    "includes": "Included"
+  },
+  "news": {
+    "title": "News and guidance",
+    "subtitle": "Updates and practical information for patients.",
+    "open": "Read more",
+    "back": "All news"
+  },
+  "contacts": {
+    "title": "Contact us",
+    "subtitle": "Send a question and we will help you find the right contact.",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email",
+    "addressLabel": "Address",
+    "phoneValue": "+998 71 200 00 00",
+    "emailValue": "info@fond.uz",
+    "addressValue": "Tashkent, Uzbekistan"
+  },
+  "faqs": {
+    "title": "Frequently asked questions",
+    "subtitle": "Answers to common questions about the platform.",
+    "items": [
+      {
+        "question": "How do I find a fund for my care area?",
+        "answer": "Open Care areas, choose a specialty, and contact the listed organization to confirm its terms."
+      },
+      {
+        "question": "Does FondUz decide whether to fund care?",
+        "answer": "FondUz helps you find information and contacts. Each organization makes its own support decisions."
+      },
+      {
+        "question": "Which documents should I prepare?",
+        "answer": "Medical records and test results are often needed. Confirm the exact list with the organization."
+      }
+    ]
+  },
+  "forms": {
+    "name": "Name",
+    "email": "Email",
+    "message": "Message",
+    "submit": "Send message",
+    "success": "Thank you. Your message has been sent."
+  },
+  "errors": {
+    "nameRequired": "Enter your name",
+    "emailInvalid": "Enter a valid email address",
+    "messageMin": "Message must contain at least 10 characters"
+  },
+  "footer": {
+    "pages": "Pages",
+    "contacts": "Contacts",
+    "description": "Helping people find medical programs and specialist organizations.",
+    "copyright": "All rights reserved."
+  },
+  "Common": {
+    "themeLight": "Light theme",
+    "themeDark": "Dark theme"
+  },
+  "Navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Care areas",
+    "blog": "News",
+    "doctors": "Doctors",
+    "prices": "Costs",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "searchPlaceholder": "Search"
+  },
+  "SearchPage": {
+    "title": "Search the site",
+    "submit": "Search",
+    "queryLabel": "Search query",
+    "placeholder": "Doctors, care areas, news…",
+    "resultsFound": "Search results",
+    "noResults": "No results found",
+    "backToHome": "Home",
+    "loading": "Searching…",
+    "hint": "Enter a care area or service",
+    "serviceNames": "Medical care areas"
+  },
+  "Auth": {
+    "login": "Admin sign in",
+    "email": "Email",
+    "password": "Password",
+    "submit": "Sign in",
+    "noAccount": "Need an account?",
+    "register": "Registration is unavailable",
+    "subTitle": "Manage FondUz content"
+  },
+  "BlogPage": {
+    "title": "News and guidance",
+    "sub": "Updates and practical information",
+    "readMore": "Read more",
+    "newsletterTitle": "FondUz updates",
+    "newsletterSub": "Receive new articles by email.",
+    "newsletterEmailPh": "Email address",
+    "newsletterCta": "Subscribe",
+    "articles": "Articles"
+  },
+  "FAQPage": {
+    "title": "Frequently asked questions",
+    "sub": "Answers to common questions"
+  },
+  "records": {
+    "services": {
+      "kardiologiya": { "name": "Cardiology" },
+      "neyroxirurgiya": { "name": "Neurosurgery" },
+      "onkologiya": { "name": "Oncology" },
+      "reabilitatsiya": { "name": "Rehabilitation" }
+    },
+    "news": {
+      "fond-uz-patients": { "title": "How FondUz helps people find a medical support program", "subtitle": "A clear route from a care area to the organization that can help.", "content": ["FondUz brings information about medical support programs together so patients and their families can find relevant organizations more easily.", "Before contacting an organization, confirm its eligibility rules and prepare the requested medical records."] },
+      "patient-support": { "title": "What to prepare before asking for support", "subtitle": "A short checklist for your first conversation with an organization.", "content": ["Prepare current medical summaries, examination results, a phone number where you can be reached, and a short description of your request.", "Requirements differ between organizations and programs. Confirm the exact list directly with the organization."] }
+    },
+    "faqs": [
+      { "question": "How do I find an organization for my care area?", "answer": "Open Care areas, choose a profile, and contact the listed organization to confirm its requirements." },
+      { "question": "Does FondUz decide who receives funding?", "answer": "FondUz helps people find information and contacts. Each organization makes its own support decisions." },
+      { "question": "Which documents should I prepare?", "answer": "Medical summaries and examination results are often requested. Confirm the exact list with the organization you choose." }
+    ],
+    "doctors": {
+      "alisher-karimov": { "name": "Alisher Karimov", "profession": "Cardiology", "bio": "Specialist in cardiology programs and coordinated patient support." },
+      "malika-rahimova": { "name": "Malika Rahimova", "profession": "Neurosurgery", "bio": "Consultant for patient referrals and support around complex procedures." }
+    },
+    "prices": {
+      "consultation": { "title": "Specialist consultation", "price": "Confirm with the medical organization", "includes": ["Initial consultation", "A list of required documents"] },
+      "diagnostics": { "title": "Diagnostic program", "price": "Confirm with the medical organization", "includes": ["The doctor determines the examinations", "The clinic confirms the cost"] }
+    }
+  },
+  "privacy": {
+    "title": "Privacy policy",
+    "sub": "How FondUz handles information",
+    "section1Title": "Information we collect",
+    "section1Desc": "We use information submitted through forms to respond to your request.",
+    "section2Title": "How we use information",
+    "section2Desc": "Your information is used to provide the requested help and contact you.",
+    "section3Title": "Data security",
+    "section3Desc": "We use appropriate safeguards to protect information from unauthorized access."
+  }
+}

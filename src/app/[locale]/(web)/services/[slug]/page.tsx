@@ -1,4 +1,5 @@
-import { funds, professions } from "@/src/features/services/data/services";
+import { professions } from "@/src/features/services/data/services";
+import { getFunds, getServices } from "@/src/lib/content";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { notFound } from "next/navigation";
 import { ServiceHero } from "./components/ServiceHero";
@@ -15,10 +16,11 @@ export default async function ServiceDetailPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("services");
   
-  const profession = professions.find((item) => item.slug === slug);
+  const [services, allFunds] = await Promise.all([getServices(locale), getFunds(locale)]);
+  const profession = services.find((item) => item.slug === slug);
   if (!profession) notFound();
   
-  const fundsForProfession = funds.filter((item) => item.professionSlug === slug);
+  const fundsForProfession = allFunds.filter((item) => item.professionSlug === slug);
 
   return (
     <div className="pb-16 md:pb-24">
@@ -34,6 +36,7 @@ export default async function ServiceDetailPage({ params }: Props) {
         websiteLabel={t("website")}
         extraInfoLabel={t("extraInfo")}
         partnerTitle={t("partnerTitle")}
+        emptyText={t("emptyPartners")}
       />
     </div>
   );

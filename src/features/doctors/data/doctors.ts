@@ -1,15 +1,6 @@
 import type { Doctor } from "@/src/types/domain";
 
-const roles = ["Cardiologist", "Neurosurgeon", "Surgeon", "Therapist", "Pediatrician", "Radiologist"];
-const lorem =
-  "Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
-
-export const doctors: Doctor[] = Array.from({ length: 20 }).map((_, index) => ({
-  id: String(index + 1),
-  name: `Doctor ${index + 1} Lorem`,
-  profession: roles[index % roles.length],
-  email: `doctor${index + 1}@example.com`,
-  phone: `+998 90 ${String(100 + index).padStart(3, "0")} ${String(10 + (index % 90)).padStart(2, "0")} ${String(10 + (index % 90)).padStart(2, "0")}`,
-  bio: `${lorem} ${lorem}`,
-  image: "/placeholders/doctor.svg",
-}));
+export const doctors: Doctor[] = [
+  { id: "alisher-karimov", name: "Доктор медицинских наук, профессор Алишер Каримов", profession: "Кардиология", email: "info@fond.uz", phone: "+998 71 200 00 00", bio: "Ведущий специалист по кардиологическим программам и организации междисциплинарной помощи.", image: "/placeholders/doctor.svg" },
+  { id: "malika-rahimova", name: "Доктор медицинских наук Малика Рахимова", profession: "Нейрохирургия", email: "info@fond.uz", phone: "+998 71 200 00 00", bio: "Консультант по маршрутизации пациентов и поддержке высокотехнологичных операций.", image: "/placeholders/doctor.svg" },
+];

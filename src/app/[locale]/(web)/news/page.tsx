@@ -1,6 +1,6 @@
 import { Container } from "@/src/components/ui/Container";
 import { Pagination } from "@/src/components/ui/Pagination";
-import { news } from "@/src/features/news/data/news";
+import { getNews } from "@/src/lib/content";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { NewsHero } from "./components/NewsHero";
 import { NewsGrid } from "./components/NewsGrid";
@@ -16,6 +16,7 @@ export default async function NewsPage({ params, searchParams }: Props) {
   const { page } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("news");
+  const news = await getNews(locale);
 
   const { items, totalPages, currentPage } = getPaginatedNews(
     news,

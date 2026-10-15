@@ -15,6 +15,7 @@ type Props = {
   websiteLabel: string;
   extraInfoLabel: string;
   partnerTitle: string;
+  emptyText: string;
 };
 
 export function FundList({
@@ -23,6 +24,7 @@ export function FundList({
   websiteLabel,
   extraInfoLabel,
   partnerTitle,
+  emptyText,
 }: Props) {
   return (
     <Container className="mt-10 md:mt-12">
@@ -69,9 +71,11 @@ export function FundList({
             </dl>
           </div>
         ))}
-        <div className="rounded-2xl border border-border/50 bg-muted/40 p-5 text-center text-sm text-muted-foreground backdrop-blur-sm">
-          {partnerTitle}
-        </div>
+        {funds.length > 0 ? (
+          <div className="rounded-2xl border border-border/50 bg-muted/40 p-5 text-center text-sm text-muted-foreground backdrop-blur-sm">{partnerTitle}</div>
+        ) : (
+          <p className="rounded-2xl border border-border bg-card p-6 text-center text-sm text-muted-foreground">{emptyText}</p>
+        )}
       </div>
     </Container>
   );
