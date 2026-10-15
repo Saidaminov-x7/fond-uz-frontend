@@ -32,7 +32,7 @@ Scope: verify the public site, authentication integration, localization dictiona
   CHECK: rtk powershell -NoProfile -File scripts/build-safe.ps1
   EXPECT: BUILD_PASSED
   CWD: .
-  EVIDENCE: automatic-evidence=v1; definition-sha256=628d6b69d0c52631c76cbf90a5b8395dcc836111ddf1532dcdcf072606cb7524; exit=0; EXPECT=matched; output-sha256=f236b65752b6b3c1ce04b76527506cd4c7577d41c860b769e322d15d06978294; output-bytes=4104; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\Users\vosil\Desktop\fond_uz\fond-uz-frontend; path=b11ea96863f8/44 entries
+  EVIDENCE: automatic-evidence=v1; definition-sha256=628d6b69d0c52631c76cbf90a5b8395dcc836111ddf1532dcdcf072606cb7524; exit=0; EXPECT=matched; output-sha256=1850ff4c2a3dd694b21366dad04c4f6172db825c39198ca523dc474ee5b3ec37; output-bytes=4105; shell=C:\WINDOWS\system32\cmd.exe; cwd=C:\Users\vosil\Desktop\fond_uz\fond-uz-frontend; path=b11ea96863f8/44 entries
 
 - [x] G6: homepage hero image is optimized for fast first load
   CHECK: rtk node scripts/optimize-hero-image.mjs --check
