@@ -11,6 +11,11 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
+  const navLabels: Record<string, Record<string, string>> = {
+    ru: { dashboard: "Обзор", news: "Новости", faqs: "Вопросы и ответы", doctors: "Специалисты", prices: "Стоимость", services: "Направления", funds: "Организации" },
+    en: { dashboard: "Dashboard", news: "News", faqs: "FAQs", doctors: "Specialists", prices: "Pricing", services: "Care areas", funds: "Organizations" },
+    uz: { dashboard: "Boshqaruv", news: "Yangiliklar", faqs: "Savol-javoblar", doctors: "Mutaxassislar", prices: "Narxlar", services: "Yordam yo‘nalishlari", funds: "Tashkilotlar" },
+  };
   const [isReady, setIsReady] = useState(false);
 
   useEffect(() => {
@@ -56,7 +61,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 }`}
               >
-                {item.title.charAt(0).toUpperCase() + item.title.slice(1)}
+                {navLabels[locale]?.[item.title] ?? item.title}
               </Link>
             );
           })}
@@ -83,7 +88,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 onClick={handleLogout}
                 className="rounded-md border border-border bg-background px-3 py-2 text-xs font-bold uppercase tracking-tight transition-colors hover:border-red-600 hover:bg-red-700 hover:text-white"
               >
-                Logout
+                {{ ru: "Выйти", en: "Logout", uz: "Chiqish" }[locale] ?? "Logout"}
               </button>
             </div>
           </div>
