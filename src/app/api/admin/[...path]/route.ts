@@ -11,7 +11,12 @@ async function forward(request: Request, context: Context) {
   const resourcePath = path[0] === "users" ? "/api/users/all" : `/api/${path[0]}${path[1] ? `/${encodeURIComponent(path[1])}` : id ? `/${encodeURIComponent(id)}` : ""}`;
   const apiPath = `${resourcePath}${query ? `?${query}` : ""}`;
   const body = request.method === "GET" || request.method === "HEAD" ? undefined : await request.text();
-  return adminApi(apiPath, { method: request.method, body, headers: { "Content-Type": "application/json" } });
+  const init: RequestInit = { method: request.method };
+  if (body) {
+    init.body = body;
+    init.headers = { "Content-Type": "application/json" };
+  }
+  return adminApi(apiPath, init);
 }
 export const GET = forward;
 export const POST = forward;
