@@ -1,6 +1,6 @@
 import { adminApi } from "@/src/lib/admin-api";
 type Context = { params: Promise<{ path: string[] }> };
-const allowed = ["users", "doctors", "services", "news", "faqs", "prices"];
+const allowed = ["users", "doctors", "services", "funds", "news", "faqs", "prices"];
 async function forward(request: Request, context: Context) {
   const { path } = await context.params;
   if (!path?.length || path.some((part) => !/^[a-z0-9-]+$/i.test(part))) return Response.json({ error: "Invalid path" }, { status: 404 });

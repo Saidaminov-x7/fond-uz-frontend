@@ -19,6 +19,7 @@ export const siteConfig = {
     { title: "doctors", href: "/admin/doctors" },
     { title: "prices", href: "/admin/prices" },
     { title: "services", href: "/admin/services" },
+    { title: "funds", href: "/admin/funds" },
   ],
   contacts: {
     phone: "+998 71 123 45 67",
