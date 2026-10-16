@@ -1,7 +1,6 @@
 import createMiddleware from "next-intl/middleware";
 import { routing } from "./i18n/routing";
 import { NextRequest, NextResponse } from "next/server";
-import { isAdminSessionValid } from "./lib/verify-session";
 
 const intlMiddleware = createMiddleware(routing);
 
@@ -19,6 +18,27 @@ function secureResponse(response: NextResponse, policy: string) {
   response.headers.set("X-Frame-Options", "DENY");
   response.headers.set("Permissions-Policy", "camera=(), microphone=(), geolocation=()");
   return response;
+}
+
+async function hasValidAdminSession(token: string | undefined) {
+  const apiBase = process.env.API_URL?.trim();
+  if (!apiBase || !token) return false;
+  try {
+    const response = await fetch(new URL("/api/auth/session", apiBase), {
+      headers: {
+        Cookie: `fond_session=${token}`,
+        Accept: "application/json",
+        ...(process.env.CLOUDFLARE_ORIGIN_SECRET
+          ? { "X-FondUz-Origin": process.env.CLOUDFLARE_ORIGIN_SECRET }
+          : {}),
+      },
+      cache: "no-store",
+      signal: AbortSignal.timeout(5_000),
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
 }
 
 export default async function middleware(request: NextRequest) {
@@ -45,7 +65,9 @@ export default async function middleware(request: NextRequest) {
   // Checks if the path includes /admin (handles both /admin and /[locale]/admin)
   if (pathname.includes("/admin")) {
     const session = request.cookies.get("session")?.value;
-    if (!(await isAdminSessionValid(session))) {
+    // The backend is the source of truth for admin sessions. The frontend must
+    // not need a second copy of the backend signing secret.
+    if (!(await hasValidAdminSession(session))) {
       const locale = pathname.split("/")[1] || routing.defaultLocale;
       const loginUrl = new URL(`/${locale}/login`, request.url);
       const response = NextResponse.redirect(loginUrl);

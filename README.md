@@ -9,7 +9,7 @@ npm ci
 npm run dev
 ```
 
-Set server-only `API_URL` to the backend origin before starting the site. Set `NEXT_PUBLIC_API_URL` to the same origin to load public content in the browser. Set `JWT_SECRET` to the same 32+ character secret as the API for locally validated admin sessions. If the API requires the Cloudflare Worker origin header, configure the same private `CLOUDFLARE_ORIGIN_SECRET`. Never expose secrets via `NEXT_PUBLIC_*` variables.
+Set server-only `API_URL` to the backend origin before starting the site. Set `NEXT_PUBLIC_API_URL` to the same origin to load public content in the browser. Admin sessions are validated by the backend through `/api/auth/session`, so the frontend does not need a second copy of the signing secret. If the API requires the Cloudflare Worker origin header, configure the same private `CLOUDFLARE_ORIGIN_SECRET`. Never expose secrets via `NEXT_PUBLIC_*` variables.
 
 Translations live in `src/messages/{ru,en,uz}.json`; public copies are served from `public/messages/`. Check matching locale data with `npm run i18n:check`. The hero image optimizer is `npm run images:optimize`.
 
@@ -27,6 +27,6 @@ For browser checks, start with `npm run dev` and open `/ru`. The admin workflows
 
 ## Deployment
 
-Deploy this folder as the FondUz public-site project on Vercel, separate from the backend Railway service. Configure server-only `API_URL`, `JWT_SECRET`, and optional `CLOUDFLARE_ORIGIN_SECRET`; expose `NEXT_PUBLIC_API_URL` only when the public API origin is intended to be browser-readable. Add the site's exact public origin to API `CORS_ORIGINS`. Keep production and admin passwords in the hosting provider's encrypted variable store.
+Deploy this folder as the FondUz public-site project on Vercel, separate from the backend Railway service. Configure server-only `API_URL` and optional `CLOUDFLARE_ORIGIN_SECRET`; expose `NEXT_PUBLIC_API_URL` only when the public API origin is intended to be browser-readable. Add the site's exact public origin to API `CORS_ORIGINS`. Keep production and admin passwords in the hosting provider's encrypted variable store.
 
 The public site is served at [fond-uz.vercel.app](https://fond-uz.vercel.app), with Russian, English, and Uzbek routes. The locale login page is shared with the admin authentication flow. Backend JSON content is cached briefly for public pages; edits stay behind the authenticated server-side admin proxy. Check the home page, translated routes, content detail pages, and contact submission after each frontend deployment. To confirm live content changes, edit a record in admin and verify it renders as text on the corresponding public page.
