@@ -65,8 +65,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.glass, .glass-dark { background: var(--card); border: 1px solid var(--border); }
-
 h1,
 h2,
 h3,
