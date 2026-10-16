@@ -30,7 +30,7 @@ export default function Header() {
   };
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-background/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
       <Container>
         <div className="flex h-16 w-full items-center justify-between gap-4">
           <Link href="/" locale={locale} className="flex shrink-0 items-center gap-2 hover:opacity-80 transition-opacity">
@@ -48,7 +48,7 @@ export default function Header() {
                   href={href}
                   className={`rounded-2xl px-4 py-2 text-xs font-bold transition-all duration-300 md:text-[13px] ${
                     active
-                      ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 ring-2 ring-primary/20"
+                      ? "bg-primary text-primary-foreground shadow-sm"
                       : "text-foreground/70 hover:bg-muted hover:text-foreground"
                   }`}
                 >
@@ -61,7 +61,7 @@ export default function Header() {
             <button
               type="button"
               onClick={toggleLanguage}
-              className="flex h-10 min-w-10 items-center justify-center rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm px-3 text-[12px] font-bold uppercase text-foreground hover:bg-muted transition-all active:scale-95"
+              className="flex h-10 min-w-10 items-center justify-center rounded-lg border border-border bg-card px-3 text-[12px] font-bold uppercase text-foreground hover:bg-muted transition-all active:scale-95"
             >
               {locale}
             </button>
@@ -99,7 +99,7 @@ export default function Header() {
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.4, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="border-t border-border/50 bg-background/95 backdrop-blur-xl lg:hidden overflow-hidden"
+            className="border-t border-border bg-background lg:hidden overflow-hidden"
           >
             <Container>
               <nav className="flex max-h-[min(70vh,calc(100dvh-4rem))] flex-col gap-1.5 overflow-y-auto py-4">
@@ -115,8 +115,8 @@ export default function Header() {
                       onClick={() => setMenuOpen(false)}
                       className={`block rounded-2xl px-4 py-3 text-base font-semibold transition-all ${
                         navActive(pathname, href)
-                          ? "bg-primary/10 text-primary shadow-sm ring-1 ring-primary/20"
-                          : "text-muted-foreground hover:bg-muted/50 hover:text-foreground"
+                          ? "bg-primary/10 text-primary ring-1 ring-primary/20"
+                          : "text-muted-foreground hover:bg-muted hover:text-foreground"
                       }`}
                     >
                       {t(href === "/" ? "home" : href.slice(1))}
@@ -158,7 +158,7 @@ export default function Header() {
                   transition={{ delay: 0.5 }}
                   className="mt-2 flex px-1"
                 >
-                  <div className="flex h-12 w-full items-center justify-between rounded-2xl border border-border/40 bg-card/50 px-4">
+                  <div className="flex h-12 w-full items-center justify-between rounded-md border border-border bg-card px-4">
                     <span className="text-sm font-semibold text-foreground">Dark Mode</span>
                     <ThemeToggle />
                   </div>

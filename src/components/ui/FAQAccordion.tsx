@@ -12,7 +12,7 @@ export function FAQAccordion({ items }: { items: Item[] }) {
       {items.map((item, index) => {
         const isOpen = open === index;
         return (
-          <div key={item.question} className="rounded-2xl border border-border/40 bg-card/60 backdrop-blur-md shadow-sm transition-all hover:bg-card/80">
+          <div key={item.question} className="rounded-lg border border-border bg-card shadow-sm transition-all hover:bg-card">
             <button
               type="button"
               onClick={() => setOpen(isOpen ? null : index)}

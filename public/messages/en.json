@@ -5,6 +5,24 @@
     "viewAll": "View all",
     "backToList": "Back to list"
   },
+  "adminDashboard": {
+    "workspace": "Content workspace",
+    "title": "Content overview",
+    "description": "Manage the public FondUz materials from one place.",
+    "admin": "Admin panel",
+    "loadError": "Could not load the summary. Collection links are still available below.",
+    "recordCount": "Records in this collection",
+    "loading": "Loading count",
+    "quickLinks": "Quick links",
+    "continueWork": "Continue working",
+    "chooseCollection": "Choose a collection to edit",
+    "news": "News",
+    "faqs": "Questions and answers",
+    "doctors": "Doctors",
+    "services": "Care areas",
+    "prices": "Prices",
+    "funds": "Partner organizations"
+  },
   "notFound": {
     "title": "Page not found",
     "description": "The requested page does not exist or has moved.",

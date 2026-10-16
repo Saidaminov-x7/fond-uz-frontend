@@ -25,13 +25,13 @@ export function DoctorInfo({ doctor, backText, emailText, phoneText }: Props) {
         <span className="inline-block transition-transform group-hover:-translate-x-1">←</span> {backText}
       </Link>
       <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-[320px_1fr]">
-        <div className="relative h-[400px] overflow-hidden rounded-2xl border border-border bg-card shadow-sm">
+        <div className="relative h-[400px] overflow-hidden rounded-lg border border-border bg-card">
           <Image src={doctor.image} alt={doctor.name} fill className="object-cover" priority />
         </div>
         <div className="flex flex-col">
           <h1 className="font-serif text-3xl text-foreground md:text-4xl">{doctor.name}</h1>
           <p className="mt-2 text-lg text-muted-foreground font-medium">{doctor.profession}</p>
-          <div className="mt-8 rounded-2xl border border-border/50 bg-card/50 p-6 backdrop-blur-sm">
+          <div className="mt-8 rounded-lg border border-border bg-card p-6">
             <h2 className="font-serif text-xl border-b border-border/50 pb-4 mb-4">About the Doctor</h2>
             <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">{doctor.bio}</p>
           </div>

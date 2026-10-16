@@ -14,7 +14,7 @@ export default function Footer() {
   const pageLinks = siteConfig.mainNav.map(item => item.href);
 
   return (
-    <footer className="mt-10 border-t border-border bg-card/95 py-12">
+    <footer className="mt-10 border-t border-border bg-card py-12">
       <Container>
         <div className="grid grid-cols-1 gap-8 border-b border-border pb-8 md:grid-cols-3">
           <div>

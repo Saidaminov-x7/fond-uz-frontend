@@ -5,6 +5,24 @@
     "viewAll": "Barchasini ko'rish",
     "backToList": "Ro'yxatga qaytish"
   },
+  "adminDashboard": {
+    "workspace": "Kontent boshqaruvi",
+    "title": "Kontent sharhi",
+    "description": "FondUz materiallarini bir joydan boshqaring.",
+    "admin": "Admin paneli",
+    "loadError": "Ma’lumotlarni yuklab bo‘lmadi. Bo‘lim havolalari quyida mavjud.",
+    "recordCount": "Bo‘limdagi yozuvlar",
+    "loading": "Ma’lumot yuklanmoqda",
+    "quickLinks": "Tezkor havolalar",
+    "continueWork": "Ishni davom ettirish",
+    "chooseCollection": "Tahrirlash uchun bo‘limni tanlang",
+    "news": "Yangiliklar",
+    "faqs": "Savol-javoblar",
+    "doctors": "Shifokorlar",
+    "services": "Yordam yo‘nalishlari",
+    "prices": "Xizmat narxlari",
+    "funds": "Hamkor tashkilotlar"
+  },
   "notFound": {
     "title": "Sahifa topilmadi",
     "description": "Siz so'ragan sahifa mavjud emas yoki ko'chirilgan.",

@@ -59,7 +59,7 @@ export default function LoginPage() {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mx-auto max-w-md overflow-hidden rounded-3xl border border-border/50 bg-card/50 shadow-2xl backdrop-blur-xl"
+          className="mx-auto max-w-md overflow-hidden rounded-xl border border-border bg-card shadow-xl"
         >
           <div className="bg-primary/5 p-8 text-center transition-colors">
             <h1 className="font-serif text-3xl font-bold tracking-tight text-foreground md:text-4xl">
@@ -85,7 +85,7 @@ export default function LoginPage() {
                   required
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="h-12 w-full rounded-2xl border border-border/50 bg-background/50 px-4 text-sm transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
+                  className="h-12 w-full rounded-lg border border-border bg-background px-4 text-sm transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
                   placeholder="admin@fond.uz"
                 />
               </div>
@@ -99,7 +99,7 @@ export default function LoginPage() {
                   required
                   value={formData.password}
                   onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="h-12 w-full rounded-2xl border border-border/50 bg-background/50 px-4 text-sm transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
+                  className="h-12 w-full rounded-lg border border-border bg-background px-4 text-sm transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
                   placeholder="••••••••"
                 />
               </div>

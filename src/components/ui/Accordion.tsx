@@ -27,7 +27,7 @@ export function Accordion({ title, subtitle, items }: AccordionProps) {
           return (
             <div
               key={item.question}
-              className="overflow-hidden rounded-2xl border border-border/60 bg-card/60 backdrop-blur-md shadow-sm transition-all hover:shadow-md hover:border-border"
+              className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:shadow-md hover:border-border"
             >
               <button
                 type="button"

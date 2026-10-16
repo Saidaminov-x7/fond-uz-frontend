@@ -35,7 +35,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
   if (!isReady) return null;
 
   return (
-    <div className="flex min-h-screen bg-muted/30">
+    <div className="flex min-h-screen bg-muted">
       {/* Sidebar */}
       <aside className="fixed left-0 top-0 hidden h-screen w-64 border-r border-border bg-card lg:block">
         <div className="flex h-16 items-center border-b border-border px-6">
@@ -50,9 +50,9 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               <Link
                 key={item.href}
                 href={item.href}
-                className={`flex items-center rounded-2xl px-4 py-2.5 text-sm font-bold transition-all active:scale-95 ${
+                className={`flex items-center rounded-md px-3 py-2.5 text-sm font-semibold transition-colors ${
                   isActive 
-                    ? "bg-primary text-primary-foreground shadow-lg shadow-primary/20 ring-2 ring-primary/20" 
+                    ? "bg-primary text-primary-foreground"
                     : "text-muted-foreground hover:bg-muted hover:text-foreground"
                 }`}
               >
@@ -65,7 +65,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
 
       {/* Main Content */}
       <div className="flex flex-1 flex-col lg:pl-64">
-        <header className="sticky top-0 z-30 flex h-16 items-center border-b border-border bg-card/80 px-8 backdrop-blur-md">
+        <header className="sticky top-0 z-30 flex h-16 items-center border-b border-border bg-card px-8">
           <div className="flex flex-1 items-center justify-between">
             <h2 className="text-xs font-black text-muted-foreground uppercase tracking-widest">
               {pathname.split("/").pop()?.toUpperCase() || "DASHBOARD"}
@@ -74,14 +74,14 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
               <button
                 type="button"
                 onClick={toggleLanguage}
-                className="flex h-10 items-center justify-center rounded-2xl border border-border/50 bg-background px-3 text-[12px] font-black uppercase text-foreground hover:bg-muted transition-all"
+              className="flex h-9 items-center justify-center rounded-md border border-border bg-background px-3 text-xs font-bold uppercase text-foreground hover:bg-muted transition-colors"
               >
                 {locale}
               </button>
               <ThemeToggle />
               <button 
                 onClick={handleLogout}
-                className="rounded-2xl border border-border bg-background px-4 py-2 text-xs font-black uppercase tracking-tight transition-all hover:bg-red-500 hover:text-white hover:border-red-500 active:scale-95"
+                className="rounded-md border border-border bg-background px-3 py-2 text-xs font-bold uppercase tracking-tight transition-colors hover:border-red-600 hover:bg-red-700 hover:text-white"
               >
                 Logout
               </button>
@@ -89,8 +89,8 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
           </div>
         </header>
 
-        <main className="flex-1 p-8">
-          <Container className="max-w-6xl">
+        <main className="flex-1 p-4 sm:p-6 lg:p-8">
+          <Container className="max-w-7xl">
             {children}
           </Container>
         </main>
