@@ -3,7 +3,8 @@
     "brand": "FondUz",
     "view": "Batafsil",
     "viewAll": "Barchasini ko'rish",
-    "backToList": "Ro'yxatga qaytish"
+    "backToList": "Ro'yxatga qaytish",
+    "theme": "Ko‘rinish"
   },
   "adminDashboard": {
     "workspace": "Kontent boshqaruvi",
@@ -29,44 +30,109 @@
     "backHome": "Bosh sahifaga"
   },
   "nav": {
+    "tagline": "Vaqtinchalik wordmark",
+    "search": "Qidirish",
+    "language": "Til",
+    "mainNavigation": "Asosiy menyu",
+    "languageNames": {
+      "uz": "O‘zbekcha",
+      "ru": "Ruscha",
+      "en": "Inglizcha"
+    },
     "home": "Bosh sahifa",
-    "about": "Loyiha haqida",
-    "services": "Tibbiy yo'nalishlar",
+    "about": "Fond haqida",
+    "services": "Xizmatlar",
     "doctors": "Shifokorlar",
     "prices": "Narxlar",
     "news": "Yangiliklar",
     "contacts": "Aloqa",
-    "faqs": "Savol-javob"
+    "faqs": "Savol-javob",
+    "blog": "Blog",
+    "feedback": "Fikr-mulohaza",
+    "navigationLabel": "Navigatsiya",
+    "openMenu": "Menyuni ochish",
+    "closeMenu": "Menyuni yopish"
   },
   "home": {
-    "heroTitle": "Tibbiy yordam topishda ko'mak",
-    "heroSubtitle": "Tibbiy yo'nalishlarni o'rganing va yordam bera oladigan tashkilotlar bilan bog'laning.",
-    "heroCta": "Yo'nalishlarni ko'rish",
-    "activityTitle": "FondUz qanday yordam beradi",
-    "activityText": "FondUz tibbiy yordam dasturlari haqida ma'lumotni yagona tushunarli qo'llanmada jamlaydi. Yo'nalishni tanlang, tashkilotlarni ko'rib chiqing va shartlarni aniqlash uchun ularga bevosita murojaat qiling.",
-    "newsTitle": "So‘nggi yangiliklar",
-    "newsSubtitle": "Platforma yangiliklari va foydali tavsiyalar.",
+    "heroTitle": "FondUz: bemorlar uchun ma’lumot",
+    "heroSubtitle": "Sizga kerakli bo‘limni tanlang: xizmatlar, mutaxassislar, narxlar yoki savollarga javoblar.",
+    "heroCta": "Xizmatlarni ko‘rish",
+    "activityTitle": "Nimadan boshlash kerak",
+    "activityText": "Sayt ma’lumotlarni qayerdan topish, jamoa bilan qanday bog‘lanish va e’lon qilishdan oldin nimalarni tasdiqlash kerakligini tushuntirishi lozim.",
+    "newsTitle": "Nashrlar",
+    "newsSubtitle": "Fond yangiliklari va foydali ma’lumotlar.",
     "faqsTitle": "Ko‘p so‘raladigan savollar",
-    "faqsSubtitle": "Yordam topish va tashkilotlarga murojaat qilish haqida javoblar.",
-    "viewAllNews": "Barcha yangiliklar",
+    "faqsSubtitle": "Ko‘p so‘raladigan savollarga javoblar.",
+    "viewAllNews": "Barcha nashrlar",
     "viewAllFaqs": "Barcha savollar",
-    "heroEyebrow": "Tibbiy yordamga tushunarli yo‘l",
-    "heroSecondaryCta": "Qanday ishlaydi",
+    "heroEyebrow": "Ma’lumot sayti",
+    "heroSecondaryCta": "Fond haqida",
     "heroImageAlt": "Samarqanddagi Registon maydoni tong paytida",
     "heroCountry": "O‘zbekiston",
-    "highlightOne": "Tibbiy yo‘nalishlar va mavjud dasturlarni bir joyda o‘rganing.",
-    "highlightTwo": "Tashkilotlar haqidagi ma’lumotlarni ko‘rib, mosini tanlang.",
-    "highlightThree": "Shartlarni aniqlash uchun tashkilot bilan bevosita bog‘laning."
+    "highlightOne": "Tasdiqlangan bo‘limlardan yordam yo‘nalishlari va dasturlar haqida ma’lumot toping.",
+    "highlightTwo": "Saytda chop etilgan materiallar orqali savollarga javob toping.",
+    "highlightThree": "Tasdiqlangan aloqa kanali orqali sayt jamoasiga murojaat qiling.",
+    "topline": "Interfeys konsepsiyasi · Mazmun tasdiqlanishi kerak",
+    "toplineNote": "",
+    "languageNote": "Saytning kerakli til versiyasini menyudan tanlang.",
+    "conceptTitle": "Ma’lumot tuzilmasi tasdiqlanishi kutilmoqda",
+    "conceptBody": "Yordam shartlari, tashkilotlar va narxlar haqida tasdiqlangan ma’lumot hozircha e’lon qilinmagan.",
+    "imagePending": "Foto keyinroq qo‘shiladi",
+    "imageCaption": "Tasdiqlangan rasm hozircha taqdim etilmagan.",
+    "heroReview": "Sayt materiallari tekshirilib, tasdiqlanishi kutilmoqda.",
+    "viewAllServices": "Barcha xizmatlar",
+    "viewAllDoctors": "Barcha mutaxassislar",
+    "viewAllPrices": "Barcha narxlar",
+    "priceName": "Xizmat",
+    "priceValue": "Narxi",
+    "contactCta": "Xabar yozish",
+    "publicationNoticeTitle": "E’lon qilishdan oldin",
+    "publicationNoticeBody": "Barcha mazmunli materiallar ishga tushishdan oldin tekshirilishi lozim.",
+    "reviewPending": "Materiallar tahririy tekshiruvdan so‘ng e’lon qilinadi.",
+    "navigationKicker": "Navigatsiya",
+    "startOneTitle": "Ma’lumot topish",
+    "startOneText": "Xizmatlar, shifokorlar va narxlar alohida bo‘limlarda.",
+    "startTwoTitle": "Savolga javob topish",
+    "startTwoText": "Savollar va yangiliklar alohida bo‘limda.",
+    "startThreeTitle": "Biz bilan bog‘lanish",
+    "startThreeText": "Tasdiqlangan aloqa ma’lumotlari kontaktlar sahifasida beriladi.",
+    "aboutKicker": "Tanishuv",
+    "aboutPreviewTitle": "Tasdiqlangan tarix uchun joy",
+    "aboutPreviewBody": "Bu bo‘limda fondning maqsadi, faoliyati va tamoyillari taqdim etiladi. Asosiy ma’lumotlar hali berilmagan.",
+    "aboutMore": "Fond haqida batafsil",
+    "servicesKicker": "Kerakli bo‘limni toping",
+    "doctorsKicker": "Mutaxassislar",
+    "doctorsIntro": "Mutaxassislar profili tayyor bo‘lgach shu yerda chiqadi.",
+    "pricesKicker": "Narxlar",
+    "pricesIntro": "Amaldagi narxlar tasdiqlangach shu yerda chiqadi.",
+    "publicationsKicker": "Nashrlar",
+    "faqKicker": "Yo‘l-yo‘riq",
+    "contactKicker": "Fikr-mulohaza",
+    "contactQuestion": "Savolingiz bormi?",
+    "contactDescription": "Savol berish uchun shaklni ochib, aloqa ma’lumotlaringizni qoldiring.",
+    "reviewExample": "Namuna — tasdiqlanishi kerak",
+    "emptyServiceTitle": "Xizmat ma’lumotlari hali berilmagan",
+    "emptyServiceText": "Qisqa tavsif tasdiqlangach qo‘shiladi.",
+    "emptyDoctorTitle": "Mutaxassis profili tekshirilmoqda",
+    "emptyDoctorText": "Tasdiqlangan ma’lumotlar kelishuvdan so‘ng qo‘shiladi.",
+    "emptyPriceTitle": "Narxlar ro‘yxati tasdiqlanishi kerak",
+    "pricePending": "Aniqlashtiriladi",
+    "emptyNewsTitle": "Nashr tekshirilmoqda",
+    "emptyNewsText": "Yangiliklar tayyor bo‘lgach shu yerda chiqadi.",
+    "emptyFaqItem": "Savollar tahririy tekshiruvdan so‘ng qo‘shiladi."
   },
   "about": {
+    "conceptTitle": "Ma’lumot tuzilmasi tasdiqlanishi kerak",
+    "conceptBody": "Yordam shartlari, tashkilotlar va narxlar haqida tasdiqlangan ma’lumot hozircha yo‘q. Nashrdan oldin tegishli jamoa bu ma’lumotlarni tekshirishi lozim.",
     "title": "FondUz loyihasi haqida",
     "subtitle": "Tibbiy dasturlar va tashkilotlar bo'yicha tushunarli qo'llanma.",
-    "body": "Bemorlar va ularning yaqinlariga mos yordam dasturlarini topish va tashkilotlar bilan bog'lanishda yordam beramiz."
+    "body": "FondUz ochiq sahifalari loyiha tuzilmasini tanishtiradi va materiallar tayyorlanib tasdiqlangach ular bo‘ylab yo‘l ko‘rsatadi."
   },
   "services": {
     "title": "Tibbiy yo'nalishlar",
     "subtitle": "Yordam turlarini o'rganing va kerakli tashkilotlarni toping.",
     "fundsCount": "Tashkilotlar: {count}",
+    "reviewPending": "Ma’lumot tasdiqlanishi kutilmoqda",
     "emptyPartners": "Hamkor tashkilotlar ro'yxati hali to'ldirilmagan. Ma'lumot uchun FondUz jamoasiga murojaat qiling.",
     "open": "Batafsil",
     "back": "Barcha yo‘nalishlar",
@@ -96,39 +162,29 @@
     "back": "Barcha yangiliklar"
   },
   "contacts": {
-    "title": "Biz bilan bog‘laning",
-    "subtitle": "Savolingizni yuboring, kerakli aloqa ma'lumotini topishga yordam beramiz.",
+    "title": "Aloqa ma’lumotlari",
+    "subtitle": "Sayt ishga tushishidan oldin ma’lumotlar tekshirilishi va tasdiqlanishi kerak.",
     "phoneLabel": "Telefon",
     "emailLabel": "Elektron pochta",
     "addressLabel": "Manzil",
-    "phoneValue": "+998 71 200 00 00",
-    "emailValue": "info@fond.uz",
-    "addressValue": "Toshkent, O‘zbekiston"
+    "phoneValue": "",
+    "emailValue": "",
+    "addressValue": "",
+    "feedbackTitle": "Fikr-mulohaza shakli",
+    "feedbackPending": "Xavfsiz aloqa kanali ulanib tekshirilgach, shakl ishlaydi."
   },
   "faqs": {
     "title": "Ko‘p so‘raladigan savollar",
-    "subtitle": "Platforma haqida asosiy savollarga javoblar.",
-    "items": [
-      {
-        "question": "Yo'nalishim bo'yicha fondni qanday topsam bo'ladi?",
-        "answer": "Yo'nalishlar bo'limini oching, mutaxassislikni tanlang va shartlarni aniqlash uchun tashkilotga murojaat qiling."
-      },
-      {
-        "question": "Moliyalashtirish qarorini FondUz qabul qiladimi?",
-        "answer": "FondUz ma'lumot va aloqalarni topishga yordam beradi. Yordam qarorini har bir tashkilot o'zi qabul qiladi."
-      },
-      {
-        "question": "Qanday hujjatlarni tayyorlash kerak?",
-        "answer": "Odatda tibbiy xulosalar va tekshiruv natijalari kerak. Aniq ro'yxatni tashkilotdan so'rang."
-      }
-    ]
+    "subtitle": "Materiallar tahririy tekshiruvdan keyin e’lon qilinadi.",
+    "items": [],
+    "reviewPending": "Materiallar tahririy tekshiruvdan keyin e’lon qilinadi."
   },
   "forms": {
     "name": "Ism",
     "email": "Elektron pochta",
     "message": "Xabar",
     "submit": "Xabar yuborish",
-    "success": "Rahmat. Xabaringiz yuborildi."
+    "success": "Namuna shakli xabar yubormaydi."
   },
   "errors": {
     "nameRequired": "Ismingizni kiriting",
@@ -136,14 +192,18 @@
     "messageMin": "Xabar kamida 10 ta belgidan iborat bo‘lishi kerak"
   },
   "footer": {
+    "conceptLabel": "Konsepsiya · Aloqa ma’lumotlari tasdiqlanishi kerak",
+    "contactReview": "Aloqa ma’lumotlari tekshirilishi kutilmoqda.",
+    "contactAction": "Aloqa ma’lumotlari",
+    "privacyLink": "Maxfiylik siyosati",
     "pages": "Sahifalar",
     "contacts": "Aloqa",
-    "description": "Tibbiy dasturlar va ixtisoslashgan tashkilotlarni topishga ko'maklashamiz.",
+    "description": "FondUz ma’lumot sayti.",
     "copyright": "Barcha huquqlar himoyalangan."
   },
   "Common": {
-    "themeLight": "Yorug‘ mavzu",
-    "themeDark": "Qorong‘i mavzu"
+    "themeLight": "Yorug‘ mavzuga o‘tish",
+    "themeDark": "Qorong‘i mavzuga o‘tish"
   },
   "Navigation": {
     "home": "Bosh sahifa",
@@ -193,28 +253,23 @@
   },
   "records": {
     "services": {
-      "kardiologiya": { "name": "Kardiologiya" },
-      "neyroxirurgiya": { "name": "Neyroxirurgiya" },
-      "onkologiya": { "name": "Onkologiya" },
-      "reabilitatsiya": { "name": "Reabilitatsiya" }
+      "kardiologiya": {
+        "name": "Kardiologiya"
+      },
+      "neyroxirurgiya": {
+        "name": "Neyroxirurgiya"
+      },
+      "onkologiya": {
+        "name": "Onkologiya"
+      },
+      "reabilitatsiya": {
+        "name": "Reabilitatsiya"
+      }
     },
-    "news": {
-      "fond-uz-patients": { "title": "FondUz tibbiy yordam dasturini topishga qanday ko'mak beradi", "subtitle": "Tibbiy yo'nalishdan yordam bera oladigan tashkilotgacha aniq yo'l.", "content": ["FondUz tibbiy yordam dasturlari haqidagi ma'lumotlarni jamlaydi. Bu bemorlar va ularning yaqinlariga mos tashkilotlarni topishni osonlashtiradi.", "Tashkilotga murojaat qilishdan oldin uning talablarini aniqlang va so'ralgan tibbiy hujjatlarni tayyorlang."] },
-      "patient-support": { "title": "Yordam so'rashdan oldin nimalarni tayyorlash kerak", "subtitle": "Tashkilot bilan ilk suhbat uchun qisqa ro'yxat.", "content": ["Yaqinda olingan tibbiy xulosalar, tekshiruv natijalari, siz bilan bog'lanish mumkin bo'lgan telefon raqami va murojaatingizning qisqa tavsifini tayyorlang.", "Talablar tashkilot va dasturga qarab farq qiladi. Aniq ro'yxatni tashkilotning o'zidan so'rang."] }
-    },
-    "faqs": [
-      { "question": "Yo'nalishim bo'yicha tashkilotni qanday topsam bo'ladi?", "answer": "Tibbiy yo'nalishlar bo'limini oching, kerakli yo'nalishni tanlang va talablarni aniqlash uchun ko'rsatilgan tashkilotga murojaat qiling." },
-      { "question": "Moliyaviy yordam haqida qarorni FondUz qabul qiladimi?", "answer": "FondUz ma'lumot va aloqalarni topishga yordam beradi. Yordam haqida qarorni har bir tashkilot mustaqil qabul qiladi." },
-      { "question": "Qaysi hujjatlarni tayyorlash kerak?", "answer": "Odatda tibbiy xulosa va tekshiruv natijalari so'raladi. Aniq ro'yxatni tanlagan tashkilotingizdan tasdiqlang." }
-    ],
-    "doctors": {
-      "alisher-karimov": { "name": "Alisher Karimov", "profession": "Kardiologiya", "bio": "Kardiologiya dasturlari va bemorlarga muvofiqlashtirilgan yordam bo'yicha mutaxassis." },
-      "malika-rahimova": { "name": "Malika Rahimova", "profession": "Neyroxirurgiya", "bio": "Bemorlarni yo'naltirish va murakkab muolajalar bo'yicha yordam maslahatchisi." }
-    },
-    "prices": {
-      "consultation": { "title": "Mutaxassis maslahati", "price": "Tibbiyot tashkilotidan aniqlang", "includes": ["Dastlabki maslahat", "Kerakli hujjatlar ro'yxati"] },
-      "diagnostics": { "title": "Diagnostika dasturi", "price": "Tibbiyot tashkilotidan aniqlang", "includes": ["Tekshiruvlarni shifokor belgilaydi", "Narxni klinika tasdiqlaydi"] }
-    }
+    "news": {},
+    "faqs": [],
+    "doctors": {},
+    "prices": {}
   },
   "privacy": {
     "title": "Maxfiylik siyosati",

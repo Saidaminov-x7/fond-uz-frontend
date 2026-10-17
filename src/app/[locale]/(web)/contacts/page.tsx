@@ -3,7 +3,6 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ContactsHero } from "./components/ContactsHero";
 import { ContactsInfo } from "./components/ContactsInfo";
 import { ContactForm } from "./components/ContactForm";
-import { siteConfig } from "@/src/config/site";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -11,37 +10,26 @@ export default async function ContactsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("contacts");
-  const tForm = await getTranslations("forms");
-  const tError = await getTranslations("errors");
+  const common = await getTranslations("home");
 
   return (
     <Container className="py-12 md:py-16">
-      <div className="grid w-full grid-cols-1 gap-12 lg:grid-cols-2">
+      <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-2">
         <div className="mx-auto w-full">
           <ContactsHero title={t("title")} subtitle={t("subtitle")} />
           <ContactsInfo
             phoneLabel={t("phoneLabel")}
-            phoneValue={siteConfig.contacts.phone}
+            phoneValue={t("phoneValue")}
             emailLabel={t("emailLabel")}
-            emailValue={siteConfig.contacts.email}
+            emailValue={t("emailValue")}
             addressLabel={t("addressLabel")}
-            addressValue={siteConfig.contacts.address}
+            addressValue={t("addressValue")}
           />
         </div>
 
         <div className="w-full">
-          <ContactForm
-            nameLabel={tForm("name")}
-            emailLabel={tForm("email")}
-            messageLabel={tForm("message")}
-            submitLabel={tForm("submit")}
-            successMessage={tForm("success")}
-            errorMessages={{
-              nameRequired: tError("nameRequired"),
-              emailInvalid: tError("emailInvalid"),
-              messageMin: tError("messageMin"),
-            }}
-          />
+          <div className="concept-note mb-6" role="note"><span className="concept-note-mark" aria-hidden="true">i</span><div><strong>{common("conceptTitle")}</strong><p>{common("conceptBody")}</p></div></div>
+          <ContactForm />
         </div>
       </div>
     </Container>

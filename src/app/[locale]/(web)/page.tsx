@@ -2,6 +2,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ActivitySection } from "./components/ActivitySection";
 import { FaqPreviewSection } from "./components/FaqPreviewSection";
 import { HeroSection } from "./components/HeroSection";
+import { HomeContentSections } from "./components/HomeContentSections";
 import { NewsPreviewSection } from "./components/NewsPreviewSection";
 import { getHomePreviewFaqs, getHomePreviewNews } from "./utils/utils";
 
@@ -15,20 +16,14 @@ export default async function HomePage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("home");
   const tc = await getTranslations("common");
-
   const [newsCards, faqItems] = await Promise.all([getHomePreviewNews(locale), getHomePreviewFaqs(locale)]);
 
   return (
     <div>
       <HeroSection title={t("heroTitle")} subtitle={t("heroSubtitle")} actionLabel={t("heroCta")} eyebrow={t("heroEyebrow")} secondaryLabel={t("heroSecondaryCta")} imageAlt={t("heroImageAlt")} />
       <ActivitySection title={t("activityTitle")} text={t("activityText")} highlights={[t("highlightOne"), t("highlightTwo"), t("highlightThree")]} />
-      <NewsPreviewSection
-        title={t("newsTitle")}
-        subtitle={t("newsSubtitle")}
-        cards={newsCards}
-        readMore={tc("view")}
-        viewAll={t("viewAllNews")}
-      />
+      <HomeContentSections locale={locale} />
+      <NewsPreviewSection title={t("newsTitle")} subtitle={t("newsSubtitle")} cards={newsCards} readMore={tc("view")} viewAll={t("viewAllNews")} />
       <FaqPreviewSection title={t("faqsTitle")} subtitle={t("faqsSubtitle")} items={faqItems} viewAll={t("viewAllFaqs")} />
     </div>
   );

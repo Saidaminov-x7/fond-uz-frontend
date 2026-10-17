@@ -1,6 +1,6 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AboutHero } from "./components/AboutHero";
-import { AboutContent } from "./components/AboutContent";
+import { Container } from "@/src/components/ui/Container";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -12,15 +12,10 @@ export default async function AboutPage({ params }: Props) {
   return (
     <div className="pb-16 md:pb-24">
       <AboutHero title={t("title")} subtitle={t("subtitle")} />
-      <AboutContent>
-        Lorem ipsum dolor sit amet consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua
-        ut enim ad minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat duis aute irure
-        dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur excepteur sint occaecat cupidatat non
-        proident sunt in culpa qui officia deserunt mollit anim id est laborum lorem ipsum dolor sit amet consectetur adipiscing elit
-        sed do eiusmod tempor incididunt ut labore et dolore magna aliqua ut enim ad minim veniam quis nostrud exercitation ullamco
-        laboris nisi ut aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore
-        eu fugiat nulla pariatur excepteur sint occaecat cupidatat non proident sunt in culpa qui officia deserunt mollit anim id.
-      </AboutContent>
+      <Container className="pt-10 md:pt-14">
+        <div className="concept-note" role="note"><span className="concept-note-mark" aria-hidden="true">i</span><div><strong>{t("conceptTitle")}</strong><p>{t("conceptBody")}</p></div></div>
+        <p className="mt-7 max-w-3xl text-sm leading-7 text-muted-foreground md:text-base">{t("body")}</p>
+      </Container>
     </div>
   );
 }

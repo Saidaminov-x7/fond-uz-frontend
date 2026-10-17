@@ -36,6 +36,7 @@ export function ProfessionList({ professions }: Props) {
   return (
     <Container className="mt-10 md:mt-14">
       <MotionViewport className="grid grid-cols-1 gap-4 lg:grid-cols-2">
+        {professions.length === 0 && <li className="col-span-full list-none border-t border-border py-4 text-sm text-muted-foreground">{t("reviewPending")}</li>}
         {professions.map((profession, i) => (
           <motion.li
             key={profession.slug}
@@ -48,13 +49,11 @@ export function ProfessionList({ professions }: Props) {
           >
             <Link
               href={`/services/${profession.slug}`}
-              className="flex items-center justify-between rounded-2xl border border-border bg-card p-6 shadow-sm transition-all hover:bg-muted/70 hover:shadow-md hover:border-border"
+              className="service-list-link flex items-center justify-between rounded-md border border-border bg-card p-5 transition-colors hover:border-primary/50 hover:bg-background"
             >
               <div>
                 <h2 className="font-serif text-xl text-foreground font-bold">{profession.name}</h2>
-                <p className="mt-2 text-sm text-muted-foreground font-medium">
-                  {t("fundsCount", { count: profession.fundsCount })}
-                </p>
+                <p className="mt-2 text-sm text-muted-foreground font-medium">{profession.fundsCount > 0 ? t("fundsCount", { count: profession.fundsCount }) : t("reviewPending")}</p>
               </div>
               <span className="text-sm font-bold text-primary transition-transform group-hover:translate-x-1">
                 {t("open")} →

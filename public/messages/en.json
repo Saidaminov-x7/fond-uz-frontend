@@ -3,7 +3,8 @@
     "brand": "FondUz",
     "view": "Learn more",
     "viewAll": "View all",
-    "backToList": "Back to list"
+    "backToList": "Back to list",
+    "theme": "Appearance"
   },
   "adminDashboard": {
     "workspace": "Content workspace",
@@ -29,44 +30,109 @@
     "backHome": "Home"
   },
   "nav": {
+    "tagline": "Temporary wordmark",
+    "search": "Search",
+    "language": "Language",
+    "mainNavigation": "Main navigation",
+    "languageNames": {
+      "uz": "Uzbek",
+      "ru": "Russian",
+      "en": "English"
+    },
     "home": "Home",
     "about": "About",
-    "services": "Care areas",
+    "services": "Services",
     "doctors": "Doctors",
-    "prices": "Costs",
+    "prices": "Prices",
     "news": "News",
     "contacts": "Contact",
-    "faqs": "FAQ"
+    "faqs": "FAQ",
+    "blog": "Blog",
+    "feedback": "Feedback",
+    "navigationLabel": "Navigation",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu"
   },
   "home": {
-    "heroTitle": "Find support for medical care",
-    "heroSubtitle": "Explore care programs and contact organizations that can help.",
-    "heroCta": "Explore care areas",
-    "activityTitle": "How FondUz helps",
-    "activityText": "FondUz brings medical support programs together in one clear guide. Choose a care area, review available organizations, and contact them directly to confirm eligibility and next steps.",
-    "newsTitle": "Latest news",
-    "newsSubtitle": "Platform updates and practical guidance.",
+    "heroTitle": "FondUz: information for patients",
+    "heroSubtitle": "Choose what you need: services, specialists, prices, or answers to common questions.",
+    "heroCta": "Explore services",
+    "activityTitle": "Where to begin",
+    "activityText": "The site should make it clear where to find information, how to contact the team, and what needs approval before publication.",
+    "newsTitle": "Publications",
+    "newsSubtitle": "Foundation updates and helpful information.",
     "faqsTitle": "Frequently asked questions",
-    "faqsSubtitle": "Answers about finding care and contacting organizations.",
-    "viewAllNews": "All news",
+    "faqsSubtitle": "Answers to common questions.",
+    "viewAllNews": "All publications",
     "viewAllFaqs": "All questions",
-    "heroEyebrow": "A clearer path to medical support",
-    "heroSecondaryCta": "How it works",
+    "heroEyebrow": "Information site",
+    "heroSecondaryCta": "About the fund",
     "heroImageAlt": "Registan Square in Samarkand at sunrise",
     "heroCountry": "Uzbekistan",
-    "highlightOne": "Explore care areas and available programs in one place.",
-    "highlightTwo": "Review organization information and choose what fits.",
-    "highlightThree": "Contact an organization directly to confirm eligibility."
+    "highlightOne": "Find information about care areas and programs in confirmed sections.",
+    "highlightTwo": "Read published material to understand common questions.",
+    "highlightThree": "Contact the site team through a confirmed channel.",
+    "topline": "Interface concept · Content requires approval",
+    "toplineNote": "",
+    "languageNote": "Choose a language from the menu to open that version of the site.",
+    "conceptTitle": "Information structure pending review",
+    "conceptBody": "Confirmed details about eligibility, organizations, and costs have not been published yet.",
+    "imagePending": "Photo will be added",
+    "imageCaption": "An approved image has not been provided yet.",
+    "heroReview": "Site content is awaiting review and approval.",
+    "viewAllServices": "All services",
+    "viewAllDoctors": "All specialists",
+    "viewAllPrices": "All prices",
+    "priceName": "Service",
+    "priceValue": "Cost",
+    "contactCta": "Write a message",
+    "publicationNoticeTitle": "Before publication",
+    "publicationNoticeBody": "All factual material must be reviewed before launch.",
+    "reviewPending": "Materials will follow editorial review.",
+    "navigationKicker": "Navigation",
+    "startOneTitle": "Find information",
+    "startOneText": "Services, doctors and prices have separate sections.",
+    "startTwoTitle": "Find an answer",
+    "startTwoText": "Questions and publications have their own section.",
+    "startThreeTitle": "Contact us",
+    "startThreeText": "Confirmed contact details will appear on the contact page.",
+    "aboutKicker": "About",
+    "aboutPreviewTitle": "A place for an approved story",
+    "aboutPreviewBody": "This section will introduce the fund, its work and its principles. Source information has not been provided yet.",
+    "aboutMore": "More about the fund",
+    "servicesKicker": "Find a section",
+    "doctorsKicker": "Profiles",
+    "doctorsIntro": "Specialist profiles will appear here once ready.",
+    "pricesKicker": "Prices",
+    "pricesIntro": "Current prices will appear here once confirmed.",
+    "publicationsKicker": "Publications",
+    "faqKicker": "Navigation help",
+    "contactKicker": "Feedback",
+    "contactQuestion": "Still have a question?",
+    "contactDescription": "Open the form and leave your contact details to ask a question.",
+    "reviewExample": "Example layout — pending approval",
+    "emptyServiceTitle": "Service information is not available yet",
+    "emptyServiceText": "A short description will be added after approval.",
+    "emptyDoctorTitle": "Specialist profile pending review",
+    "emptyDoctorText": "Confirmed details will be added after approval.",
+    "emptyPriceTitle": "Price list pending confirmation",
+    "pricePending": "To be confirmed",
+    "emptyNewsTitle": "Publication pending review",
+    "emptyNewsText": "Updates will appear here once they are ready.",
+    "emptyFaqItem": "Questions will appear after editorial review."
   },
   "about": {
+    "conceptTitle": "Information structure pending review",
+    "conceptBody": "Confirmed details about eligibility, organizations, and costs are not available on this page yet. The relevant team should verify them before publication.",
     "title": "About FondUz",
     "subtitle": "A clear guide to medical programs and organizations.",
-    "body": "We help patients and families find relevant support programs and contact the organizations directly."
+    "body": "FondUz public pages introduce the project structure and help visitors navigate materials once they have been prepared and approved."
   },
   "services": {
     "title": "Medical care areas",
     "subtitle": "Explore care areas and find relevant organizations.",
     "fundsCount": "Organizations: {count}",
+    "reviewPending": "Information pending confirmation",
     "emptyPartners": "Partner organizations have not been added yet. Contact the FondUz team for information.",
     "open": "Learn more",
     "back": "All care areas",
@@ -96,39 +162,29 @@
     "back": "All news"
   },
   "contacts": {
-    "title": "Contact us",
-    "subtitle": "Send a question and we will help you find the right contact.",
+    "title": "Contact information",
+    "subtitle": "Details are awaiting review and confirmation before launch.",
     "phoneLabel": "Phone",
     "emailLabel": "Email",
     "addressLabel": "Address",
-    "phoneValue": "+998 71 200 00 00",
-    "emailValue": "info@fond.uz",
-    "addressValue": "Tashkent, Uzbekistan"
+    "phoneValue": "",
+    "emailValue": "",
+    "addressValue": "",
+    "feedbackTitle": "Feedback form",
+    "feedbackPending": "The form will be available after a safe contact channel is connected and verified."
   },
   "faqs": {
     "title": "Frequently asked questions",
-    "subtitle": "Answers to common questions about the platform.",
-    "items": [
-      {
-        "question": "How do I find a fund for my care area?",
-        "answer": "Open Care areas, choose a specialty, and contact the listed organization to confirm its terms."
-      },
-      {
-        "question": "Does FondUz decide whether to fund care?",
-        "answer": "FondUz helps you find information and contacts. Each organization makes its own support decisions."
-      },
-      {
-        "question": "Which documents should I prepare?",
-        "answer": "Medical records and test results are often needed. Confirm the exact list with the organization."
-      }
-    ]
+    "subtitle": "Materials will appear after editorial review.",
+    "items": [],
+    "reviewPending": "Materials will appear after editorial review."
   },
   "forms": {
     "name": "Name",
     "email": "Email",
     "message": "Message",
     "submit": "Send message",
-    "success": "Thank you. Your message has been sent."
+    "success": "This demonstration form does not send messages."
   },
   "errors": {
     "nameRequired": "Enter your name",
@@ -136,14 +192,18 @@
     "messageMin": "Message must contain at least 10 characters"
   },
   "footer": {
+    "conceptLabel": "Concept · Contact details require confirmation",
+    "contactReview": "Contact details are awaiting review.",
+    "contactAction": "Contact information",
+    "privacyLink": "Privacy policy",
     "pages": "Pages",
-    "contacts": "Contacts",
-    "description": "Helping people find medical programs and specialist organizations.",
+    "contacts": "Contact",
+    "description": "FondUz information site.",
     "copyright": "All rights reserved."
   },
   "Common": {
-    "themeLight": "Light theme",
-    "themeDark": "Dark theme"
+    "themeLight": "Switch to light theme",
+    "themeDark": "Switch to dark theme"
   },
   "Navigation": {
     "home": "Home",
@@ -206,68 +266,10 @@
         "name": "Rehabilitation"
       }
     },
-    "news": {
-      "fond-uz-patients": {
-        "title": "How FondUz helps people find a medical support program",
-        "subtitle": "A clear route from a care area to the organization that can help.",
-        "content": [
-          "FondUz brings information about medical support programs together so patients and their families can find relevant organizations more easily.",
-          "Before contacting an organization, confirm its eligibility rules and prepare the requested medical records."
-        ]
-      },
-      "patient-support": {
-        "title": "What to prepare before asking for support",
-        "subtitle": "A short checklist for your first conversation with an organization.",
-        "content": [
-          "Prepare current medical summaries, examination results, a phone number where you can be reached, and a short description of your request.",
-          "Requirements differ between organizations and programs. Confirm the exact list directly with the organization."
-        ]
-      }
-    },
-    "faqs": [
-      {
-        "question": "How do I find an organization for my care area?",
-        "answer": "Open Care areas, choose a profile, and contact the listed organization to confirm its requirements."
-      },
-      {
-        "question": "Does FondUz decide who receives funding?",
-        "answer": "FondUz helps people find information and contacts. Each organization makes its own support decisions."
-      },
-      {
-        "question": "Which documents should I prepare?",
-        "answer": "Medical summaries and examination results are often requested. Confirm the exact list with the organization you choose."
-      }
-    ],
-    "doctors": {
-      "alisher-karimov": {
-        "name": "Alisher Karimov",
-        "profession": "Cardiology",
-        "bio": "Specialist in cardiology programs and coordinated patient support."
-      },
-      "malika-rahimova": {
-        "name": "Malika Rahimova",
-        "profession": "Neurosurgery",
-        "bio": "Consultant for patient referrals and support around complex procedures."
-      }
-    },
-    "prices": {
-      "consultation": {
-        "title": "Specialist consultation",
-        "price": "Confirm with the medical organization",
-        "includes": [
-          "Initial consultation",
-          "A list of required documents"
-        ]
-      },
-      "diagnostics": {
-        "title": "Diagnostic program",
-        "price": "Confirm with the medical organization",
-        "includes": [
-          "The doctor determines the examinations",
-          "The clinic confirms the cost"
-        ]
-      }
-    }
+    "news": {},
+    "faqs": [],
+    "doctors": {},
+    "prices": {}
   },
   "privacy": {
     "title": "Privacy policy",

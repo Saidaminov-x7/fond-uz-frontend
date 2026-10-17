@@ -3,21 +3,15 @@ import { Button } from "@/src/components/ui/Button";
 import { Container } from "@/src/components/ui/Container";
 import type { HomeFaqItem } from "../utils/types";
 
-type Props = {
-  title: string;
-  subtitle: string;
-  items: HomeFaqItem[];
-  viewAll: string;
-};
+type Props = { title: string; subtitle: string; items: HomeFaqItem[]; viewAll: string };
 
 export function FaqPreviewSection({ title, subtitle, items, viewAll }: Props) {
+  if (items.length === 0) return null;
   return (
-    <section className="py-12 md:py-16">
+    <section className="faq-home-section py-12 md:py-16">
       <Container>
         <Accordion title={title} subtitle={subtitle} items={items} />
-        <div className="mt-8 text-center">
-          <Button href="/faqs">{viewAll}</Button>
-        </div>
+        <div className="mt-6"><Button href="/faqs" variant="secondary">{viewAll}</Button></div>
       </Container>
     </section>
   );

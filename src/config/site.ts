@@ -22,9 +22,9 @@ export const siteConfig = {
     { title: "funds", href: "/admin/funds" },
   ],
   contacts: {
-    phone: "+998 71 123 45 67",
-    email: "info@fond.uz",
-    address: "Toshkent sh., Yunusobod tumani",
+    phone: "",
+    email: "",
+    address: "",
   },
   socials: {
     telegram: "https://t.me/fond_uz",

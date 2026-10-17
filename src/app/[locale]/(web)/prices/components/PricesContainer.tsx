@@ -3,6 +3,7 @@ import { Container } from "@/src/components/ui/Container";
 import { useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import { MotionViewport } from "@/src/components/ui/MotionViewport";
+import { useTranslations } from "next-intl";
 
 type PriceItem = {
   id: string;
@@ -32,11 +33,12 @@ const cardVariants: Variants = {
 };
 
 export function PricesContainer({ items, toggleListText, toggleCardsText, includesText }: Props) {
+  const t = useTranslations("home");
   const [view, setView] = useState<"list" | "cards">("list");
 
   return (
     <Container className="mt-10 md:mt-14">
-      <div className="mb-6 hidden justify-end gap-2 md:flex">
+      <div className={`${items.length === 0 ? "hidden" : "mb-6 hidden justify-end gap-2 md:flex"}`}>
         <button
           onClick={() => setView("list")}
           className={`rounded-xl border px-3 py-2 text-sm transition-all shadow-sm active:scale-95 ${
@@ -61,6 +63,7 @@ export function PricesContainer({ items, toggleListText, toggleCardsText, includ
           view === "cards" ? "md:grid-cols-2 xl:grid-cols-3" : "md:block md:space-y-4"
         }`}
       >
+        {items.length === 0 && <p className="empty-state py-10 text-base text-muted-foreground">{t("reviewPending")}</p>}
         <AnimatePresence mode="popLayout">
           {items.map((item, i) => (
             <motion.article

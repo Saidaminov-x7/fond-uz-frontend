@@ -1,25 +1,25 @@
 import { Container } from "@/src/components/ui/Container";
+import { Link } from "@/src/i18n/routing";
+import { useTranslations } from "next-intl";
 
 type Props = { title: string; text: string; highlights: [string, string, string] | string[] };
 
-export function ActivitySection({ title, text, highlights }: Props) {
+const destinations = ["/services", "/faqs", "/contacts"] as const;
+
+export function ActivitySection({ title }: Props) {
+  const th = useTranslations("home");
   return (
-    <section className="activity-section py-16 md:py-24">
+    <section className="activity-section py-12 md:py-16">
       <Container>
         <div className="activity-intro">
-          <p className="section-kicker">FondUz</p>
           <h2>{title}</h2>
-          <p>{text}</p>
         </div>
-        <ol className="activity-steps">
-          {highlights.map((item, index) => (
-            <li className="activity-step" key={item}>
-              <span className="activity-step-number">0{index + 1}</span>
-              <p>{item}</p>
-              <span className="activity-step-arrow" aria-hidden="true">↗</span>
-            </li>
-          ))}
-        </ol>
+        <nav className="activity-steps" aria-label={title}>
+          {destinations.map((href) => {
+            const key = href.slice(1);
+            return <Link className="activity-step" href={href} key={href}><span className="activity-step-copy"><strong>{th(`start${key === "services" ? "One" : key === "faqs" ? "Two" : "Three"}Title`)}</strong><small>{th(`start${key === "services" ? "One" : key === "faqs" ? "Two" : "Three"}Text`)}</small></span><span className="activity-step-arrow" aria-hidden="true">{"\u2197"}</span></Link>;
+          })}
+        </nav>
       </Container>
     </section>
   );

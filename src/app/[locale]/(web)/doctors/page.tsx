@@ -16,6 +16,7 @@ export default async function DoctorsPage({ params, searchParams }: Props) {
   const { page } = await searchParams;
   setRequestLocale(locale);
   const t = await getTranslations("doctors");
+  const home = await getTranslations("home");
   const doctors = await getDoctors(locale);
 
   const { items: pageDoctors, totalPages, currentPage } = getPaginatedItems(
@@ -27,7 +28,7 @@ export default async function DoctorsPage({ params, searchParams }: Props) {
   return (
     <div className="pb-16 md:pb-24">
       <DoctorsHero title={t("title")} subtitle={t("subtitle")} />
-      <DoctorsGrid doctors={pageDoctors} openText={t("open")} />
+      {pageDoctors.length ? <DoctorsGrid doctors={pageDoctors} openText={t("open")} /> : <Container className="py-10 md:py-14"><p className="empty-state text-base text-muted-foreground">{home("reviewPending")}</p></Container>}
       <Container>
         <Pagination currentPage={currentPage} totalPages={totalPages} basePath="/doctors" />
       </Container>

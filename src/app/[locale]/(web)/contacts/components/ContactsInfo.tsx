@@ -34,7 +34,7 @@ export function ContactsInfo({
 }: Props) {
   return (
     <dl className="mt-10 space-y-6 text-left">
-      {[1, 2, 3].map((_, i) => {
+      {[0, 1, 2].map((_, i) => {
         const labels = [phoneLabel, emailLabel, addressLabel];
         const values = [phoneValue, emailValue, addressValue];
         const icons = [
@@ -46,6 +46,8 @@ export function ContactsInfo({
         const value = values[i];
         const icon = icons[i];
 
+        if (!value) return null;
+
         return (
           <motion.div
             key={label}
@@ -54,9 +56,9 @@ export function ContactsInfo({
             whileInView="visible"
             viewport={{ once: true }}
             variants={itemVariants}
-            className="flex gap-4 rounded-xl border border-border bg-card p-4 transition-all hover:bg-muted/30"
+            className="flex gap-4 rounded-md border border-border bg-card p-4 transition-colors hover:bg-muted/30"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-2xl border border-border/50 bg-muted text-foreground">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md border border-border bg-muted text-foreground">
               {icon}
             </div>
             <div>
