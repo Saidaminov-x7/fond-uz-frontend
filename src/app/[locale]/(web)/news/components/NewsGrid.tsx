@@ -46,17 +46,16 @@ export function NewsGrid({ items, openText }: Props) {
             variants={cardVariants}
             className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:shadow-md hover:border-border"
           >
-            <Link href={`/news/${item.slug}`}>
-              <div className="relative h-[250px] md:h-[250px] group overflow-hidden">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-            </Link>
+            <div className="relative h-[250px] md:h-[250px] overflow-hidden">
+              <Image
+                src={item.image}
+                alt={item.title}
+                fill
+                unoptimized={item.image.startsWith("https://")}
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </div>
             <div className="flex flex-col p-5 gap-3">
               <p className="text-xs text-muted-foreground">{item.date}</p>
               <h3 className="mt-2 font-serif text-lg text-foreground">{item.title}</h3>

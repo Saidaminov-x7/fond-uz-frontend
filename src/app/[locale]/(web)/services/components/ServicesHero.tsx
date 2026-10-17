@@ -1,34 +1,16 @@
-"use client";
-
 import { Container } from "@/src/components/ui/Container";
-import { motion } from "framer-motion";
+import { Link } from "@/src/i18n/routing";
 
-type Props = {
-  title: string;
-  subtitle: string;
-};
+type Props = { title: string; subtitle: string; homeLabel: string };
 
-export function ServicesHero({ title, subtitle }: Props) {
+export function ServicesHero({ title, subtitle, homeLabel }: Props) {
   return (
-    <section className="border-b border-border bg-muted/40 py-12 md:py-20">
-      <Container>
-        <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, ease: "easeOut" }}
-          className="font-serif text-3xl text-foreground md:text-4xl"
-        >
-          {title}
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-          className="mt-4 max-w-2xl text-sm text-muted-foreground md:text-base"
-        >
-          {subtitle}
-        </motion.p>
-      </Container>
-    </section>
+    <Container className="service-page-heading">
+      <nav aria-label="Breadcrumb" className="page-breadcrumb">
+        <Link href="/">{homeLabel}</Link><span aria-hidden="true">/</span><span aria-current="page">{title}</span>
+      </nav>
+      <h1>{title}</h1>
+      <p>{subtitle}</p>
+    </Container>
   );
 }

@@ -2,21 +2,29 @@
 
 import { ReactNode, useEffect, useState } from "react";
 import { Link, usePathname, useRouter } from "@/src/i18n/routing";
-import { siteConfig } from "@/src/config/site";
 import { ThemeToggle } from "@/src/components/ThemeToggle";
-import { Container } from "@/src/components/ui/Container";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import "./admin.css";
+
+const languageOrder = ["ru", "en", "uz"] as const;
+const navItems = [
+  ["dashboard", "overview", "/admin"],
+  ["inbox", "inbox", "/admin/inbox"],
+  ["news", "news", "/admin/news"],
+  ["faqs", "faqs", "/admin/faqs"],
+  ["doctors", "doctors", "/admin/doctors"],
+  ["prices", "prices", "/admin/prices"],
+  ["services", "services", "/admin/services"],
+  ["funds", "funds", "/admin/funds"],
+] as const;
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
   const locale = useLocale();
-  const navLabels: Record<string, Record<string, string>> = {
-    ru: { dashboard: "Обзор", news: "Новости", faqs: "Вопросы и ответы", doctors: "Специалисты", prices: "Стоимость", services: "Направления", funds: "Организации" },
-    en: { dashboard: "Dashboard", news: "News", faqs: "FAQs", doctors: "Specialists", prices: "Pricing", services: "Care areas", funds: "Organizations" },
-    uz: { dashboard: "Boshqaruv", news: "Yangiliklar", faqs: "Savol-javoblar", doctors: "Mutaxassislar", prices: "Narxlar", services: "Yordam yo‘nalishlari", funds: "Tashkilotlar" },
-  };
+  const t = useTranslations("adminDashboard");
   const [isReady, setIsReady] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
 
   useEffect(() => {
     let active = true;
@@ -28,77 +36,53 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
     return () => { active = false; };
   }, [router]);
 
-  const toggleLanguage = () => {
-    const nextLocale = locale === "uz" ? "ru" : "uz";
-    router.replace(pathname, { locale: nextLocale });
-  };
-
+  const nextLocale = languageOrder[(languageOrder.indexOf(locale as typeof languageOrder[number]) + 1) % languageOrder.length];
+  const switchLanguage = () => router.replace(pathname, { locale: nextLocale });
   const handleLogout = () => {
     void fetch("/api/auth/logout", { method: "POST" }).finally(() => router.push("/login"));
   };
 
-  if (!isReady) return null;
+  if (!isReady) return <div className="admin-checking" role="status">{t("checkingAccess")}</div>;
 
   return (
-    <div className="flex min-h-screen bg-muted">
-      {/* Sidebar */}
-      <aside className="fixed left-0 top-0 hidden h-screen w-64 border-r border-border bg-card lg:block">
-        <div className="flex h-16 items-center border-b border-border px-6">
-          <Link href="/" className="font-serif text-xl font-bold text-primary hover:opacity-80 transition-opacity">
-            FondUz Admin
-          </Link>
-        </div>
-        <nav className="space-y-1.5 p-4">
-          {siteConfig.adminNav.map((item) => {
-            const isActive = pathname === item.href || (item.href !== "/admin" && pathname.startsWith(item.href));
-            return (
-              <Link
-                key={item.href}
-                href={item.href}
-                className={`flex items-center rounded-md px-3 py-2.5 text-sm font-semibold transition-colors ${
-                  isActive 
-                    ? "bg-primary text-primary-foreground"
-                    : "text-muted-foreground hover:bg-muted hover:text-foreground"
-                }`}
-              >
-                {navLabels[locale]?.[item.title] ?? item.title}
-              </Link>
-            );
+    <div className="admin-shell">
+      <aside className="admin-sidebar">
+        <Link href="/admin" className="admin-brand" aria-label="FondUz admin">
+          <span className="admin-brand-mark" aria-hidden="true">F</span>
+          <span><strong>FondUz</strong><small>{t("workspace")}</small></span>
+        </Link>
+        <nav className="admin-nav" aria-label={t("navigation")}>
+          <span className="admin-nav-label">{t("navigation")}</span>
+          {navItems.map(([key, label, href], index) => {
+            const active = pathname === href || (href !== "/admin" && pathname.startsWith(href));
+            return <Link key={key} href={href} aria-current={active ? "page" : undefined} className={`admin-nav-link${active ? " is-active" : ""}`}>
+              <span className="admin-nav-index">{String(index + 1).padStart(2, "0")}</span><span>{t(label)}</span>
+            </Link>;
           })}
         </nav>
+        <div className="admin-sidebar-bottom">
+          <Link href="/" className="admin-public-link"><span aria-hidden="true">↗</span>{t("viewSite")}</Link>
+          <p>FONDUZ · CONTENT MANAGEMENT</p>
+        </div>
       </aside>
 
-      {/* Main Content */}
-      <div className="flex flex-1 flex-col lg:pl-64">
-        <header className="sticky top-0 z-30 flex h-16 items-center border-b border-border bg-card px-8">
-          <div className="flex flex-1 items-center justify-between">
-            <h2 className="text-xs font-black text-muted-foreground uppercase tracking-widest">
-              {pathname.split("/").pop()?.toUpperCase() || "DASHBOARD"}
-            </h2>
-            <div className="flex items-center gap-2 sm:gap-4">
-              <button
-                type="button"
-                onClick={toggleLanguage}
-              className="flex h-9 items-center justify-center rounded-md border border-border bg-background px-3 text-xs font-bold uppercase text-foreground hover:bg-muted transition-colors"
-              >
-                {locale}
-              </button>
-              <ThemeToggle />
-              <button 
-                onClick={handleLogout}
-                className="rounded-md border border-border bg-background px-3 py-2 text-xs font-bold uppercase tracking-tight transition-colors hover:border-red-600 hover:bg-red-700 hover:text-white"
-              >
-                {{ ru: "Выйти", en: "Logout", uz: "Chiqish" }[locale] ?? "Logout"}
-              </button>
-            </div>
-          </div>
+      <div className="admin-main">
+        <header className="admin-toolbar">
+          <button className="admin-mobile-menu" type="button" aria-expanded={mobileOpen} aria-controls="admin-mobile-nav" onClick={() => setMobileOpen(!mobileOpen)}>
+            <span aria-hidden="true">{mobileOpen ? "×" : "☰"}</span><span>{t("menu")}</span>
+          </button>
+          <div className="admin-toolbar-spacer" />
+          <span className="admin-session-label"><span aria-hidden="true" />{t("signedIn")}</span>
+          <button type="button" onClick={switchLanguage} className="admin-language" aria-label={`${t("language")}: ${nextLocale.toUpperCase()}`}>
+            {locale.toUpperCase()} <span aria-hidden="true">⌄</span>
+          </button>
+          <ThemeToggle />
+          <button type="button" onClick={handleLogout} className="admin-logout">{t("logout")}</button>
         </header>
-
-        <main className="flex-1 p-4 sm:p-6 lg:p-8">
-          <Container className="max-w-7xl">
-            {children}
-          </Container>
-        </main>
+        {mobileOpen && <nav id="admin-mobile-nav" className="admin-mobile-nav" aria-label={t("navigation")}>
+          {navItems.map(([key, label, href]) => <Link key={key} href={href} onClick={() => setMobileOpen(false)} aria-current={pathname === href ? "page" : undefined}>{t(label)}</Link>)}
+        </nav>}
+        <main className="admin-content">{children}</main>
       </div>
     </div>
   );

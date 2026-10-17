@@ -5,6 +5,14 @@ type Locale = "ru" | "en" | "uz";
 type Collection<T> = { items: T[]; total: number };
 type LocalizedValue = string | string[];
 const localeSuffix: Record<Locale, "" | "En" | "Uz"> = { ru: "", en: "En", uz: "Uz" };
+const fallbackImage = "/img/samarkand-registan.webp";
+
+function safeImage(value: unknown) {
+  if (typeof value !== "string") return fallbackImage;
+  if (value.startsWith("/") && !value.startsWith("//") && !value.includes("\\")) return value;
+  try { return new URL(value).protocol === "https:" ? value : fallbackImage; }
+  catch { return fallbackImage; }
+}
 
 function resolveLocale(locale: string): Locale {
   return locale === "en" || locale === "uz" ? locale : "ru";
@@ -31,17 +39,17 @@ function mergeLocale<T extends object>(item: T, locale: Locale, fields: Record<s
 export async function getDoctors(localeName: string = "ru"): Promise<Doctor[]> {
   const locale = resolveLocale(localeName);
   const { items } = await load<Doctor>("/api/doctors", []);
-  return items.map((item) => mergeLocale(item, locale, {
+  return items.map((item) => ({ ...mergeLocale(item, locale, {
     name: "name", profession: "specialty", bio: "bio",
-  }));
+  }), image: safeImage(item.image) }));
 }
 
 export async function getNews(localeName: string = "ru"): Promise<NewsItem[]> {
   const locale = resolveLocale(localeName);
   const { items } = await load<NewsItem>("/api/news", []);
-  return items.map((item) => mergeLocale(item, locale, {
+  return items.map((item) => ({ ...mergeLocale(item, locale, {
     title: "title", subtitle: "subtitle", content: "content",
-  }));
+  }), image: safeImage(item.image) }));
 }
 
 export async function getFaqs(localeName: string = "ru"): Promise<FAQItem[]> {

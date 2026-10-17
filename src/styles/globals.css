@@ -96,8 +96,8 @@ a { text-underline-offset: .2em; }
 .hero-primary { min-height: 2.7rem; border-radius: .2rem; box-shadow: none; }
 .hero-secondary { display: inline-flex; min-height: 2.7rem; align-items: center; border: 1px solid #829a8b; border-radius: .2rem; padding-inline: .85rem; color: var(--primary); font-size: .83rem; font-weight: 550; text-decoration: none; transition: background-color .15s ease; }
 .hero-secondary:hover { background: var(--muted); }
-.hero-visual { display: flex; min-width: 0; min-height: 18rem; flex-direction: column; overflow: visible; margin: 0; border: 0; background: transparent; }
-  .hero-photo { border-radius: .25rem; object-fit: cover; }
+.hero-visual { position: relative; display: flex; min-width: 0; min-height: 18rem; flex-direction: column; overflow: hidden; margin: 0; border: 0; border-radius: .25rem; background: var(--muted); }
+.hero-photo { border-radius: .25rem; object-fit: cover; }
 .hero-image-placeholder { display: flex; min-height: 17rem; flex: 1; flex-direction: column; align-items: center; justify-content: center; gap: .65rem; border: 0; border-radius: .25rem; background: #edf0e9; color: #738075; font-size: .72rem; text-align: center; }
 .dark .hero-image-placeholder { border-color: var(--border); background: var(--muted); color: var(--muted-foreground); }
 .hero-placeholder-mark { color: #aebcaf; font-size: 1.7rem; line-height: 1; }
@@ -146,6 +146,7 @@ a { text-underline-offset: .2em; }
 .dark .home-content-muted { background: color-mix(in srgb, var(--card) 72%, var(--background)); }
 .home-about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: start; gap: 2rem; }
 .home-about-grid h2, .home-contact-cta h2 { margin: .5rem 0 0; color: var(--foreground); font-family: var(--font-serif); font-size: clamp(1.8rem, 3vw, 2.65rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.14; }
+.home-about-grid h3 { margin: 0 0 .7rem; color: var(--foreground); font-family: var(--font-serif); font-size: clamp(1.3rem, 2vw, 1.8rem); font-weight: 500; letter-spacing: -.025em; line-height: 1.25; }
 .home-about-copy, .home-contact-cta > div > p:not(.section-kicker):not(.home-review-note) { margin: 0; color: var(--muted-foreground); font-size: .95rem; line-height: 1.75; }
 .home-text-link { display: inline-flex; align-items: center; gap: .45rem; margin-top: 1rem; color: var(--primary); font-size: .8rem; font-weight: 600; text-decoration: none; }
 .home-text-link:hover { text-decoration: underline; }
@@ -183,6 +184,13 @@ a { text-underline-offset: .2em; }
 .faq-home-section { background: #edf0e9; }
 .dark .faq-home-section { background: color-mix(in srgb, var(--card) 72%, var(--background)); }
 .home-publication-note p:last-child { max-width: 46rem; margin: .5rem 0 0; color: var(--muted-foreground); font-size: .8rem; line-height: 1.6; }
+.blog-page-heading { max-width: 1440px; padding: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 4.45vw, 4rem) 1.5rem; }
+.blog-page-heading .page-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; color: var(--muted-foreground); font-size: .78rem; }
+.blog-page-heading .page-breadcrumb a { color: inherit; text-decoration: none; }
+.blog-page-heading .page-breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
+.blog-page-heading .page-breadcrumb [aria-current="page"] { color: var(--foreground); }
+.blog-page-heading h1 { margin: 2.1rem 0 0; color: var(--foreground); font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.08; }
+.blog-page-heading > p { max-width: 48rem; margin: .8rem 0 0; color: var(--muted-foreground); font-size: clamp(.96rem, 1.3vw, 1.1rem); line-height: 1.65; }
 
 @media (min-width: 1024px) {
   .hero-panel { grid-template-columns: minmax(0, 1fr) minmax(0, .88fr); }
@@ -213,6 +221,8 @@ a { text-underline-offset: .2em; }
   .activity-step { min-height: 3.6rem; font-size: 1rem; }
   .section-heading { align-items: flex-start; flex-direction: column; gap: .75rem; }
   .home-about-grid { grid-template-columns: 1fr; gap: 1rem; }
+  .blog-page-heading { padding-top: 1.5rem; }
+  .blog-page-heading h1 { margin-top: 1.55rem; }
   .home-data-grid { grid-template-columns: 1fr; gap: .25rem; }
   .home-data-card { min-height: 4rem; }
   .home-placeholder-card { min-height: 10rem; }

@@ -1,8 +1,7 @@
-import { Container } from "@/src/components/ui/Container";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import { getNews } from "@/src/lib/content";
 import { BlogHero } from "./components/BlogHero";
-import { BlogList } from "./components/BlogList";
-import { NewsletterSignup } from "./components/NewsletterSignup";
+import { NewsGrid } from "../news/components/NewsGrid";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -10,23 +9,15 @@ export default async function BlogPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("BlogPage");
-  
-  const articles = t.raw("articles") as { title: string; date: string; category: string }[];
+  const nav = await getTranslations("nav");
+  const home = await getTranslations("home");
+  const newsLabels = await getTranslations("news");
+  const articles = await getNews(locale);
 
   return (
     <div className="pb-16 md:pb-24">
-      <BlogHero title={t("title")} subtitle={t("sub")} />
-
-      <Container className="mt-10 md:mt-14">
-        <BlogList articles={articles} readMoreText={t("readMore")} />
-
-        <NewsletterSignup
-          title={t("newsletterTitle")}
-          subtitle={t("newsletterSub")}
-          placeholderText={t("newsletterEmailPh")}
-          buttonText={t("newsletterCta")}
-        />
-      </Container>
+      <BlogHero title={t("title")} subtitle={t("sub")} homeLabel={nav("home")} />
+      {articles.length ? <NewsGrid items={articles} openText={newsLabels("open")} /> : <p className="empty-state mx-auto max-w-6xl px-6 py-10 text-base text-muted-foreground sm:px-8 lg:px-12">{home("reviewPending")}</p>}
     </div>
   );
 }

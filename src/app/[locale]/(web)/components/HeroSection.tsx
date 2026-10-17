@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/src/components/ui/Button";
 import { Container } from "@/src/components/ui/Container";
 import { Link } from "@/src/i18n/routing";
@@ -18,11 +19,10 @@ export function HeroSection({ title, subtitle, actionLabel, eyebrow, secondaryLa
             <div className="hero-actions"><Button href="/services" size="lg" className="hero-primary">{actionLabel}</Button><Link href="/about" className="hero-secondary">{secondaryLabel}</Link></div>
           </div>
           <figure className="hero-visual">
-            <Image src="/img/samarkand-registan.webp" alt={imageAlt || t("imageAlt")} fill priority sizes="(max-width: 768px) 100vw, 45vw" className="hero-photo" />
+            <Image src="/img/samarkand-registan.webp" alt={imageAlt || t("heroImageAlt")} fill priority sizes="(max-width: 768px) 100vw, 45vw" className="hero-photo" />
           </figure>
         </div>
       </Container>
     </section>
   );
 }
-import Image from "next/image";

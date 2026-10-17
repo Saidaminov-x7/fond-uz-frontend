@@ -24,6 +24,7 @@ export default async function DoctorDetailsPage({ params }: Props) {
         backText={tc("backToList")}
         emailText={t("email")}
         phoneText={t("phone")}
+        aboutText={t("about")}
       />
     </Container>
   );

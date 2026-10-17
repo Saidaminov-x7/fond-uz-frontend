@@ -43,9 +43,6 @@ async function hasValidAdminSession(token: string | undefined) {
 
 export default async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
-  const originSecret = process.env.CLOUDFLARE_ORIGIN_SECRET;
-  if (originSecret && request.headers.get("x-fonduz-origin") !== originSecret) return new Response("Forbidden", { status: 403 });
-
   const policy = createCsp();
   const requestHeaders = new Headers(request.headers);
   requestHeaders.set("Content-Security-Policy", policy);

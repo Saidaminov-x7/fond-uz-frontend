@@ -45,17 +45,16 @@ export function DoctorsGrid({ doctors, openText }: Props) {
             variants={cardVariants}
             className="overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:shadow-md hover:border-border"
           >
-            <Link href={`/doctors/${doc.id}`}>
-              <div className="relative h-[250px] md:h-[250px] w-full group overflow-hidden">
-                <Image
-                  src={doc.image}
-                  alt={doc.name}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
-              </div>
-            </Link>
+            <div className="relative h-[250px] md:h-[250px] w-full overflow-hidden">
+              <Image
+                src={doc.image}
+                alt={doc.name}
+                fill
+                unoptimized={doc.image.startsWith("https://")}
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 33vw"
+              />
+            </div>
             <div className="flex flex-col p-5 gap-3 items-start">
               <h3 className="font-serif text-2xl text-foreground">{doc.name}</h3>
               <p className="mt-1 text-lg text-muted-foreground">{doc.profession}</p>

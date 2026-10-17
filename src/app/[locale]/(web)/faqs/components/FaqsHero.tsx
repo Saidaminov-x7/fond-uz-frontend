@@ -1,24 +1,16 @@
-"use client";
-
 import { Container } from "@/src/components/ui/Container";
-import { SectionHeader } from "@/src/components/ui/SectionHeader";
-import { motion } from "framer-motion";
+import { Link } from "@/src/i18n/routing";
 
-type Props = {
-  title: string;
-  subtitle: string;
-};
+type Props = { title: string; subtitle: string; homeLabel: string };
 
-export function FaqsHero({ title, subtitle }: Props) {
+export function FaqsHero({ title, subtitle, homeLabel }: Props) {
   return (
-    <Container className="pt-12 md:pt-16">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: "easeOut" }}
-      >
-        <SectionHeader title={title} subtitle={subtitle} />
-      </motion.div>
+    <Container className="faq-page-heading">
+      <nav aria-label="Breadcrumb" className="page-breadcrumb">
+        <Link href="/">{homeLabel}</Link><span aria-hidden="true">/</span><span aria-current="page">{title}</span>
+      </nav>
+      <h1>{title}</h1>
+      <p>{subtitle}</p>
     </Container>
   );
 }

@@ -1,3 +1,3 @@
-import { AdminCollectionManager } from "@/src/components/admin/AdminCollectionManager";
+import { AdminCollectionManager } from "../_components/AdminCollectionManager";
 
 export default function AdminPage() { return <AdminCollectionManager collection="doctors" />; }

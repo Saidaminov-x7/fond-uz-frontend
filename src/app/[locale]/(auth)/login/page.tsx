@@ -8,131 +8,93 @@ import { useRouter, usePathname } from "@/src/i18n/routing";
 import { ThemeToggle } from "@/src/components/ThemeToggle";
 import { motion } from "framer-motion";
 
+const locales = ["ru", "en", "uz"] as const;
+
 export default function LoginPage() {
   const t = useTranslations("Auth");
   const tc = useTranslations("Common");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();
-  
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const toggleLanguage = () => {
-    const nextLocale = locale === "uz" ? "ru" : "uz";
-    router.replace(pathname, { locale: nextLocale });
-  };
+  const nextLocale = locales[(locales.indexOf(locale as typeof locales[number]) + 1) % locales.length];
+  const switchLanguage = () => router.replace(pathname, { locale: nextLocale });
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
     setLoading(true);
     setError("");
-
     try {
-      const res = await fetch("/api/auth/login", {
+      const response = await fetch("/api/auth/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
       });
-
-      const contentType = res.headers.get("content-type");
-      if (res.ok) {
-        // Success! Redirect to admin dashboard
-        router.push("/admin");
-      } else if (contentType && contentType.includes("application/json")) {
-        const data = await res.json();
-        setError(data.error || "Login failed");
+      if (response.ok) {
+        const sessionResponse = await fetch("/api/auth/session", { cache: "no-store" });
+        if (!sessionResponse.ok) {
+          setError(t("loginError"));
+          return;
+        }
+        router.replace("/admin");
+        router.refresh();
+      } else if (response.headers.get("content-type")?.includes("application/json")) {
+        const data = await response.json();
+        setError(data.error || t("loginError"));
       } else {
-        setError(`Server error: ${res.status}`);
+        setError(t("loginError"));
       }
     } catch {
-      setError("Network error: Could not reach the server");
+      setError(t("networkError"));
     } finally {
       setLoading(false);
     }
   };
 
-  return (
-    <div className="flex min-h-[85vh] items-center py-12">
-      <Container>
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="mx-auto max-w-md overflow-hidden rounded-xl border border-border bg-card shadow-xl"
-        >
-          <div className="bg-primary/5 p-8 text-center transition-colors">
-            <h1 className="font-serif text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-              {t("login")}
-            </h1>
-            <p className="mt-2 text-sm text-muted-foreground">Admin-panel login</p>
+  return <main className="min-h-screen bg-background">
+    <Container className="flex min-h-screen max-w-6xl items-center py-8 sm:py-12">
+      <div className="grid w-full overflow-hidden border border-border bg-card md:grid-cols-[.9fr_1.1fr]">
+        <section className="relative flex min-h-52 flex-col justify-between bg-primary p-7 text-primary-foreground sm:p-10 md:min-h-[34rem]">
+          <div className="flex items-center gap-3"><span className="grid h-10 w-10 place-items-center border border-primary-foreground/35 font-serif text-xl">F</span><span className="font-semibold tracking-tight">FondUz</span></div>
+          <div className="relative z-10 mt-12 max-w-sm md:mt-0">
+            <p className="text-xs font-semibold uppercase tracking-[.15em] text-primary-foreground/70">FondUz</p>
+            <h1 className="mt-3 font-serif text-3xl font-medium leading-tight tracking-tight sm:text-4xl">{t("login")}</h1>
+            <p className="mt-4 max-w-xs text-sm leading-6 text-primary-foreground/80">{t("subTitle")}</p>
           </div>
+          <p className="mt-9 text-[10px] font-medium tracking-[.14em] text-primary-foreground/60">CONTENT MANAGEMENT</p>
+          <span aria-hidden="true" className="pointer-events-none absolute bottom-0 right-0 select-none font-serif text-[14rem] leading-[.8] text-white/[.06]">F</span>
+        </section>
 
-          <div className="p-8">
-            {error && (
-              <div className="mb-6 rounded-2xl bg-red-500/10 p-3 text-center text-xs font-semibold text-red-500 ring-1 ring-red-500/20">
-                {error}
-              </div>
-            )}
+        <section className="flex flex-col justify-center p-6 sm:p-10 md:p-14">
+          <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: .25 }} className="mx-auto w-full max-w-md">
+            <p className="text-xs font-semibold uppercase tracking-[.12em] text-primary">{t("secureAccess")}</p>
+            <h2 className="mt-2 font-serif text-2xl font-medium tracking-tight text-foreground sm:text-3xl">{t("login")}</h2>
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">{t("formDescription")}</p>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div className="space-y-1.5">
-                <label className="ml-1 text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80">
-                  {t("email")}
-                </label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="h-12 w-full rounded-lg border border-border bg-background px-4 text-sm transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
-                  placeholder="admin@fond.uz"
-                />
-              </div>
+            {error && <div role="alert" aria-live="polite" className="mt-6 border-l-[3px] border-red-600 bg-red-50 px-4 py-3 text-sm text-red-800 dark:bg-red-950/30 dark:text-red-200">{error}</div>}
 
-              <div className="space-y-1.5">
-                <label className="ml-1 text-[11px] font-bold uppercase tracking-wider text-muted-foreground/80">
-                  {t("password")}
-                </label>
-                <input
-                  type="password"
-                  required
-                  value={formData.password}
-                  onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-                  className="h-12 w-full rounded-lg border border-border bg-background px-4 text-sm transition-all focus:border-primary focus:outline-none focus:ring-4 focus:ring-primary/10"
-                  placeholder="••••••••"
-                />
-              </div>
-
-              <Button 
-                type="submit" 
-                variant="primary" 
-                className="h-12 w-full rounded-2xl font-bold shadow-lg shadow-primary/20 transition-all hover:scale-[1.02] active:scale-[0.98]" 
-                disabled={loading}
-              >
-                {loading ? "..." : t("submit")}
-              </Button>
+            <form onSubmit={handleSubmit} className="mt-7 space-y-5">
+              <label className="grid gap-2 text-sm font-medium text-foreground"><span>{t("email")}</span>
+                <input type="email" autoComplete="username" required value={formData.email} onChange={(event) => setFormData({ ...formData, email: event.target.value })} className="h-12 w-full rounded-none border border-border bg-background px-4 text-sm outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15" />
+              </label>
+              <label className="grid gap-2 text-sm font-medium text-foreground"><span>{t("password")}</span>
+                <input type="password" autoComplete="current-password" required value={formData.password} onChange={(event) => setFormData({ ...formData, password: event.target.value })} className="h-12 w-full rounded-none border border-border bg-background px-4 text-sm outline-none transition-colors focus:border-primary focus:ring-2 focus:ring-primary/15" />
+              </label>
+              <Button type="submit" variant="primary" className="h-12 w-full rounded-none font-semibold" disabled={loading}>{loading ? t("submitting") : t("submit")}</Button>
             </form>
 
-            <div className="mt-8 flex items-center justify-between border-t border-border/30 pt-6">
-              <button
-                type="button"
-                onClick={toggleLanguage}
-                className="flex h-10 items-center justify-center rounded-2xl border border-border/50 bg-background/50 px-4 text-xs font-black uppercase tracking-widest text-foreground hover:bg-muted transition-all"
-              >
-                {locale}
+            <div className="mt-8 flex items-center justify-between border-t border-border pt-5">
+              <button type="button" onClick={switchLanguage} className="inline-flex min-h-10 items-center gap-2 px-2 text-xs font-bold uppercase tracking-wide text-foreground hover:text-primary" aria-label={`${t("language")}: ${nextLocale.toUpperCase()}`}>
+                {locale.toUpperCase()} <span aria-hidden="true">→ {nextLocale.toUpperCase()}</span>
               </button>
-
-              <div className="flex h-10 items-center gap-3 rounded-2xl border border-border/50 bg-background/50 px-3">
-                <span className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">
-                  {tc("themeLight")} / {tc("themeDark")}
-                </span>
-                <ThemeToggle />
-              </div>
+              <div className="flex items-center gap-3"><span className="text-xs text-muted-foreground">{tc("theme")}</span><ThemeToggle /></div>
             </div>
-          </div>
-        </motion.div>
-      </Container>
-    </div>
-  );
+          </motion.div>
+        </section>
+      </div>
+    </Container>
+  </main>;
 }

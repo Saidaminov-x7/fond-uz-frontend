@@ -30,6 +30,7 @@ export function NewsDetailContent({ item, backText }: Props) {
           src={item.image}
           alt={item.title}
           fill
+          unoptimized={item.image.startsWith("https://")}
           className="object-cover"
           sizes="100vw"
           priority

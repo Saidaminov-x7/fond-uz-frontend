@@ -16,9 +16,10 @@ type Props = {
   backText: string;
   emailText: string;
   phoneText: string;
+  aboutText: string;
 };
 
-export function DoctorInfo({ doctor, backText, emailText, phoneText }: Props) {
+export function DoctorInfo({ doctor, backText, emailText, phoneText, aboutText }: Props) {
   return (
     <>
       <Link href="/doctors" className="text-sm text-muted-foreground hover:text-foreground transition-colors group">
@@ -26,13 +27,13 @@ export function DoctorInfo({ doctor, backText, emailText, phoneText }: Props) {
       </Link>
       <div className="mt-6 grid grid-cols-1 gap-8 md:grid-cols-[320px_1fr]">
         <div className="relative h-[400px] overflow-hidden rounded-lg border border-border bg-card">
-          <Image src={doctor.image} alt={doctor.name} fill className="object-cover" priority />
+          <Image src={doctor.image} alt={doctor.name} fill unoptimized={doctor.image.startsWith("https://")} className="object-cover" priority />
         </div>
         <div className="flex flex-col">
           <h1 className="font-serif text-3xl text-foreground md:text-4xl">{doctor.name}</h1>
           <p className="mt-2 text-lg text-muted-foreground font-medium">{doctor.profession}</p>
           <div className="mt-8 rounded-lg border border-border bg-card p-6">
-            <h2 className="font-serif text-xl border-b border-border/50 pb-4 mb-4">About the Doctor</h2>
+            <h2 className="font-serif text-xl border-b border-border/50 pb-4 mb-4">{aboutText}</h2>
             <p className="text-sm leading-relaxed text-muted-foreground whitespace-pre-wrap">{doctor.bio}</p>
           </div>
           <div className="mt-8 space-y-3 text-sm">

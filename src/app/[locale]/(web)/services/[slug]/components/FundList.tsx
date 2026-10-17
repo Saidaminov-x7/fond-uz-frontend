@@ -26,6 +26,12 @@ export function FundList({
   partnerTitle,
   emptyText,
 }: Props) {
+  const safeWebsite = (value: string) => {
+    try {
+      const url = new URL(value);
+      return url.protocol === "https:" || url.protocol === "http:" ? url.toString() : null;
+    } catch { return null; }
+  };
   return (
     <Container className="mt-10 md:mt-12">
       <div className="space-y-6">
@@ -50,14 +56,14 @@ export function FundList({
               <div className="space-y-1">
                 <dt className="text-muted-foreground font-medium uppercase tracking-wider text-[10px]">{websiteLabel}</dt>
                 <dd>
-                  <a
-                    href={fund.website}
+                  {safeWebsite(fund.website) ? <a
+                    href={safeWebsite(fund.website)!}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-lg font-serif text-primary hover:underline transition-colors"
                   >
                     {fund.website}
-                  </a>
+                  </a> : <span className="text-muted-foreground">{fund.website}</span>}
                 </dd>
               </div>
               {fund.description ? (

@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { ContactsHero } from "./components/ContactsHero";
 import { ContactsInfo } from "./components/ContactsInfo";
 import { ContactForm } from "./components/ContactForm";
+import "./contacts.css";
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -10,14 +11,16 @@ export default async function ContactsPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("contacts");
-  const common = await getTranslations("home");
+  const nav = await getTranslations("nav");
 
   return (
-    <Container className="py-12 md:py-16">
-      <div className="grid w-full grid-cols-1 gap-8 lg:grid-cols-2">
-        <div className="mx-auto w-full">
-          <ContactsHero title={t("title")} subtitle={t("subtitle")} />
+    <Container className="contacts-page">
+      <ContactsHero title={t("title")} subtitle={t("subtitle")} homeLabel={nav("home")} />
+      <div className="contacts-layout">
+        <div>
           <ContactsInfo
+            title={t("infoTitle")}
+            emptyText={t("infoEmpty")}
             phoneLabel={t("phoneLabel")}
             phoneValue={t("phoneValue")}
             emailLabel={t("emailLabel")}
@@ -27,8 +30,7 @@ export default async function ContactsPage({ params }: Props) {
           />
         </div>
 
-        <div className="w-full">
-          <div className="concept-note mb-6" role="note"><span className="concept-note-mark" aria-hidden="true">i</span><div><strong>{common("conceptTitle")}</strong><p>{common("conceptBody")}</p></div></div>
+        <div>
           <ContactForm />
         </div>
       </div>

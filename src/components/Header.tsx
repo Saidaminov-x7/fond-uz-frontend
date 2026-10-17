@@ -20,6 +20,7 @@ function SearchIcon() {
 export default function Header() {
   const t = useTranslations("nav");
   const tc = useTranslations("common");
+  const th = useTranslations("home");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -33,10 +34,12 @@ export default function Header() {
   return (
     <>
       <header className="site-header sticky top-0 z-50 w-full border-b border-border bg-background">
+        <div className="concept-strip"><Container><p className="m-0">{th("topline")}</p></Container></div>
         <Container>
           <div className="site-header-main flex min-h-[4.4rem] w-full items-center justify-between gap-4">
             <Link href="/" locale={locale} className="flex shrink-0 flex-col gap-0.5 text-foreground transition-opacity hover:opacity-80">
               <span className="font-serif text-xl leading-none font-medium tracking-tight md:text-2xl">Fond_Uz</span>
+              <span className="text-[10px] leading-tight text-muted-foreground">{t("tagline")}</span>
             </Link>
             <div className="hidden items-center gap-4 lg:flex">
               <Link href="/search" className="site-header-action inline-flex items-center gap-2 text-[11px] text-muted-foreground transition-colors hover:text-foreground" aria-label={t("search")}>
@@ -44,6 +47,7 @@ export default function Header() {
               </Link>
               <span className="site-theme-action text-[11px] font-medium text-foreground">{tc("theme")}</span>
               <ThemeToggle />
+              <Link href="/contacts" className="site-feedback-link inline-flex min-h-9 items-center border border-primary px-3 text-[11px] font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">{t("feedback")}</Link>
             </div>
           </div>
         </Container>

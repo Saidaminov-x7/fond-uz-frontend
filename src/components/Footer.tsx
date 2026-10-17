@@ -2,11 +2,10 @@
 
 import { Container } from "@/src/components/ui/Container";
 import { Link } from "@/src/i18n/routing";
-import { useLocale, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
   const t = useTranslations("footer");
-  const locale = useLocale();
   const tNav = useTranslations("nav");
   const pageLinks = ["/", "/about", "/services", "/doctors", "/prices", "/news", "/faqs", "/contacts"];
 
@@ -32,7 +31,7 @@ export default function Footer() {
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-between gap-3 pt-6 text-sm text-muted-foreground">
-          <p>{t("copyright")}</p><Link href="/privacy-policy" className="hover:text-foreground">{t("privacyLink")}</Link><span className="text-xs uppercase tracking-wide">{locale.toUpperCase()} · RU · EN · UZ</span>
+          <p>{t("copyright")}</p><Link href="/privacy-policy" className="hover:text-foreground">{t("privacyLink")}</Link>
         </div>
       </Container>
     </footer>
