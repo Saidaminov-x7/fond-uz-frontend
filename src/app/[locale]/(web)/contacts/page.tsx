@@ -27,6 +27,8 @@ export default async function ContactsPage({ params }: Props) {
             emailValue={t("emailValue")}
             addressLabel={t("addressLabel")}
             addressValue={t("addressValue")}
+            servicesLabel={nav("services")}
+            questionsLabel={nav("faqs")}
           />
         </div>
 

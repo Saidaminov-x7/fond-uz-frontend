@@ -1,3 +1,5 @@
+import { Link } from "@/src/i18n/routing";
+
 type Props = {
   title: string;
   emptyText: string;
@@ -7,9 +9,11 @@ type Props = {
   emailValue: string;
   addressLabel: string;
   addressValue: string;
+  servicesLabel: string;
+  questionsLabel: string;
 };
 
-export function ContactsInfo({ title, emptyText, phoneLabel, phoneValue, emailLabel, emailValue, addressLabel, addressValue }: Props) {
+export function ContactsInfo({ title, emptyText, phoneLabel, phoneValue, emailLabel, emailValue, addressLabel, addressValue, servicesLabel, questionsLabel }: Props) {
   const entries = [
     { label: phoneLabel, value: phoneValue, href: phoneValue ? `tel:${phoneValue.replace(/[^+\d]/g, "")}` : undefined },
     { label: emailLabel, value: emailValue, href: emailValue ? `mailto:${emailValue}` : undefined },
@@ -29,6 +33,10 @@ export function ContactsInfo({ title, emptyText, phoneLabel, phoneValue, emailLa
           ))}
         </dl>
       ) : <p>{emptyText}</p>}
+      <nav className="contact-info-links" aria-label={title}>
+        <Link href="/services">{servicesLabel} <span aria-hidden="true">{"\u2197"}</span></Link>
+        <Link href="/faqs">{questionsLabel} <span aria-hidden="true">{"\u2197"}</span></Link>
+      </nav>
     </section>
   );
 }

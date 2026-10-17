@@ -62,7 +62,9 @@
     "feedback": "Fikr-mulohaza",
     "navigationLabel": "Navigatsiya",
     "openMenu": "Menyuni ochish",
-    "closeMenu": "Menyuni yopish"
+    "closeMenu": "Menyuni yopish",
+    "searchPlaceholder": "Xizmat, shifokor yoki ma\\u2019lumotni qidiring",
+    "closeSearch": "Qidiruvni yopish"
   },
   "home": {
     "heroTitle": "FondUz: bemorlar uchun ma’lumot",

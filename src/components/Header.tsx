@@ -3,7 +3,7 @@
 import { Container } from "@/src/components/ui/Container";
 import { Link, usePathname, useRouter } from "@/src/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
-import { useState } from "react";
+import { useState, type FormEvent } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = ["/about", "/services", "/doctors", "/prices", "/news", "/faqs", "/contacts"] as const;
@@ -25,6 +25,16 @@ export default function Header() {
   const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+
+  const submitSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const query = String(new FormData(event.currentTarget).get("q") ?? "").trim().slice(0, 100);
+    if (!query) return;
+    router.push(`/search?q=${encodeURIComponent(query)}`);
+    setSearchOpen(false);
+    setMenuOpen(false);
+  };
 
   const switchLanguage = (nextLocale: "uz" | "ru" | "en") => {
     router.replace(pathname, { locale: nextLocale });
@@ -42,9 +52,16 @@ export default function Header() {
               <span className="text-[10px] leading-tight text-muted-foreground">{t("tagline")}</span>
             </Link>
             <div className="hidden items-center gap-4 lg:flex">
-              <Link href="/search" className="site-header-action inline-flex items-center gap-2 text-[11px] text-muted-foreground transition-colors hover:text-foreground" aria-label={t("search")}>
-                <SearchIcon />{t("search")}
-              </Link>
+              <div className="site-header-search">
+                <button type="button" className="site-header-action inline-flex min-h-9 items-center gap-2 text-[11px] text-muted-foreground transition-colors hover:text-foreground" aria-expanded={searchOpen} aria-controls="site-search-desktop" onClick={() => setSearchOpen((open) => !open)}>
+                  <SearchIcon />{searchOpen ? t("closeSearch") : t("search")}
+                </button>
+                {searchOpen && <form id="site-search-desktop" className="site-search-form" role="search" onSubmit={submitSearch}>
+                  <label className="sr-only" htmlFor="site-search-input-desktop">{t("search")}</label>
+                  <input id="site-search-input-desktop" name="q" type="search" autoFocus maxLength={100} placeholder={t("searchPlaceholder")} />
+                  <button type="submit">{t("search")}</button>
+                </form>}
+              </div>
               <span className="site-theme-action text-[11px] font-medium text-foreground">{tc("theme")}</span>
               <ThemeToggle />
               <Link href="/contacts" className="site-feedback-link inline-flex min-h-9 items-center border border-primary px-3 text-[11px] font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">{t("feedback")}</Link>
@@ -75,7 +92,12 @@ export default function Header() {
               const active = navActive(pathname, href);
               return <Link key={href} href={href} onClick={() => setMenuOpen(false)} aria-current={active ? "page" : undefined} className={`block rounded px-4 py-3 text-base font-semibold transition-colors ${active ? "bg-muted text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}>{t(key)}</Link>;
             })}
-            <Link href="/search" onClick={() => setMenuOpen(false)} className="flex items-center gap-3 rounded px-4 py-3 text-base font-semibold text-muted-foreground hover:bg-muted hover:text-foreground"><SearchIcon/>{t("search")}</Link>
+            <button type="button" onClick={() => setSearchOpen((open) => !open)} aria-expanded={searchOpen} aria-controls="site-search-mobile" className="flex items-center gap-3 rounded px-4 py-3 text-left text-base font-semibold text-muted-foreground hover:bg-muted hover:text-foreground"><SearchIcon/>{searchOpen ? t("closeSearch") : t("search")}</button>
+            {searchOpen && <form id="site-search-mobile" className="site-search-form mobile-search-form" role="search" onSubmit={submitSearch}>
+              <label className="sr-only" htmlFor="site-search-input-mobile">{t("search")}</label>
+              <input id="site-search-input-mobile" name="q" type="search" autoFocus maxLength={100} placeholder={t("searchPlaceholder")} />
+              <button type="submit">{t("search")}</button>
+            </form>}
             <div className="mt-3 flex gap-2" aria-label={t("language")}>{(["uz", "ru", "en"] as const).map((code) => <button key={code} type="button" onClick={() => switchLanguage(code)} aria-current={locale === code ? "true" : undefined} aria-label={t(`languageNames.${code}`)} className="site-language flex-1 rounded border border-border py-3 text-sm font-semibold uppercase">{code}</button>)}</div>
             <div className="mt-2 flex items-center justify-between rounded border border-border bg-card px-4 py-2"><span className="text-sm font-semibold text-foreground">{tc("theme")}</span><ThemeToggle /></div>
           </nav>

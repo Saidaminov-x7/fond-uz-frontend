@@ -1,9 +1,9 @@
-.contacts-page { max-width: 1440px; padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1.25rem, 4.45vw, 4rem) clamp(4rem, 7vw, 6rem); }
+.contacts-page { max-width: 1440px; padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1.25rem, 3vw, 3rem) clamp(3rem, 5vw, 4rem); }
 .contact-page-heading .page-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; color: var(--muted-foreground); font-size: .78rem; }
 .contact-page-heading .page-breadcrumb a { color: inherit; text-decoration: none; }
 .contact-page-heading .page-breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
 .contact-page-heading .page-breadcrumb [aria-current="page"] { color: var(--foreground); }
-.contact-page-heading h1 { margin: 2.1rem 0 0; font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.08; }
+.contact-page-heading h1 { margin: 1.35rem 0 0; font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.08; }
 .contact-page-heading > p { max-width: 48rem; margin: .8rem 0 0; color: var(--muted-foreground); font-size: clamp(.96rem, 1.3vw, 1.1rem); line-height: 1.65; }
 .contacts-layout { display: grid; grid-template-columns: minmax(14rem, .72fr) minmax(0, 1.28fr); align-items: start; gap: clamp(2rem, 5vw, 4.5rem); margin-top: clamp(2rem, 4vw, 3.1rem); }
 .contact-info-panel { padding-top: .2rem; }
@@ -16,7 +16,10 @@
 .contact-info-entry a { color: inherit; text-decoration: underline; text-underline-offset: .18em; }
 .contact-info-entry a:hover { color: var(--primary); }
 .contact-info-panel > p { max-width: 35ch; margin: 1rem 0 0; color: var(--muted-foreground); line-height: 1.65; }
-.contact-form { display: grid; gap: 1.15rem; border: 1px solid var(--border); border-radius: .35rem; background: var(--card); padding: clamp(1.2rem, 3vw, 2.3rem); }
+.contact-form { display: grid; gap: 1rem; border: 1px solid var(--border); border-radius: .35rem; background: var(--card); padding: clamp(1.2rem, 2.4vw, 2rem); }
+.contact-info-links { display: grid; gap: .6rem; margin-top: 1.4rem; border-top: 1px solid var(--border); padding-top: 1rem; }
+.contact-info-links a { color: var(--primary); font-size: .88rem; font-weight: 600; text-decoration: none; }
+.contact-info-links a:hover { text-decoration: underline; text-underline-offset: .2em; }
 .contact-form-intro { margin: -.45rem 0 0; color: var(--muted-foreground); font-size: .9rem; line-height: 1.6; }
 .contact-field { display: grid; gap: .45rem; color: var(--foreground); font-size: .87rem; font-weight: 600; }
 .contact-field input,

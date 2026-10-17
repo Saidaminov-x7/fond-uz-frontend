@@ -69,6 +69,13 @@ a { text-underline-offset: .2em; }
 .dark .concept-strip { border-color: var(--border); background: #1a241e; color: var(--muted-foreground); }
 .site-header { border-color: var(--border); background: var(--background); }
 .site-header-main { min-height: 3.9rem; }
+.site-header-search { display: flex; align-items: center; gap: .75rem; }
+.site-search-form { display: flex; width: min(23rem, 38vw); align-items: center; gap: .4rem; }
+.site-search-form input { min-width: 0; height: 2.45rem; flex: 1; border: 1px solid var(--border); border-radius: .2rem; background: var(--background); padding: 0 .7rem; color: var(--foreground); font: inherit; font-size: .78rem; }
+.site-search-form input:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
+.site-search-form button[type="submit"] { min-height: 2.45rem; border: 1px solid var(--primary); border-radius: .2rem; background: var(--primary); padding: 0 .75rem; color: var(--primary-foreground); font-size: .76rem; font-weight: 650; }
+.site-search-form button[type="submit"]:active { transform: scale(.97); }
+.mobile-search-form { width: 100%; padding-inline: .5rem; }
 .site-header-nav-row { min-height: 2.35rem; border-top: 1px solid #e4e8e0; }
 .dark .site-header-nav-row { border-color: var(--border); }
 .site-desktop-nav { gap: clamp(.45rem, 1vw, .95rem); white-space: nowrap; }
@@ -184,7 +191,7 @@ a { text-underline-offset: .2em; }
 .faq-home-section { background: #edf0e9; }
 .dark .faq-home-section { background: color-mix(in srgb, var(--card) 72%, var(--background)); }
 .home-publication-note p:last-child { max-width: 46rem; margin: .5rem 0 0; color: var(--muted-foreground); font-size: .8rem; line-height: 1.6; }
-.blog-page-heading { max-width: 1440px; padding: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 4.45vw, 4rem) 1.5rem; }
+.blog-page-heading { max-width: 1440px; padding: clamp(2rem, 4vw, 3.5rem) clamp(1.25rem, 3vw, 3rem) 1.5rem; }
 .blog-page-heading .page-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; color: var(--muted-foreground); font-size: .78rem; }
 .blog-page-heading .page-breadcrumb a { color: inherit; text-decoration: none; }
 .blog-page-heading .page-breadcrumb a:hover { color: var(--primary); text-decoration: underline; }

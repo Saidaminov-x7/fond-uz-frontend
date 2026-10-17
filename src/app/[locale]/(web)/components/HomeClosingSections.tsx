@@ -6,7 +6,6 @@ export function HomeClosingSections() {
   const t = useTranslations("home");
 
   return (
-    <>
       <section className="home-content-section py-12 md:py-16">
         <Container>
           <div className="home-contact-cta">
@@ -19,12 +18,5 @@ export function HomeClosingSections() {
           </div>
         </Container>
       </section>
-      <section className="home-publication-note py-7">
-        <Container>
-          <p className="section-kicker">{t("publicationNoticeTitle")}</p>
-          <p>{t("publicationNoticeBody")}</p>
-        </Container>
-      </section>
-    </>
   );
 }

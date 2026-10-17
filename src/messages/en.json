@@ -62,7 +62,9 @@
     "feedback": "Feedback",
     "navigationLabel": "Navigation",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "searchPlaceholder": "Search services, doctors, and information",
+    "closeSearch": "Close search"
   },
   "home": {
     "heroTitle": "FondUz: information for patients",

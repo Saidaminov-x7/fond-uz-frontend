@@ -1,179 +1,56 @@
-"use client"
 import { Container } from "@/src/components/ui/Container";
-import { SERVICE_SLUGS, type ServiceSlug } from "@/src/data/service-slugs";
-import { Link, useRouter } from "@/src/i18n/routing";
-import { useTranslations } from "next-intl";
-import { useSearchParams } from "next/navigation";
-import { Suspense, useMemo } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import { Link } from "@/src/i18n/routing";
+import { getDoctors, getFaqs, getNews, getPrices, getServices } from "@/src/lib/content";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 
-type Hit = { id: string; title: string; description: string; href: string };
+type Props = { params: Promise<{ locale: string }>; searchParams: Promise<{ q?: string }> };
+type Result = { id: string; title: string; description: string; href: string };
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, y: 10 },
-  visible: { opacity: 1, y: 0 },
-};
-
-function SearchResults() {
-  const t = useTranslations("SearchPage");
-  const tNav = useTranslations("Navigation");
-  const router = useRouter();
-  const searchParams = useSearchParams();
-  const query = (searchParams.get("q") ?? "").trim();
-
-  const hits = useMemo(() => {
-    const q = query.toLowerCase();
-    if (!q) return [];
-
-    const pool: Hit[] = [
-      { id: "p1", title: tNav("home"), description: tNav("home"), href: "/" },
-      { id: "p2", title: tNav("about"), description: tNav("about"), href: "/about" },
-      { id: "p3", title: tNav("services"), description: tNav("services"), href: "/services" },
-      { id: "p4", title: tNav("blog"), description: tNav("blog"), href: "/news" },
-      { id: "p5", title: tNav("doctors"), description: tNav("doctors"), href: "/doctors" },
-      { id: "p6", title: tNav("prices"), description: tNav("prices"), href: "/prices" },
-      { id: "p7", title: tNav("contact"), description: tNav("contact"), href: "/contacts" },
-      { id: "p8", title: tNav("faq"), description: tNav("faq"), href: "/faqs" },
-    ];
-
-    const serviceNames: Record<ServiceSlug, string> = {
-      heart: t("serviceNames.heart"),
-      neurology: t("serviceNames.neurology"),
-      orthopedics: t("serviceNames.orthopedics"),
-      pediatrics: t("serviceNames.pediatrics"),
-      diagnostics: t("serviceNames.diagnostics"),
-    };
-
-    SERVICE_SLUGS.forEach((slug) => {
-      pool.push({
-        id: `s-${slug}`,
-        title: serviceNames[slug],
-        description: serviceNames[slug],
-        href: `/services/${slug}`,
-      });
-    });
-
-    return pool.filter(
-      (h) => h.title.toLowerCase().includes(q) || h.description.toLowerCase().includes(q),
-    );
-  }, [query, t, tNav]);
-
-  return (
-    <div className="pb-16 md:pb-24">
-      <section className="border-b border-border bg-muted/40 py-10 md:py-14">
-        <Container>
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className="font-serif text-3xl text-foreground md:text-4xl">{t("title")}</h1>
-            {query ? (
-              <p className="mt-3 text-sm text-muted-foreground">
-                {t("queryLabel")}{" "}
-                <span className="font-medium text-foreground">&ldquo;{query}&rdquo;</span>
-              </p>
-            ) : (
-              <p className="mt-3 text-sm text-muted-foreground">{t("hint")}</p>
-            )}
-            <form
-              className="mt-6 flex max-w-xl flex-col gap-2 sm:flex-row"
-              onSubmit={(e) => {
-                e.preventDefault();
-                const fd = new FormData(e.currentTarget);
-                const q = String(fd.get("q") ?? "").trim();
-                if (q) router.push(`/search?q=${encodeURIComponent(q)}`);
-              }}
-            >
-              <input
-                name="q"
-                type="search"
-                defaultValue={query}
-                placeholder={t("placeholder")}
-                className="h-10 min-w-0 flex-1 rounded-2xl border border-border bg-card px-4 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all shadow-sm"
-              />
-              <button
-                type="submit"
-                className="h-10 rounded-2xl bg-primary px-6 text-sm font-bold text-primary-foreground shadow-lg shadow-primary/20 transition-all hover:scale-105 active:scale-95"
-              >
-                {t("submit")}
-              </button>
-            </form>
-          </motion.div>
-        </Container>
-      </section>
-
-      <Container className="mt-10">
-        {query ? (
-          <div key={query}>
-            <p className="mb-6 text-sm text-muted-foreground">{t("resultsFound", { count: hits.length })}</p>
-            <AnimatePresence mode="popLayout">
-              {hits.length > 0 ? (
-                <motion.ul
-                  variants={containerVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="space-y-3"
-                >
-                  {hits.map((h) => (
-                    <motion.li
-                      key={h.id}
-                      variants={itemVariants}
-                      layout
-                    >
-                      <Link
-                        href={h.href}
-                        className="block rounded-2xl border border-border bg-card p-4 transition-all hover:bg-muted/50 hover:border-border hover:shadow-sm"
-                      >
-                        <span className="font-serif text-base font-bold text-foreground">{h.title}</span>
-                        <span className="mt-1 block text-sm text-muted-foreground">{h.description}</span>
-                      </Link>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-              ) : (
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  className="rounded-2xl border border-dashed border-border p-12 text-center"
-                >
-                  <p className="text-sm text-muted-foreground">{t("noResults")}</p>
-                  <Link href="/" className="mt-4 inline-block text-sm font-bold text-primary hover:underline">
-                    {t("backToHome")}
-                  </Link>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        ) : null}
-      </Container>
-    </div>
-  );
+function plainText(value: string | string[] | undefined) {
+  return (Array.isArray(value) ? value.join(" ") : value ?? "").replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
 }
 
-export default function SearchPage() {
-  return (
-    <Suspense
-      fallback={
-        <Container className="py-16">
-          <div className="flex items-center gap-2 text-sm text-muted-foreground animate-pulse">
-            <div className="h-4 w-4 rounded-full border-2 border-primary border-t-transparent animate-spin" />
-            <span>Search results loading...</span>
-          </div>
-        </Container>
-      }
-    >
-      <SearchResults />
-    </Suspense>
-  );
+export default async function SearchPage({ params, searchParams }: Props) {
+  const [{ locale }, queryParams] = await Promise.all([params, searchParams]);
+  setRequestLocale(locale);
+  const query = (queryParams.q ?? "").trim().slice(0, 100);
+  const [t, nav, services, doctors, news, prices, faqs] = await Promise.all([
+    getTranslations({ locale, namespace: "SearchPage" }),
+    getTranslations({ locale, namespace: "nav" }),
+    getServices(locale), getDoctors(locale), getNews(locale), getPrices(locale), getFaqs(locale),
+  ]);
+  const pages: Result[] = [
+    ["about", "/about"], ["services", "/services"], ["doctors", "/doctors"],
+    ["prices", "/prices"], ["news", "/news"], ["faqs", "/faqs"], ["contacts", "/contacts"],
+  ].map(([key, href]) => ({ id: `page-${key}`, title: nav(key), description: nav(key), href }));
+  const records: Result[] = [
+    ...services.map((item) => ({ id: `service-${item.slug}`, title: item.name, description: item.name, href: `/services/${encodeURIComponent(item.slug)}` })),
+    ...doctors.map((item) => ({ id: `doctor-${item.id}`, title: item.name, description: item.profession, href: `/doctors/${encodeURIComponent(item.id)}` })),
+    ...news.map((item) => ({ id: `news-${item.slug}`, title: item.title, description: item.subtitle, href: `/news/${encodeURIComponent(item.slug)}` })),
+    ...prices.map((item) => ({ id: `price-${item.id}`, title: item.title, description: item.price, href: "/prices" })),
+    ...faqs.map((item, index) => ({ id: `faq-${index}`, title: item.question, description: plainText(item.answer), href: "/faqs" })),
+  ];
+  const normalizedQuery = query.toLocaleLowerCase(locale);
+  const results = query ? [...records, ...pages].filter((item) => `${item.title} ${item.description}`.toLocaleLowerCase(locale).includes(normalizedQuery)).slice(0, 30) : [];
+
+  return <main className="min-h-[55vh]">
+    <section className="border-b border-border py-12 md:py-16"><Container>
+      <h1 className="font-serif text-4xl text-foreground md:text-5xl">{t("title")}</h1>
+      <p className="mt-3 text-muted-foreground">{t("hint")}</p>
+      <form action="" method="get" role="search" className="mt-6 flex max-w-2xl flex-col gap-3 sm:flex-row">
+        <label className="sr-only" htmlFor="site-search-query">{t("placeholder")}</label>
+        <input id="site-search-query" name="q" type="search" maxLength={100} defaultValue={query} placeholder={t("placeholder")} className="min-h-12 min-w-0 flex-1 rounded-sm border border-border bg-card px-4 text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring" />
+        <button type="submit" className="min-h-12 rounded-sm bg-primary px-6 font-semibold text-primary-foreground">{t("submit")}</button>
+      </form>
+      {query && <p className="mt-5 text-sm text-muted-foreground">{t("resultsFound", { count: results.length })} <span className="font-medium text-foreground">“{query}”</span></p>}
+    </Container></section>
+    {query && <Container className="py-8 md:py-12">
+      {results.length ? <ul className="divide-y divide-border border-y border-border">{results.map((result) => <li key={result.id}>
+        <Link href={result.href} className="group flex min-h-20 items-center justify-between gap-5 py-4 text-foreground hover:text-primary">
+          <span><span className="block text-lg font-semibold">{result.title}</span><span className="mt-1 block text-sm text-muted-foreground">{result.description}</span></span>
+          <span aria-hidden="true" className="text-xl">{"\u2197"}</span>
+        </Link>
+      </li>)}</ul> : <p className="border-y border-border py-6 text-muted-foreground">{t("noResults")}</p>}
+    </Container>}
+  </main>;
 }
