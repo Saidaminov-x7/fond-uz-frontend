@@ -19,9 +19,10 @@ export function Pagination({ currentPage, totalPages, basePath }: Props) {
           <Link
             key={page}
             href={`${basePath}?page=${page}`}
-            className={`inline-flex h-10 min-w-10 items-center justify-center rounded-2xl border px-4 text-sm font-semibold transition-all ${
+            aria-current={isActive ? "page" : undefined}
+            className={`inline-flex h-10 min-w-10 items-center justify-center rounded-sm border px-4 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring ${
               isActive
-                ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20"
+                ? "border-primary bg-primary text-primary-foreground"
                 : "border-border bg-card text-foreground hover:bg-muted hover:border-border"
             }`}
           >

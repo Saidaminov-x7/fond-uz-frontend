@@ -24,7 +24,7 @@ export function NewsDetailContent({ item, backText }: Props) {
       >
         <span className="inline-block transition-transform group-hover:-translate-x-1">←</span> {backText}
       </Link>
-      
+
       <div className="relative mt-8 h-80 md:h-[450px] w-full overflow-hidden rounded-2xl border border-border/50 bg-card shadow-lg">
         <Image
           src={item.image}
@@ -37,12 +37,12 @@ export function NewsDetailContent({ item, backText }: Props) {
         />
       </div>
 
-      <div className="mt-10 max-w-4xl mx-auto">
+      <article className="news-article mt-10 mx-auto max-w-4xl">
         <p className="text-xs font-semibold uppercase tracking-wider text-primary mb-4">{item.date}</p>
         <h1 className="font-serif text-3xl text-foreground md:text-4xl lg:text-5xl leading-tight">
           {item.title}
         </h1>
-        <p className="mt-4 text-lg text-muted-foreground font-medium italic">
+        <p className="mt-4 text-lg text-muted-foreground font-medium">
           {item.subtitle}
         </p>
 
@@ -53,7 +53,7 @@ export function NewsDetailContent({ item, backText }: Props) {
             </p>
           ))}
         </div>
-      </div>
+      </article>
     </>
   );
 }

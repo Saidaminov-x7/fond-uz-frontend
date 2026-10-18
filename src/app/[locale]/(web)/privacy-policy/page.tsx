@@ -13,8 +13,8 @@ export default function PrivacyPolicyPage({ params }: Props) {
   const t = useTranslations("privacy");
 
   return (
-    <div className="pb-16 md:pb-24 overflow-hidden">
-      <section className="border-b border-border bg-muted/40 py-12 md:py-16">
+    <div className="privacy-policy-page pb-16 md:pb-24 overflow-hidden">
+      <section className="public-page-hero border-b border-border py-12 md:py-16">
         <Container>
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
@@ -48,7 +48,7 @@ export default function PrivacyPolicyPage({ params }: Props) {
               <h2 className="font-serif text-xl text-foreground">{t("section1Title")}</h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">{t("section1Desc")}</p>
             </section>
-            <section className="rounded-2xl border border-border bg-card p-6 md:p-8 shadow-sm">
+            <section className="privacy-highlight rounded-2xl border border-border bg-card p-6 md:p-8 shadow-sm">
               <h2 className="font-serif text-xl text-foreground">{t("section2Title")}</h2>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground md:text-base">{t("section2Desc")}</p>
             </section>

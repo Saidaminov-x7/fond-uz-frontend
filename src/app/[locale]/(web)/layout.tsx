@@ -11,7 +11,7 @@ export default async function WebLayout({ children, params }: { children: ReactN
   return (
     <div className="public-site flex min-h-screen flex-col bg-background">
       <Header />
-      <main className="flex-1 w-full">{children}</main>
+      <main id="main-content" tabIndex={-1} className="flex-1 w-full">{children}</main>
       <Footer />
     </div>
   );

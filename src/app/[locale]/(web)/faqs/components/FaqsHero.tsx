@@ -1,7 +1,7 @@
 import { Container } from "@/src/components/ui/Container";
 import { Link } from "@/src/i18n/routing";
 
-type Props = { title: string; subtitle: string; homeLabel: string };
+type Props = { title: string; subtitle?: string; homeLabel: string };
 
 export function FaqsHero({ title, subtitle, homeLabel }: Props) {
   return (
@@ -10,7 +10,7 @@ export function FaqsHero({ title, subtitle, homeLabel }: Props) {
         <Link href="/">{homeLabel}</Link><span aria-hidden="true">/</span><span aria-current="page">{title}</span>
       </nav>
       <h1>{title}</h1>
-      <p>{subtitle}</p>
+      {subtitle ? <p>{subtitle}</p> : null}
     </Container>
   );
 }

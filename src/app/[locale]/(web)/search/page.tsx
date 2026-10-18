@@ -33,8 +33,8 @@ export default async function SearchPage({ params, searchParams }: Props) {
   const normalizedQuery = query.toLocaleLowerCase(locale);
   const results = query ? [...records, ...pages].filter((item) => `${item.title} ${item.description}`.toLocaleLowerCase(locale).includes(normalizedQuery)).slice(0, 30) : [];
 
-  return <main className="min-h-[55vh]">
-    <section className="border-b border-border py-12 md:py-16"><Container>
+  return <div className="search-page min-h-[55vh]">
+    <section className="public-page-hero border-b border-border py-12 md:py-16"><Container>
       <h1 className="font-serif text-4xl text-foreground md:text-5xl">{t("title")}</h1>
       <p className="mt-3 text-muted-foreground">{t("hint")}</p>
       <form action="" method="get" role="search" className="mt-6 flex max-w-2xl flex-col gap-3 sm:flex-row">
@@ -44,7 +44,7 @@ export default async function SearchPage({ params, searchParams }: Props) {
       </form>
       {query && <p className="mt-5 text-sm text-muted-foreground">{t("resultsFound", { count: results.length })} <span className="font-medium text-foreground">“{query}”</span></p>}
     </Container></section>
-    {query && <Container className="py-8 md:py-12">
+    {query && <Container className="search-results py-8 md:py-12">
       {results.length ? <ul className="divide-y divide-border border-y border-border">{results.map((result) => <li key={result.id}>
         <Link href={result.href} className="group flex min-h-20 items-center justify-between gap-5 py-4 text-foreground hover:text-primary">
           <span><span className="block text-lg font-semibold">{result.title}</span><span className="mt-1 block text-sm text-muted-foreground">{result.description}</span></span>
@@ -52,5 +52,5 @@ export default async function SearchPage({ params, searchParams }: Props) {
         </Link>
       </li>)}</ul> : <p className="border-y border-border py-6 text-muted-foreground">{t("noResults")}</p>}
     </Container>}
-  </main>;
+  </div>;
 }

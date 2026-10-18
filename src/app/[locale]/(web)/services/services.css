@@ -28,6 +28,10 @@
 .service-result-category { display: block; margin-top: .35rem; color: var(--muted-foreground); font-size: .84rem; }
 .service-result-arrow { flex: 0 0 auto; color: var(--primary); font-size: 1.25rem; }
 .service-empty { margin: 2rem 0 0; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 1.5rem .2rem; color: var(--muted-foreground); }
+.fund-card { border-color: var(--border); background: var(--card); }
+.fund-card:hover { border-color: color-mix(in srgb, var(--primary) 42%, var(--border)); }
+.fund-extra-info { border-color: var(--border); background: var(--muted); font-style: normal; }
+.fund-empty { border-color: var(--border); background: var(--card); }
 @media (max-width: 640px) {
   .service-page-heading { padding-top: 1.5rem; }
   .service-page-heading h1 { margin-top: 1.55rem; }

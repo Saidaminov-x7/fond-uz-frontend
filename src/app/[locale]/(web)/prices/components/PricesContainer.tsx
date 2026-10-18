@@ -75,7 +75,7 @@ export function PricesContainer({ items, toggleListText, toggleCardsText, includ
               viewport={{ once: true }}
               variants={cardVariants}
               whileHover={{ y: -5 }}
-              className="rounded-2xl border border-border bg-card p-5 shadow-sm transition-all hover:shadow-md hover:border-border"
+              className="price-card rounded-2xl border border-border bg-card p-5 shadow-sm transition-all hover:shadow-md hover:border-border"
             >
               <h2 className="font-serif text-xl text-foreground">{item.title}</h2>
               <p className="mt-2 text-lg font-semibold text-primary">{item.price}</p>

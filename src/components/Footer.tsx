@@ -26,7 +26,7 @@ export default function Footer() {
           <div>
             <p className="text-xs font-semibold uppercase tracking-wide text-muted-foreground">{t("contacts")}</p>
             <div className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <Link href="/contacts" className="inline-flex items-center gap-2 pt-1 font-semibold text-primary hover:underline">{t("contactAction")} <span aria-hidden="true">→</span></Link>
+              <Link href="/contacts" className="site-footer-contact">{t("contactAction")} <span aria-hidden="true">→</span></Link>
             </div>
           </div>
         </div>

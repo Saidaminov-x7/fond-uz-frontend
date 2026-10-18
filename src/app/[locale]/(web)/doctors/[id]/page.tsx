@@ -13,12 +13,12 @@ export default async function DoctorDetailsPage({ params }: Props) {
   setRequestLocale(locale);
   const t = await getTranslations("doctors");
   const tc = await getTranslations("common");
-  
+
   const doctor = (await getDoctors(locale)).find((item) => item.id === id);
   if (!doctor) notFound();
 
   return (
-    <Container className="py-12 md:py-16">
+    <Container className="doctor-profile-page py-12 md:py-16">
       <DoctorInfo
         doctor={doctor}
         backText={tc("backToList")}

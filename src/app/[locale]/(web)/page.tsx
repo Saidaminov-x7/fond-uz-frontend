@@ -21,8 +21,9 @@ export default async function HomePage({ params }: Props) {
 
   return (
     <div>
-      <HeroSection title={t("heroTitle")} subtitle={t("heroSubtitle")} actionLabel={t("heroCta")} eyebrow={t("heroEyebrow")} secondaryLabel={t("heroSecondaryCta")} imageAlt={t("heroImageAlt")} />
-      <ActivitySection title={t("activityTitle")} />
+      <HeroSection title={t("heroTitle")} subtitle={t("heroSubtitle")} actionLabel={t("heroCta")} eyebrow={t("heroEyebrow")} secondaryLabel={t("heroSecondaryCta")} imageAlt={t("heroImageAlt")}>
+        <ActivitySection title={t("activityTitle")} />
+      </HeroSection>
       <HomeContentSections locale={locale} />
       {newsCards.length > 0 && <NewsPreviewSection title={t("newsTitle")} subtitle={t("newsSubtitle")} cards={newsCards} readMore={tc("view")} viewAll={t("viewAllNews")} />}
       {faqItems.length > 0 && <FaqPreviewSection title={t("faqsTitle")} subtitle={t("faqsSubtitle")} items={faqItems} viewAll={t("viewAllFaqs")} />}

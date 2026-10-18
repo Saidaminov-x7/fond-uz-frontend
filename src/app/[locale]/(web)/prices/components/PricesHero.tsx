@@ -10,8 +10,8 @@ type Props = {
 
 export function PricesHero({ title, subtitle }: Props) {
   return (
-    <section className="border-b border-border bg-muted/40 py-12 md:py-16">
-      <Container className="text-center">
+    <section className="public-page-hero border-b border-border py-12 md:py-16">
+      <Container>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -24,7 +24,7 @@ export function PricesHero({ title, subtitle }: Props) {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1, ease: "easeOut" }}
-          className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground md:text-base"
+          className="mt-4 max-w-2xl text-sm text-muted-foreground md:text-base"
         >
           {subtitle}
         </motion.p>

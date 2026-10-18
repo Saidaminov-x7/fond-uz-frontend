@@ -11,7 +11,7 @@ type Props = {
 
 export function DoctorsHero({ title, subtitle }: Props) {
   return (
-    <section className="border-b border-border bg-muted/40 py-12 md:py-16">
+    <section className="public-page-hero border-b border-border py-12 md:py-16">
       <Container>
         <motion.div
           initial={{ opacity: 0, y: 20 }}

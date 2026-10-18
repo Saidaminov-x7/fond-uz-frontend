@@ -9,7 +9,7 @@ type Props = {
 
 export function ServiceHero({ title, subtitle, backText }: Props) {
   return (
-    <section className="border-b border-border bg-muted/40 py-10 md:py-14">
+    <section className="public-page-hero border-b border-border py-10 md:py-14">
       <Container>
         <Link
           href="/services"

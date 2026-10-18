@@ -3,13 +3,12 @@
 import { Container } from "@/src/components/ui/Container";
 import { Link, usePathname, useRouter } from "@/src/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
-import { useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
 const navLinks = ["/about", "/services", "/doctors", "/prices", "/news", "/faqs", "/contacts"] as const;
 
 function navActive(pathname: string, href: string) {
-  if (href === "/") return pathname === "/" || pathname === "";
   return pathname === href || pathname.startsWith(`${href}/`);
 }
 
@@ -17,15 +16,54 @@ function SearchIcon() {
   return <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m16.5 16.5 4 4"/></svg>;
 }
 
+function MenuIcon({ close }: { close: boolean }) {
+  return close
+    ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>;
+}
+
 export default function Header() {
   const t = useTranslations("nav");
   const tc = useTranslations("common");
-  const th = useTranslations("home");
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const desktopSearchInputRef = useRef<HTMLInputElement>(null);
+  const mobileSearchInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    const desktopBreakpoint = window.matchMedia("(min-width: 1280px)");
+    const closeMobileMenu = (event: MediaQueryListEvent) => {
+      if (event.matches) setMenuOpen(false);
+    };
+    desktopBreakpoint.addEventListener("change", closeMobileMenu);
+    return () => desktopBreakpoint.removeEventListener("change", closeMobileMenu);
+  }, []);
+
+  useEffect(() => {
+    if (!searchOpen) return;
+    const input = window.matchMedia("(min-width: 1280px)").matches
+      ? desktopSearchInputRef.current
+      : menuOpen ? mobileSearchInputRef.current : null;
+    if (!input) return;
+    const frame = window.requestAnimationFrame(() => input.focus());
+    return () => window.cancelAnimationFrame(frame);
+  }, [menuOpen, searchOpen]);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", closeOnEscape);
+    return () => window.removeEventListener("keydown", closeOnEscape);
+  }, [menuOpen]);
 
   const submitSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -41,67 +79,73 @@ export default function Header() {
     setMenuOpen(false);
   };
 
+  const languageButtons = (mobile = false) => (
+    <div className={`site-language-list${mobile ? " is-mobile" : ""}`} role="group" aria-label={t("language")}>
+      {(["uz", "ru", "en"] as const).map((code) => <button key={code} type="button" onClick={() => switchLanguage(code)} aria-current={locale === code ? "true" : undefined} aria-label={t(`languageNames.${code}`)} className="site-language">{code}</button>)}
+    </div>
+  );
+
+  const searchForm = (id: string, open: boolean, mobile = false) => (
+    <form id={id} hidden={!open} className={`site-search-form${mobile ? " mobile-search-form" : ""}`} role="search" onSubmit={submitSearch}>
+      <label className="sr-only" htmlFor={`${id}-input`}>{t("search")}</label>
+      <input ref={mobile ? mobileSearchInputRef : desktopSearchInputRef} id={`${id}-input`} name="q" type="search" maxLength={100} placeholder={t("searchPlaceholder")} />
+      <button type="submit">{t("search")}</button>
+    </form>
+  );
+
   return (
     <>
+      <a className="skip-link" href="#main-content">{locale === "ru" ? "Перейти к основному содержимому" : locale === "uz" ? "Asosiy mazmunga o‘tish" : "Skip to main content"}</a>
       <header className="site-header sticky top-0 z-50 w-full border-b border-border bg-background">
-        <div className="concept-strip"><Container><p className="m-0">{th("topline")}</p></Container></div>
         <Container>
-          <div className="site-header-main flex min-h-[4.4rem] w-full items-center justify-between gap-4">
-            <Link href="/" locale={locale} className="flex shrink-0 flex-col gap-0.5 text-foreground transition-opacity hover:opacity-80">
-              <span className="font-serif text-xl leading-none font-medium tracking-tight md:text-2xl">Fond_Uz</span>
-              <span className="text-[10px] leading-tight text-muted-foreground">{t("tagline")}</span>
+          <div className="site-header-main">
+            <Link href="/" locale={locale} className="site-brand" aria-label={`Fond_Uz — ${t("tagline")}`}>
+              <span className="site-brand-name">Fond_Uz</span>
+              <span className="site-brand-tagline">{t("tagline")}</span>
             </Link>
-            <div className="hidden items-center gap-4 lg:flex">
-              <div className="site-header-search">
-                <button type="button" className="site-header-action inline-flex min-h-9 items-center gap-2 text-[11px] text-muted-foreground transition-colors hover:text-foreground" aria-expanded={searchOpen} aria-controls="site-search-desktop" onClick={() => setSearchOpen((open) => !open)}>
-                  <SearchIcon />{searchOpen ? t("closeSearch") : t("search")}
-                </button>
-                {searchOpen && <form id="site-search-desktop" className="site-search-form" role="search" onSubmit={submitSearch}>
-                  <label className="sr-only" htmlFor="site-search-input-desktop">{t("search")}</label>
-                  <input id="site-search-input-desktop" name="q" type="search" autoFocus maxLength={100} placeholder={t("searchPlaceholder")} />
-                  <button type="submit">{t("search")}</button>
-                </form>}
-              </div>
-              <span className="site-theme-action text-[11px] font-medium text-foreground">{tc("theme")}</span>
-              <ThemeToggle />
-              <Link href="/contacts" className="site-feedback-link inline-flex min-h-9 items-center border border-primary px-3 text-[11px] font-semibold text-primary transition-colors hover:bg-primary hover:text-primary-foreground">{t("feedback")}</Link>
-            </div>
-          </div>
-        </Container>
-        <Container>
-          <div className="site-header-nav-row flex min-h-[2.2rem] w-full items-center justify-between gap-4">
-            <nav className="site-desktop-nav hidden items-center lg:flex" aria-label={t("mainNavigation")}>
+
+            <nav className="site-desktop-nav" aria-label={t("mainNavigation")}>
               {navLinks.map((href) => {
                 const key = href.slice(1);
                 const active = navActive(pathname, href);
                 return <Link key={href} href={href} aria-current={active ? "page" : undefined} className={`site-desktop-nav-item${active ? " is-active" : ""}`}>{t(key)}</Link>;
               })}
             </nav>
-            <div className="flex items-center gap-2 sm:gap-3">
-              <div className="hidden items-center gap-0.5 lg:flex" aria-label={t("language")}>{(["uz", "ru", "en"] as const).map((code) => <button key={code} type="button" onClick={() => switchLanguage(code)} aria-current={locale === code ? "true" : undefined} aria-label={t(`languageNames.${code}`)} className="site-language rounded px-1.5 py-1 text-[10px] font-semibold uppercase transition-colors">{code}</button>)}</div>
-              <button type="button" onClick={() => setMenuOpen((open) => !open)} className="flex h-9 w-9 items-center justify-center rounded-sm border border-border bg-card text-foreground transition-colors hover:bg-muted lg:hidden" aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? t("closeMenu") : t("openMenu")}>
-                {menuOpen ? <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg> : <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>}
-              </button>
+
+            <div className="site-header-actions">
+              <div className="site-header-search">
+                <button type="button" className="site-header-action" aria-expanded={searchOpen} aria-controls="site-search-desktop" onClick={() => setSearchOpen((open) => !open)}>
+                  <SearchIcon /><span>{searchOpen ? t("closeSearch") : t("search")}</span>
+                </button>
+                {searchForm("site-search-desktop", searchOpen)}
+              </div>
+              {languageButtons()}
+              <ThemeToggle />
+              <Link href="/contacts" className="site-feedback-link">{t("feedback")}</Link>
             </div>
+
+            <button ref={menuButtonRef} type="button" onClick={() => setMenuOpen((open) => !open)} className="site-menu-toggle" aria-expanded={menuOpen} aria-controls="mobile-navigation" aria-label={menuOpen ? t("closeMenu") : t("openMenu")}>
+              <MenuIcon close={menuOpen} />
+            </button>
           </div>
         </Container>
-        {menuOpen && <div id="mobile-navigation" className="site-mobile-menu border-t border-border bg-background lg:hidden"><Container>
-          <nav className="flex max-h-[min(70vh,calc(100dvh-4rem))] flex-col gap-1.5 overflow-y-auto py-4" aria-label={t("mainNavigation")}>
-            {navLinks.map((href) => {
-              const key = href.slice(1);
-              const active = navActive(pathname, href);
-              return <Link key={href} href={href} onClick={() => setMenuOpen(false)} aria-current={active ? "page" : undefined} className={`block rounded px-4 py-3 text-base font-semibold transition-colors ${active ? "bg-muted text-primary" : "text-muted-foreground hover:bg-muted hover:text-foreground"}`}>{t(key)}</Link>;
-            })}
-            <button type="button" onClick={() => setSearchOpen((open) => !open)} aria-expanded={searchOpen} aria-controls="site-search-mobile" className="flex items-center gap-3 rounded px-4 py-3 text-left text-base font-semibold text-muted-foreground hover:bg-muted hover:text-foreground"><SearchIcon/>{searchOpen ? t("closeSearch") : t("search")}</button>
-            {searchOpen && <form id="site-search-mobile" className="site-search-form mobile-search-form" role="search" onSubmit={submitSearch}>
-              <label className="sr-only" htmlFor="site-search-input-mobile">{t("search")}</label>
-              <input id="site-search-input-mobile" name="q" type="search" autoFocus maxLength={100} placeholder={t("searchPlaceholder")} />
-              <button type="submit">{t("search")}</button>
-            </form>}
-            <div className="mt-3 flex gap-2" aria-label={t("language")}>{(["uz", "ru", "en"] as const).map((code) => <button key={code} type="button" onClick={() => switchLanguage(code)} aria-current={locale === code ? "true" : undefined} aria-label={t(`languageNames.${code}`)} className="site-language flex-1 rounded border border-border py-3 text-sm font-semibold uppercase">{code}</button>)}</div>
-            <div className="mt-2 flex items-center justify-between rounded border border-border bg-card px-4 py-2"><span className="text-sm font-semibold text-foreground">{tc("theme")}</span><ThemeToggle /></div>
-          </nav>
-        </Container></div>}
+
+        <div id="mobile-navigation" className="site-mobile-menu" hidden={!menuOpen}>
+          <Container>
+            <nav className="site-mobile-nav" aria-label={t("mainNavigation")}>
+              {navLinks.map((href) => {
+                const key = href.slice(1);
+                const active = navActive(pathname, href);
+                return <Link key={href} href={href} onClick={() => setMenuOpen(false)} aria-current={active ? "page" : undefined} className={`site-mobile-nav-item${active ? " is-active" : ""}`}>{t(key)}</Link>;
+              })}
+              <button type="button" onClick={() => setSearchOpen((open) => !open)} aria-expanded={searchOpen} aria-controls="site-search-mobile" className="site-mobile-search-toggle"><SearchIcon />{searchOpen ? t("closeSearch") : t("search")}</button>
+              {searchForm("site-search-mobile", searchOpen, true)}
+              {languageButtons(true)}
+              <div className="site-mobile-theme"><span>{tc("theme")}</span><ThemeToggle /></div>
+              <Link href="/contacts" onClick={() => setMenuOpen(false)} className="site-mobile-feedback">{t("feedback")}</Link>
+            </nav>
+          </Container>
+        </div>
       </header>
     </>
   );

@@ -17,7 +17,7 @@ export default async function FAQsPage({ params }: Props) {
 
   return (
     <div className="pb-16 md:pb-24">
-      <FaqsHero title={t("title")} subtitle={t("subtitle")} homeLabel={nav("home")} />
+      <FaqsHero title={t("title")} subtitle={faqs.length ? t("subtitle") : undefined} homeLabel={nav("home")} />
       <FaqsList items={faqs} />
     </div>
   );
