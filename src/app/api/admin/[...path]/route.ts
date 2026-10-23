@@ -8,6 +8,11 @@ async function forward(request: Request, context: Context) {
   if (path.length > 2 || !allowed.includes(path[0]) || (path.length === 2 && !/^[a-z0-9-]{1,100}$/i.test(path[1]))) return Response.json({ error: "Not found" }, { status: 404 });
   if (path[0] === "contacts" && (path.length !== 1 || request.method !== "GET")) return Response.json({ error: "Method not allowed" }, { status: 405 });
   const id = url.searchParams.get("id");
+  // User management is read-only in both admin interfaces and in the API.
+  if (path[0] === "users") {
+    if (request.method !== "GET") return Response.json({ error: "Method not allowed" }, { status: 405, headers: { Allow: "GET" } });
+    if (path.length !== 1 || url.searchParams.has("id")) return Response.json({ error: "Not found" }, { status: 404 });
+  }
   const query = new URLSearchParams([...url.searchParams.entries()].filter(([key]) => ["limit", "offset"].includes(key))).toString();
   const resourcePath = path[0] === "users" ? "/api/users/all" : `/api/${path[0]}${path[1] ? `/${encodeURIComponent(path[1])}` : id ? `/${encodeURIComponent(id)}` : ""}`;
   const apiPath = `${resourcePath}${query ? `?${query}` : ""}`;
