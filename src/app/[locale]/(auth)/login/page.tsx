@@ -12,7 +12,7 @@ const locales = ["ru", "en", "uz"] as const;
 
 export default function LoginPage() {
   const t = useTranslations("Auth");
-  const tc = useTranslations("Common");
+  const tc = useTranslations("common");
   const locale = useLocale();
   const router = useRouter();
   const pathname = usePathname();

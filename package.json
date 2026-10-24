@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint && node -e \"console.log('LINT_PASSED')\"",
     "typecheck": "tsc --noEmit && node -e \"console.log('TYPECHECK_PASSED')\"",
+    "qa:responsive": "node scripts/responsive-qa.mjs",
     "i18n:check": "node scripts/audit-i18n.mjs"
   },
   "dependencies": {
@@ -29,10 +30,11 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "^15.5.28",
+    "playwright": "^1.64.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   },
-  "allowScripts": { "@swc/core": true, "sharp": true }
-  ,"overrides": { "postcss": "^8.5.30", "braces": "^3.0.3", "fast-glob": "^3.3.3", "sharp": "^0.35.5", "micromatch": "^4.0.8" },
+  "allowScripts": { "@swc/core": true, "sharp": true },
+  "overrides": { "postcss": "^8.5.30", "braces": "^3.0.3", "fast-glob": "^3.3.3", "sharp": "^0.35.5", "micromatch": "^4.0.8" },
   "optionalDependencies": { "@swc/core-win32-x64-msvc": "^1.16.18", "@swc/core-linux-x64-gnu": "^1.16.18" }
 }
