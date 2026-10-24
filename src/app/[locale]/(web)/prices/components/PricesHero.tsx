@@ -10,7 +10,7 @@ type Props = {
 
 export function PricesHero({ title, subtitle }: Props) {
   return (
-    <section className="public-page-hero border-b border-border py-12 md:py-16">
+    <section className="public-page-hero border-b border-border py-8 md:py-12">
       <Container>
         <motion.h1
           initial={{ opacity: 0, y: 20 }}

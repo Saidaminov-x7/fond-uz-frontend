@@ -8,9 +8,10 @@ import { chromium } from "playwright";
 
 const root = process.cwd();
 const outputDir = resolve(process.env.RESPONSIVE_QA_OUTPUT ?? "../responsive-qa-results");
-const widths = [360, 390, 414, 768, 1024, 1280, 1440, 1920];
+const widths = [320, 360, 375, 390, 414, 768, 1024, 1280, 1440, 1920];
 const headerWidths = [...new Set([...widths, 640, 700, 767, 1100, 1279])].sort((a, b) => a - b);
 const representativeLocales = ["ru", "en", "uz"];
+const themes = ["light", "dark"];
 const routes = [
   { key: "home", path: "" },
   { key: "doctors", path: "/doctors" },
@@ -117,12 +118,15 @@ async function waitForServer() {
   throw new Error("Next dev server did not become ready within 60 seconds");
 }
 
-async function inspectViewport(locale, route, width) {
+async function inspectViewport(locale, route, width, theme) {
   const pageErrorStart = pageErrors.length;
   const consoleErrorStart = consoleErrors.length;
   await page.setViewportSize({ width, height: 1000 });
+  await page.emulateMedia({ colorScheme: theme });
   const path = route.path ? `/${locale}${route.path}` : `/${locale}`;
   const response = await page.goto(`${baseUrl}${path}`, { waitUntil: "domcontentloaded", timeout: 60_000 });
+  await page.addStyleTag({ content: "nextjs-portal { display: none !important; }" }).catch(() => {});
+  await page.waitForFunction((expectDark) => document.documentElement.classList.contains("dark") === expectDark, theme === "dark", { timeout: 10_000 });
   await page.evaluate(async () => { await document.fonts.ready; });
   await page.waitForTimeout(300);
   if (route.key === "login" || route.key === "admin") {
@@ -144,7 +148,7 @@ async function inspectViewport(locale, route, width) {
       image.addEventListener("error", resolveImage, { once: true });
     })));
   });
-  const filename = `${locale}-${route.key}-${width}.png`;
+  const filename = `${locale}-${route.key}-${theme}-${width}.png`;
   await page.screenshot({ path: resolve(outputDir, filename), fullPage: true, caret: "initial" });
   const metrics = await page.evaluate(() => {
     const visible = (element) => {
@@ -193,7 +197,7 @@ async function inspectViewport(locale, route, width) {
       visibleForms: [...document.querySelectorAll("form")].filter(visible).length,
     };
   });
-  results.push({ locale, route: route.key, path: page.url(), viewport: width, status: response?.status() ?? null, screenshot: filename, metrics, pageErrors: pageErrors.slice(pageErrorStart), consoleErrors: consoleErrors.slice(consoleErrorStart) });
+  results.push({ locale, route: route.key, path: page.url(), theme, viewport: width, status: response?.status() ?? null, screenshot: filename, metrics, pageErrors: pageErrors.slice(pageErrorStart), consoleErrors: consoleErrors.slice(consoleErrorStart) });
 }
 
 async function checkHeaderAndForms() {
@@ -231,7 +235,9 @@ async function checkHeaderAndForms() {
       await searchButton.click();
       await page.waitForTimeout(200);
       if (await searchButton.getAttribute("aria-expanded") !== "true") await searchButton.click();
-      await page.waitForFunction(() => document.querySelector('button[aria-controls="site-search-desktop"]')?.getAttribute("aria-expanded") === "true", undefined, { timeout: 5_000 });
+      await page.waitForFunction(() => document.querySelector('button[aria-controls="site-search-desktop"]')?.getAttribute("aria-expanded") === "true", undefined, { timeout: 5_000 }).catch(async () => {
+        throw new Error(`Desktop search did not open at ${width}px (aria-expanded=${await searchButton.getAttribute("aria-expanded")})`);
+      });
       await page.locator("#site-search-desktop input").waitFor({ state: "visible", timeout: 5_000 });
       if (!(await page.locator("#site-search-desktop input").isVisible())) throw new Error(`Desktop search did not open at ${width}px`);
       desktopHeaderWidths.push(width);
@@ -259,7 +265,7 @@ async function checkHeaderAndForms() {
   await page.locator("input[type=email]").fill("qa.invalid@example.test");
   await page.locator("input[type=password]").fill("not-a-real-password");
   await page.locator("form button[type=submit]").click();
-  await page.locator("main [role=alert]").waitFor({ timeout: 10_000 });
+  await page.locator("[role=alert]").waitFor({ timeout: 10_000 });
   await page.goto(`${baseUrl}/ru/admin`, { waitUntil: "domcontentloaded" });
   await page.waitForTimeout(300);
   const adminGate = { url: page.url(), loginFormVisible: await page.locator("input[type=email]").isVisible().catch(() => false) };
@@ -277,19 +283,19 @@ try {
   await waitForServer();
   if (process.env.RESPONSIVE_QA_REUSE_MATRIX === "1") {
     const previous = JSON.parse(await readFile(resolve(outputDir, "responsive-qa-progress.json"), "utf8"));
-    const expectedKeys = new Set(representativeLocales.flatMap((locale) => routes.flatMap((route) => widths.map((width) => `${locale}/${route.key}/${width}`))));
-    const actualKeys = new Set(previous.results?.map((result) => `${result.locale}/${result.route}/${result.viewport}`) ?? []);
-    if (previous.results?.length !== 264 || actualKeys.size !== 264 || [...expectedKeys].some((key) => !actualKeys.has(key)) || previous.results.some((result) => result.status !== 200 || !widths.includes(result.viewport) || !representativeLocales.includes(result.locale) || !routes.some((route) => route.key === result.route))) {
-      throw new Error("Refusing to reuse a stale or incomplete screenshot matrix; expected 264 route/locale/viewport records");
+    const expectedKeys = new Set(representativeLocales.flatMap((locale) => routes.flatMap((route) => themes.flatMap((theme) => widths.map((width) => `${locale}/${route.key}/${theme}/${width}`)))));
+    const actualKeys = new Set(previous.results?.map((result) => `${result.locale}/${result.route}/${result.theme}/${result.viewport}`) ?? []);
+    if (previous.results?.length !== 660 || actualKeys.size !== 660 || [...expectedKeys].some((key) => !actualKeys.has(key)) || previous.results.some((result) => result.status !== 200 || !widths.includes(result.viewport) || !representativeLocales.includes(result.locale) || !themes.includes(result.theme) || !routes.some((route) => route.key === result.route))) {
+      throw new Error("Refusing to reuse a stale or incomplete screenshot matrix; expected 660 route/locale/theme/viewport records");
     }
     for (const result of previous.results) await readFile(resolve(outputDir, result.screenshot));
     results = previous.results;
   } else if (process.env.RESPONSIVE_QA_RESUME_MATRIX === "1") {
     const previous = JSON.parse(await readFile(resolve(outputDir, "responsive-qa-progress.json"), "utf8"));
     const keys = new Set();
-    const expectedKeys = new Set(representativeLocales.flatMap((locale) => routes.flatMap((route) => widths.map((width) => `${locale}/${route.key}/${width}`))));
+    const expectedKeys = new Set(representativeLocales.flatMap((locale) => routes.flatMap((route) => themes.flatMap((theme) => widths.map((width) => `${locale}/${route.key}/${theme}/${width}`)))));
     for (const result of previous.results ?? []) {
-      const key = `${result.locale}/${result.route}/${result.viewport}`;
+      const key = `${result.locale}/${result.route}/${result.theme}/${result.viewport}`;
       if (keys.has(key) || !expectedKeys.has(key) || result.status !== 200 || result.pageErrors?.length || result.consoleErrors?.length || result.metrics?.horizontalOverflow || result.metrics?.clippedText?.length || result.metrics?.contentOutsideViewport?.length || result.metrics?.overlappingCardPairs) throw new Error(`Invalid existing QA progress record: ${key}`);
       await readFile(resolve(outputDir, result.screenshot));
       keys.add(key);
@@ -297,12 +303,15 @@ try {
     results = previous.results;
   }
   if (process.env.RESPONSIVE_QA_REUSE_MATRIX !== "1") {
-    const completed = new Set(results.map((result) => `${result.locale}/${result.route}/${result.viewport}`));
+    const completed = new Set(results.map((result) => `${result.locale}/${result.route}/${result.theme}/${result.viewport}`));
     for (const locale of representativeLocales) {
       const localeWidths = widths;
       for (const route of selectedRoutes) {
-        for (const width of localeWidths) {
-          if (!completed.has(`${locale}/${route.key}/${width}`)) await inspectViewport(locale, route, width);
+        for (const theme of themes) {
+          for (const width of localeWidths) {
+            const key = `${locale}/${route.key}/${theme}/${width}`;
+            if (!completed.has(key)) await inspectViewport(locale, route, width, theme);
+          }
         }
         await writeFile(resolve(outputDir, "responsive-qa-progress.json"), JSON.stringify({ generatedAt: new Date().toISOString(), locale, route: route.key, completed: results.length, results }, null, 2));
       }
@@ -315,19 +324,22 @@ try {
     }
   }
   const interactions = await checkHeaderAndForms();
+  const failures = results.filter((result) => result.status !== 200 || result.metrics.horizontalOverflow || result.metrics.clippedText.length || result.metrics.contentOutsideViewport.length || result.metrics.overlappingCardPairs || result.pageErrors.length || result.consoleErrors.length);
   const report = {
     generatedAt: new Date().toISOString(),
     origin: baseUrl,
     fixtureData: "Synthetic local-only QA records; no production API or real data used.",
     routeCount: selectedRoutes.length,
     screenshots: results.length,
+    failureCount: failures.length,
+    themes,
     widths: { ru: widths, en: widths, uz: widths },
     interactions,
     results,
+    failures: failures.map(({ locale, route, theme, viewport, status, metrics, pageErrors, consoleErrors }) => ({ locale, route, theme, viewport, status, horizontalOverflow: metrics.horizontalOverflow, clippedText: metrics.clippedText, contentOutsideViewport: metrics.contentOutsideViewport, overlappingCardPairs: metrics.overlappingCardPairs, pageErrors, consoleErrors })),
   };
   await writeFile(resolve(outputDir, "responsive-qa.json"), JSON.stringify(report, null, 2));
-  const failures = results.filter((result) => result.status !== 200 || result.metrics.horizontalOverflow || result.metrics.clippedText.length || result.metrics.contentOutsideViewport.length || result.metrics.overlappingCardPairs || result.pageErrors.length || result.consoleErrors.length);
-  console.log(JSON.stringify({ outputDir, screenshots: results.length, failureCount: failures.length, failures: failures.map(({ locale, route, viewport, status, metrics, pageErrors }) => ({ locale, route, viewport, status, horizontalOverflow: metrics.horizontalOverflow, clippedText: metrics.clippedText.length, outside: metrics.contentOutsideViewport.length, overlaps: metrics.overlappingCardPairs, pageErrors })) }, null, 2));
+  console.log(JSON.stringify({ outputDir, screenshots: results.length, failureCount: failures.length, failures: failures.map(({ locale, route, theme, viewport, status, metrics, pageErrors }) => ({ locale, route, theme, viewport, status, horizontalOverflow: metrics.horizontalOverflow, clippedText: metrics.clippedText.length, outside: metrics.contentOutsideViewport.length, overlaps: metrics.overlappingCardPairs, pageErrors })) }, null, 2));
   if (failures.length) process.exitCode = 1;
 } finally {
   await browser.close();

@@ -15,7 +15,7 @@ export default async function ContactsPage({ params }: Props) {
 
   return (
     <>
-      <section className="public-page-hero border-b border-border py-12 md:py-16">
+      <section className="public-page-hero border-b border-border py-8 md:py-12">
         <Container><ContactsHero title={t("title")} subtitle={t("subtitle")} homeLabel={nav("home")} /></Container>
       </section>
       <Container className="contacts-page">

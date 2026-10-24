@@ -25,7 +25,7 @@ export default async function FAQDetailPage({ params }: Props) {
 
   return (
     <div className="public-page-flow">
-      <section className="public-page-hero border-b border-border py-12 md:py-16">
+      <section className="public-page-hero border-b border-border py-8 md:py-12">
         <Container>
           <MotionViewport
             initial={{ opacity: 0, y: 20 }}
