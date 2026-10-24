@@ -1,4 +1,6 @@
 import { Container } from "@/src/components/ui/Container";
+import { Button } from "@/src/components/ui/Button";
+import { Input } from "@/src/components/ui/Input";
 import { Link } from "@/src/i18n/routing";
 import { getDoctors, getFaqs, getNews, getPrices, getServices } from "@/src/lib/content";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -33,14 +35,14 @@ export default async function SearchPage({ params, searchParams }: Props) {
   const normalizedQuery = query.toLocaleLowerCase(locale);
   const results = query ? [...records, ...pages].filter((item) => `${item.title} ${item.description}`.toLocaleLowerCase(locale).includes(normalizedQuery)).slice(0, 30) : [];
 
-  return <div className="search-page min-h-[55vh]">
+  return <div className="search-page">
     <section className="public-page-hero border-b border-border py-12 md:py-16"><Container>
       <h1 className="font-serif text-4xl text-foreground md:text-5xl">{t("title")}</h1>
       <p className="mt-3 text-muted-foreground">{t("hint")}</p>
       <form action="" method="get" role="search" className="mt-6 flex max-w-2xl flex-col gap-3 sm:flex-row">
         <label className="sr-only" htmlFor="site-search-query">{t("placeholder")}</label>
-        <input id="site-search-query" name="q" type="search" maxLength={100} defaultValue={query} placeholder={t("placeholder")} className="min-h-12 min-w-0 flex-1 rounded-sm border border-border bg-card px-4 text-foreground placeholder:text-muted-foreground focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring" />
-        <button type="submit" className="min-h-12 rounded-sm bg-primary px-6 font-semibold text-primary-foreground">{t("submit")}</button>
+        <Input id="site-search-query" name="q" type="search" maxLength={100} defaultValue={query} placeholder={t("placeholder")} className="min-h-12 h-12 min-w-0 flex-1 rounded-control" />
+        <Button type="submit" size="lg" className="rounded-control">{t("submit")}</Button>
       </form>
       {query && <p className="mt-5 text-sm text-muted-foreground">{t("resultsFound", { count: results.length })} <span className="font-medium text-foreground">“{query}”</span></p>}
     </Container></section>

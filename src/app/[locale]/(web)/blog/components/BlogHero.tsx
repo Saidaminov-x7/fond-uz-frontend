@@ -9,12 +9,14 @@ type Props = {
 
 export function BlogHero({ title, subtitle, homeLabel }: Props) {
   return (
-    <Container className="blog-page-heading">
-      <nav aria-label="Breadcrumb" className="page-breadcrumb">
-        <Link href="/">{homeLabel}</Link><span aria-hidden="true">/</span><span aria-current="page">{title}</span>
-      </nav>
-      <h1>{title}</h1>
-      <p>{subtitle}</p>
-    </Container>
+    <section className="public-page-hero border-b border-border py-12 md:py-16">
+      <Container className="blog-page-heading">
+        <nav aria-label="Breadcrumb" className="page-breadcrumb">
+          <Link href="/">{homeLabel}</Link><span aria-hidden="true">/</span><span aria-current="page">{title}</span>
+        </nav>
+        <h1>{title}</h1>
+        <p>{subtitle}</p>
+      </Container>
+    </section>
   );
 }

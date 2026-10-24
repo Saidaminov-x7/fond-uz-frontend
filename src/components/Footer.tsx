@@ -10,7 +10,7 @@ export default function Footer() {
   const pageLinks = ["/", "/about", "/services", "/doctors", "/prices", "/news", "/faqs", "/contacts"];
 
   return (
-    <footer className="site-footer mt-10 border-t border-border bg-card py-12">
+    <footer className="site-footer mt-auto border-t border-border py-10 md:py-12">
       <Container>
         <div className="grid grid-cols-1 gap-8 border-b border-border pb-8 md:grid-cols-3">
           <div>

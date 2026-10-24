@@ -10,7 +10,7 @@ export default async function AboutPage({ params }: Props) {
   const t = await getTranslations("about");
 
   return (
-    <div className="pb-16 md:pb-24">
+    <div className="public-page-flow">
       <AboutHero title={t("title")} subtitle={t("subtitle")} />
       <Container className="pt-10 md:pt-14">
         <div className="concept-note" role="note"><span className="concept-note-mark" aria-hidden="true">i</span><div><strong>{t("conceptTitle")}</strong><p>{t("conceptBody")}</p></div></div>

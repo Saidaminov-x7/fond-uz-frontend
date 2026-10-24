@@ -16,7 +16,7 @@ export default async function FAQsPage({ params }: Props) {
   const faqs = await getFaqs(locale);
 
   return (
-    <div className="pb-16 md:pb-24">
+    <div className="public-page-flow">
       <FaqsHero title={t("title")} subtitle={faqs.length ? t("subtitle") : undefined} homeLabel={nav("home")} />
       <FaqsList items={faqs} />
     </div>

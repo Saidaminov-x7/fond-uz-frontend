@@ -38,7 +38,7 @@ export function FundList({
         {funds.map((fund) => (
           <div
             key={fund.id}
-            className="fund-card rounded-lg border border-border bg-card p-6 md:p-8 transition-colors hover:border-primary/40"
+            className="fund-card rounded-card border border-border bg-card p-6 md:p-8 shadow-card transition-colors hover:border-primary/40"
           >
             <h2 className="font-serif text-2xl text-foreground mb-6">{fund.name}</h2>
             <dl className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
@@ -69,7 +69,7 @@ export function FundList({
               {fund.description ? (
                 <div className="md:col-span-2 space-y-2 mt-2 border-t border-border/50 pt-4">
                   <dt className="text-muted-foreground font-medium uppercase tracking-wider text-[10px]">{extraInfoLabel}</dt>
-                  <dd className="fund-extra-info text-sm leading-relaxed text-muted-foreground bg-muted/30 p-4 rounded-xl border border-border/30">
+                  <dd className="fund-extra-info text-sm leading-relaxed text-muted-foreground bg-muted/30 p-4 rounded-card border border-border/30">
                     {fund.description}
                   </dd>
                 </div>
@@ -78,9 +78,9 @@ export function FundList({
           </div>
         ))}
         {funds.length > 0 ? (
-          <div className="rounded-lg border border-border bg-muted p-5 text-center text-sm text-muted-foreground">{partnerTitle}</div>
+          <div className="rounded-card border border-border bg-muted p-5 text-center text-sm text-muted-foreground">{partnerTitle}</div>
         ) : (
-          <p className="fund-empty rounded-2xl border border-border bg-card p-6 text-center text-sm text-muted-foreground">{emptyText}</p>
+          <p className="fund-empty rounded-card border border-border bg-card p-6 text-center text-sm text-muted-foreground">{emptyText}</p>
         )}
       </div>
     </Container>

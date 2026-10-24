@@ -43,7 +43,7 @@ export function DoctorsGrid({ doctors, openText }: Props) {
             whileInView="visible"
             viewport={{ once: true }}
             variants={cardVariants}
-            className="doctor-card overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:shadow-md hover:border-border"
+            className="doctor-card overflow-hidden rounded-card border border-border bg-card shadow-card transition-all hover:border-border"
           >
             <div className="relative h-[250px] md:h-[250px] w-full overflow-hidden">
               <Image
@@ -60,7 +60,7 @@ export function DoctorsGrid({ doctors, openText }: Props) {
               <p className="mt-1 text-lg text-muted-foreground">{doc.profession}</p>
               <Link
                 href={`/doctors/${doc.id}`}
-                className="doctor-card-action mt-4 inline-flex rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-transform active:scale-95"
+                className="doctor-card-action mt-4 inline-flex rounded-control bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-transform active:scale-95"
               >
                 {openText}
               </Link>

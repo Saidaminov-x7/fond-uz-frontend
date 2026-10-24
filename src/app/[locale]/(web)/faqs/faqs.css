@@ -1,20 +1,14 @@
-.faq-page-heading,
-.faq-content { max-width: 1440px; padding-right: clamp(1.25rem, 4.45vw, 4rem); padding-left: clamp(1.25rem, 4.45vw, 4rem); }
-.faq-page-heading { padding-top: clamp(2rem, 4vw, 3.5rem); }
+.faq-page-heading { padding-block: 0; }
 .faq-page-heading .page-breadcrumb { display: flex; flex-wrap: wrap; align-items: center; gap: .55rem; color: var(--muted-foreground); font-size: .78rem; }
 .faq-page-heading .page-breadcrumb a { color: inherit; text-decoration: none; }
 .faq-page-heading .page-breadcrumb a:hover { color: var(--primary); text-decoration: underline; }
 .faq-page-heading .page-breadcrumb [aria-current="page"] { color: var(--foreground); }
-.faq-page-heading h1 { margin: 2.1rem 0 0; font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.08; text-align: left; }
+.faq-page-heading h1 { margin: 1.35rem 0 0; font-size: clamp(2.25rem, 4vw, 3.5rem); font-weight: 500; letter-spacing: -.035em; line-height: 1.08; text-align: left; }
 .faq-page-heading p { max-width: 48rem; margin: .8rem 0 0; color: var(--muted-foreground); font-size: clamp(.96rem, 1.3vw, 1.1rem); line-height: 1.65; text-align: left; }
-.faq-content { padding-top: clamp(2rem, 4vw, 3.2rem); padding-bottom: clamp(4rem, 7vw, 6rem); }
+.faq-content { padding-top: clamp(2rem, 4vw, 3.2rem); padding-bottom: 0; }
 .faq-search { display: flex; flex-wrap: wrap; align-items: end; gap: .75rem; }
 .faq-search-field { display: grid; flex: 1 1 24rem; gap: .45rem; color: var(--foreground); font-size: .88rem; font-weight: 600; }
-.faq-search input,
-.faq-filter select { min-height: 3.25rem; border: 1px solid var(--border); border-radius: .3rem; background: var(--card); color: var(--foreground); padding: .75rem .9rem; font: inherit; }
-.faq-search input:focus-visible,
-.faq-filter select:focus-visible { outline: 2px solid var(--ring); outline-offset: 2px; }
-.faq-reset { min-height: 3.25rem; border: 0; background: transparent; color: var(--primary); padding: .5rem .7rem; font: inherit; font-weight: 600; text-decoration: underline; text-underline-offset: .2em; }
+.faq-filter select { min-height: 2.8rem; padding-right: 2.2rem; }
 .faq-results { margin-top: 2rem; border-top: 1px solid var(--border); }
 .faq-item { border-bottom: 1px solid var(--border); }
 .faq-item summary { display: flex; min-height: 4.25rem; align-items: center; justify-content: space-between; gap: 1.2rem; padding: 1rem .2rem; color: var(--foreground); cursor: pointer; font-size: clamp(.98rem, 1.4vw, 1.1rem); font-weight: 600; line-height: 1.5; list-style: none; }
@@ -30,11 +24,9 @@
 .faq-contact-cta { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1.25rem; margin-top: 2rem; border-top: 1px solid var(--border); padding-top: 1.7rem; }
 .faq-contact-cta h2 { margin: 0; font-size: clamp(1.25rem, 2vw, 1.6rem); font-weight: 500; }
 .faq-contact-cta p { margin: .45rem 0 0; color: var(--muted-foreground); line-height: 1.6; }
-.faq-contact-cta a { display: inline-flex; min-height: 2.9rem; align-items: center; gap: .6rem; border: 1px solid var(--primary); border-radius: .3rem; color: var(--primary); padding: .65rem 1rem; font-weight: 600; text-decoration: none; }
-.faq-contact-cta a:hover { background: var(--primary); color: var(--primary-foreground); }
+.faq-contact-action { gap: .6rem; }
 @media (max-width: 640px) {
-  .faq-page-heading { padding-top: 1.5rem; }
-  .faq-page-heading h1 { margin-top: 1.55rem; }
+  .faq-page-heading h1 { margin-top: 1.35rem; }
   .faq-search-field { flex-basis: 100%; }
   .faq-filter select { min-height: 2.8rem; }
 }

@@ -2,6 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { Container } from "@/src/components/ui/Container";
+import { Button } from "@/src/components/ui/Button";
+import { Input } from "@/src/components/ui/Input";
+import { Select } from "@/src/components/ui/Select";
 import { Link } from "@/src/i18n/routing";
 import { useTranslations } from "next-intl";
 
@@ -37,7 +40,7 @@ export function ProfessionList({ professions }: Props) {
       {professions.length > 0 ? <><form className="service-search" role="search" onSubmit={(event) => { event.preventDefault(); setQuery(queryInput); }}>
         <label className="service-search-field">
           <span>{t("searchLabel")}</span>
-          <input
+          <Input
             type="search"
             value={queryInput}
             onChange={(event) => setQueryInput(event.target.value)}
@@ -45,21 +48,21 @@ export function ProfessionList({ professions }: Props) {
             aria-label={t("searchPlaceholder")}
           />
         </label>
-        <button type="submit" className="service-search-submit">{t("searchAction")}</button>
+        <Button type="submit" size="lg" className="service-search-submit">{t("searchAction")}</Button>
       </form>
 
       <div className="service-filter-row">
         <label className="service-filter">
           <span className="sr-only">{t("filterLabel")}</span>
-          <select value={filter} onChange={(event) => setFilter(event.target.value)}>
+          <Select value={filter} onChange={(event) => setFilter(event.target.value)}>
             <option value="">{t("allCategories")}</option>
             <option value="with-organizations">{t("withOrganizations")}</option>
             <option value="without-organizations">{t("withoutOrganizations")}</option>
             {categories.length ? <optgroup label={t("topicCategories")}>{categories.map((item) => <option key={item} value={`category:${item}`}>{item}</option>)}</optgroup> : null}
-          </select>
+          </Select>
         </label>
         {filter || query || queryInput ? (
-          <button className="service-reset" type="button" onClick={() => { setFilter(""); setQuery(""); setQueryInput(""); }}>{t("resetFilters")}</button>
+          <Button variant="ghost" size="sm" className="service-reset" type="button" onClick={() => { setFilter(""); setQuery(""); setQueryInput(""); }}>{t("resetFilters")}</Button>
         ) : null}
       </div></> : null}
 

@@ -27,7 +27,7 @@ export function Accordion({ title, subtitle, items }: AccordionProps) {
           return (
             <div
               key={item.question}
-              className="overflow-hidden rounded-lg border border-border bg-card shadow-sm transition-all hover:shadow-md hover:border-border"
+              className="overflow-hidden rounded-card border border-border bg-card shadow-card transition-all hover:border-border"
             >
               <button
                 type="button"
@@ -39,7 +39,7 @@ export function Accordion({ title, subtitle, items }: AccordionProps) {
                 </span>
                 <motion.span
                   animate={{ rotate: isOpen ? 45 : 0 }}
-                  className="flex h-6 w-6 items-center justify-center rounded-full bg-primary/10 text-primary"
+                  className="flex h-6 w-6 items-center justify-center rounded-pill bg-primary/10 text-primary"
                 >
                   +
                 </motion.span>

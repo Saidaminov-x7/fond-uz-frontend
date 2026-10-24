@@ -23,7 +23,7 @@ export default async function ServiceDetailPage({ params }: Props) {
   const fundsForProfession = allFunds.filter((item) => item.professionSlug === slug);
 
   return (
-    <div className="pb-16 md:pb-24">
+    <div className="public-page-flow">
       <ServiceHero
         title={profession.name}
         subtitle={t("fundsCount", { count: fundsForProfession.length })}

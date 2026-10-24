@@ -25,7 +25,7 @@ export function NewsDetailContent({ item, backText }: Props) {
         <span className="inline-block transition-transform group-hover:-translate-x-1">←</span> {backText}
       </Link>
 
-      <div className="relative mt-8 h-80 md:h-[450px] w-full overflow-hidden rounded-2xl border border-border/50 bg-card shadow-lg">
+      <div className="relative mt-8 h-80 md:h-[450px] w-full overflow-hidden rounded-card border border-border/50 bg-card shadow-card">
         <Image
           src={item.image}
           alt={item.title}

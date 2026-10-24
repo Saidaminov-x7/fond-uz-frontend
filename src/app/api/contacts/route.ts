@@ -18,6 +18,8 @@ export async function POST(request: Request) {
   const email = typeof body.email === "string" ? body.email.trim() : "";
   const phone = typeof body.phone === "string" ? body.phone.trim() : "";
   const message = typeof body.message === "string" ? body.message.trim() : "";
+  const captchaId = typeof body.captchaId === "string" ? body.captchaId.trim() : "";
+  const captchaAnswer = typeof body.captchaAnswer === "string" ? body.captchaAnswer.trim() : "";
   const hasContact = Boolean(email || phone);
   if (name.length < 2 || name.length > 120 || !hasContact || (email && (!EMAIL_PATTERN.test(email) || email.length > 254)) || phone.length > 32 || message.length < 5 || message.length > 3_000) {
     return Response.json({ error: "Invalid contact request" }, { status: 400 });
@@ -25,6 +27,6 @@ export async function POST(request: Request) {
 
   return adminApi("/api/contacts", {
     method: "POST",
-    body: JSON.stringify({ name, ...(email ? { email } : {}), ...(phone ? { phone } : {}), message, consent: true }),
+    body: JSON.stringify({ name, ...(email ? { email } : {}), ...(phone ? { phone } : {}), message, consent: true, captchaId, captchaAnswer }),
   });
 }

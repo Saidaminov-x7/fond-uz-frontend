@@ -18,15 +18,17 @@ export default async function DoctorDetailsPage({ params }: Props) {
   if (!doctor) notFound();
 
   return (
-    <Container className="doctor-profile-page py-12 md:py-16">
-      <DoctorInfo
-        doctor={doctor}
-        backText={tc("backToList")}
-        emailText={t("email")}
-        phoneText={t("phone")}
-        aboutText={t("about")}
-      />
-    </Container>
+    <div className="public-page-flow">
+      <Container className="doctor-profile-page pt-12 md:pt-16">
+        <DoctorInfo
+          doctor={doctor}
+          backText={tc("backToList")}
+          emailText={t("email")}
+          phoneText={t("phone")}
+          aboutText={t("about")}
+        />
+      </Container>
+    </div>
   );
 }
 

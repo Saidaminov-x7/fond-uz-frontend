@@ -2,7 +2,7 @@ import type { ButtonHTMLAttributes, ReactNode } from "react";
 import { Link } from "@/src/i18n/routing";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary";
+  variant?: "primary" | "secondary" | "ghost";
   size?: "sm" | "md" | "lg";
   children: ReactNode;
   href?: string;
@@ -11,10 +11,11 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ variant = "primary", size = "md", className = "", children, href, params, isLoading, disabled, ...buttonProps }: ButtonProps) {
-  const base = "inline-flex min-h-10 items-center justify-center gap-2 rounded-lg border font-semibold tracking-tight transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50";
+  const base = "inline-flex min-h-10 items-center justify-center gap-2 rounded-control border font-semibold tracking-tight transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50";
   const variants = {
     primary: "border-primary bg-primary text-primary-foreground hover:bg-primary/90",
     secondary: "border-border bg-card text-foreground hover:bg-muted",
+    ghost: "border-transparent bg-transparent text-primary hover:bg-muted",
   };
   const sizes = { sm: "px-3 py-1.5 text-sm", md: "px-4 py-2 text-sm", lg: "min-h-12 px-6 py-3 text-base" };
   const classes = `${base} ${variants[variant]} ${sizes[size]} ${className}`;

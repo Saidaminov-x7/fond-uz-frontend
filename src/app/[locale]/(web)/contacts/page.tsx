@@ -14,9 +14,15 @@ export default async function ContactsPage({ params }: Props) {
   const nav = await getTranslations("nav");
 
   return (
-    <Container className="contacts-page">
-      <ContactsHero title={t("title")} subtitle={t("subtitle")} homeLabel={nav("home")} />
+    <>
+      <section className="public-page-hero border-b border-border py-12 md:py-16">
+        <Container><ContactsHero title={t("title")} subtitle={t("subtitle")} homeLabel={nav("home")} /></Container>
+      </section>
+      <Container className="contacts-page">
       <div className="contacts-layout">
+        <div>
+          <ContactForm />
+        </div>
         <div>
           <ContactsInfo
             title={t("infoTitle")}
@@ -31,12 +37,9 @@ export default async function ContactsPage({ params }: Props) {
             questionsLabel={nav("faqs")}
           />
         </div>
-
-        <div>
-          <ContactForm />
-        </div>
       </div>
-    </Container>
+      </Container>
+    </>
   );
 }
 

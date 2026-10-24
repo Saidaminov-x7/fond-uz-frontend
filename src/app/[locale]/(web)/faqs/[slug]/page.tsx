@@ -24,8 +24,8 @@ export default async function FAQDetailPage({ params }: Props) {
   }
 
   return (
-    <div className="pb-16 md:pb-24">
-      <section className="border-b border-border bg-muted/40 py-12 md:py-20">
+    <div className="public-page-flow">
+      <section className="public-page-hero border-b border-border py-12 md:py-16">
         <Container>
           <MotionViewport
             initial={{ opacity: 0, y: 20 }}
@@ -45,7 +45,7 @@ export default async function FAQDetailPage({ params }: Props) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="rounded-2xl border border-border bg-card p-6 shadow-sm md:p-10"
+          className="rounded-card border border-border bg-card p-6 shadow-card md:p-10"
         >
           <p className="text-sm leading-8 text-muted-foreground md:text-lg">
             {faq.answer}

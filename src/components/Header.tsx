@@ -1,12 +1,14 @@
 "use client";
 
 import { Container } from "@/src/components/ui/Container";
+import { Button } from "@/src/components/ui/Button";
+import { Input } from "@/src/components/ui/Input";
 import { Link, usePathname, useRouter } from "@/src/i18n/routing";
 import { useLocale, useTranslations } from "next-intl";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 
-const navLinks = ["/about", "/services", "/doctors", "/prices", "/news", "/faqs", "/contacts"] as const;
+const navLinks = ["/", "/about", "/services", "/doctors", "/prices", "/news", "/faqs", "/contacts"] as const;
 
 function navActive(pathname: string, href: string) {
   return pathname === href || pathname.startsWith(`${href}/`);
@@ -31,11 +33,12 @@ export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [searchOpen, setSearchOpen] = useState(false);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
   const desktopSearchInputRef = useRef<HTMLInputElement>(null);
   const mobileSearchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    const desktopBreakpoint = window.matchMedia("(min-width: 1280px)");
+    const desktopBreakpoint = window.matchMedia("(min-width: 1024px)");
     const closeMobileMenu = (event: MediaQueryListEvent) => {
       if (event.matches) setMenuOpen(false);
     };
@@ -45,7 +48,7 @@ export default function Header() {
 
   useEffect(() => {
     if (!searchOpen) return;
-    const input = window.matchMedia("(min-width: 1280px)").matches
+    const input = window.matchMedia("(min-width: 1024px)").matches
       ? desktopSearchInputRef.current
       : menuOpen ? mobileSearchInputRef.current : null;
     if (!input) return;
@@ -55,14 +58,35 @@ export default function Header() {
 
   useEffect(() => {
     if (!menuOpen) return;
-    const closeOnEscape = (event: KeyboardEvent) => {
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const frame = window.requestAnimationFrame(() => {
+      mobileMenuRef.current?.querySelector<HTMLElement>("a, button, input, [tabindex]:not([tabindex='-1'])")?.focus();
+    });
+    const containFocus = (event: KeyboardEvent) => {
       if (event.key === "Escape") {
         setMenuOpen(false);
         menuButtonRef.current?.focus();
+      } else if (event.key === "Tab") {
+        const items = Array.from(mobileMenuRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex='-1'])") ?? []).filter((item) => item.getClientRects().length > 0);
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && document.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && document.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
       }
     };
-    window.addEventListener("keydown", closeOnEscape);
-    return () => window.removeEventListener("keydown", closeOnEscape);
+    window.addEventListener("keydown", containFocus);
+    return () => {
+      window.cancelAnimationFrame(frame);
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", containFocus);
+    };
   }, [menuOpen]);
 
   const submitSearch = (event: FormEvent<HTMLFormElement>) => {
@@ -88,8 +112,8 @@ export default function Header() {
   const searchForm = (id: string, open: boolean, mobile = false) => (
     <form id={id} hidden={!open} className={`site-search-form${mobile ? " mobile-search-form" : ""}`} role="search" onSubmit={submitSearch}>
       <label className="sr-only" htmlFor={`${id}-input`}>{t("search")}</label>
-      <input ref={mobile ? mobileSearchInputRef : desktopSearchInputRef} id={`${id}-input`} name="q" type="search" maxLength={100} placeholder={t("searchPlaceholder")} />
-      <button type="submit">{t("search")}</button>
+      <Input ref={mobile ? mobileSearchInputRef : desktopSearchInputRef} id={`${id}-input`} name="q" type="search" maxLength={100} placeholder={t("searchPlaceholder")} />
+      <Button type="submit" size="sm">{t("search")}</Button>
     </form>
   );
 
@@ -106,7 +130,7 @@ export default function Header() {
 
             <nav className="site-desktop-nav" aria-label={t("mainNavigation")}>
               {navLinks.map((href) => {
-                const key = href.slice(1);
+                const key = href === "/" ? "home" : href.slice(1);
                 const active = navActive(pathname, href);
                 return <Link key={href} href={href} aria-current={active ? "page" : undefined} className={`site-desktop-nav-item${active ? " is-active" : ""}`}>{t(key)}</Link>;
               })}
@@ -130,11 +154,18 @@ export default function Header() {
           </div>
         </Container>
 
-        <div id="mobile-navigation" className="site-mobile-menu" hidden={!menuOpen}>
-          <Container>
+        <div id="mobile-navigation" ref={mobileMenuRef} className="site-mobile-menu" role="dialog" aria-modal="true" aria-label={t("mainNavigation")} hidden={!menuOpen}>
+          <div className="site-mobile-backdrop" aria-hidden="true" onClick={() => { setMenuOpen(false); menuButtonRef.current?.focus(); }} />
+          <Container className="site-mobile-menu-panel">
+            <div className="site-mobile-menu-header">
+              <span>{t("mainNavigation")}</span>
+              <Button type="button" variant="ghost" size="sm" className="site-mobile-close" aria-label={t("closeMenu")} onClick={() => { setMenuOpen(false); menuButtonRef.current?.focus(); }}>
+                <MenuIcon close />
+              </Button>
+            </div>
             <nav className="site-mobile-nav" aria-label={t("mainNavigation")}>
               {navLinks.map((href) => {
-                const key = href.slice(1);
+                const key = href === "/" ? "home" : href.slice(1);
                 const active = navActive(pathname, href);
                 return <Link key={href} href={href} onClick={() => setMenuOpen(false)} aria-current={active ? "page" : undefined} className={`site-mobile-nav-item${active ? " is-active" : ""}`}>{t(key)}</Link>;
               })}

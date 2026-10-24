@@ -2,7 +2,9 @@
 
 import { useMemo, useState } from "react";
 import { Container } from "@/src/components/ui/Container";
-import { Link } from "@/src/i18n/routing";
+import { Button } from "@/src/components/ui/Button";
+import { Input } from "@/src/components/ui/Input";
+import { Select } from "@/src/components/ui/Select";
 import { useTranslations } from "next-intl";
 
 type FAQItem = { question: string; answer: string; category?: string };
@@ -30,19 +32,19 @@ export function FaqsList({ items }: Props) {
       {items.length > 0 ? <form role="search" className="faq-search" onSubmit={(event) => { event.preventDefault(); setQuery(queryInput); }}>
         <label className="faq-search-field">
           <span>{t("searchLabel")}</span>
-          <input type="search" value={queryInput} onChange={(event) => setQueryInput(event.target.value)} placeholder={t("searchPlaceholder")} />
+          <Input type="search" value={queryInput} onChange={(event) => setQueryInput(event.target.value)} placeholder={t("searchPlaceholder")} />
         </label>
-        <button type="submit" className="faq-search-submit">{t("searchAction")}</button>
+        <Button type="submit" size="lg" className="faq-search-submit">{t("searchAction")}</Button>
         <label className="faq-filter">
           <span className="sr-only">{t("filterLabel")}</span>
-          <select value={filter} onChange={(event) => setFilter(event.target.value)}>
+          <Select value={filter} onChange={(event) => setFilter(event.target.value)}>
             <option value="">{t("allCategories")}</option>
             <option value="questions">{t("questionsOnly")}</option>
             <option value="answers">{t("answersOnly")}</option>
             {categories.length ? <optgroup label={t("topicCategories")}>{categories.map((item) => <option key={item} value={`category:${item}`}>{item}</option>)}</optgroup> : null}
-          </select>
+          </Select>
         </label>
-        {filter || query || queryInput ? <button type="button" className="faq-reset" onClick={() => { setFilter(""); setQuery(""); setQueryInput(""); }}>{t("resetFilters")}</button> : null}
+        {filter || query || queryInput ? <Button variant="ghost" size="sm" type="button" className="faq-reset" onClick={() => { setFilter(""); setQuery(""); setQueryInput(""); }}>{t("resetFilters")}</Button> : null}
       </form> : null}
 
       {filteredItems.length ? (
@@ -66,7 +68,7 @@ export function FaqsList({ items }: Props) {
           <h2 id="faq-contact-heading">{t("contactQuestion")}</h2>
           <p>{t("contactDescription")}</p>
         </div>
-        <Link href="/contacts">{t("contactAction")} <span aria-hidden="true">→</span></Link>
+        <Button href="/contacts" variant="secondary" className="faq-contact-action">{t("contactAction")} <span aria-hidden="true">{"\u2192"}</span></Button>
       </section>
     </Container>
   );

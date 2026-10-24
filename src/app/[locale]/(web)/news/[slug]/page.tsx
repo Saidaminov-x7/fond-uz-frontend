@@ -12,17 +12,19 @@ export default async function NewsDetailsPage({ params }: Props) {
   const { locale, slug } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("news");
-  
+
   const item = (await getNews(locale)).find((entry) => entry.slug === slug);
   if (!item) notFound();
 
   return (
-    <Container className="py-12 md:py-16">
-      <NewsDetailContent
-        item={item}
-        backText={t("back")}
-      />
-    </Container>
+    <div className="public-page-flow">
+      <Container className="pt-12 md:pt-16">
+        <NewsDetailContent
+          item={item}
+          backText={t("back")}
+        />
+      </Container>
+    </div>
   );
 }
 

@@ -14,7 +14,7 @@ export default async function ServicesIndexPage({ params }: Props) {
   const professions = await getServices(locale);
 
   return (
-    <div className="pb-16 md:pb-24">
+    <div className="public-page-flow">
       <ServicesHero title={t("title")} subtitle={t("subtitle")} homeLabel={nav("home")} />
       <ProfessionList professions={professions} />
     </div>

@@ -41,16 +41,16 @@ export function PricesContainer({ items, toggleListText, toggleCardsText, includ
       <div className={`${items.length === 0 ? "hidden" : "mb-6 hidden justify-end gap-2 md:flex"}`}>
         <button
           onClick={() => setView("list")}
-          className={`rounded-xl border px-3 py-2 text-sm transition-all shadow-sm active:scale-95 ${
-            view === "list" ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20" : "border-border bg-card hover:bg-muted/50"
+          className={`rounded-control border px-3 py-2 text-sm transition-all shadow-field active:scale-95 ${
+            view === "list" ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card hover:bg-muted/50"
           }`}
         >
           {toggleListText}
         </button>
         <button
           onClick={() => setView("cards")}
-          className={`rounded-xl border px-3 py-2 text-sm transition-all shadow-sm active:scale-95 ${
-            view === "cards" ? "border-primary bg-primary text-primary-foreground shadow-lg shadow-primary/20" : "border-border bg-card hover:bg-muted/50"
+          className={`rounded-control border px-3 py-2 text-sm transition-all shadow-field active:scale-95 ${
+            view === "cards" ? "border-primary bg-primary text-primary-foreground" : "border-border bg-card hover:bg-muted/50"
           }`}
         >
           {toggleCardsText}
@@ -75,7 +75,7 @@ export function PricesContainer({ items, toggleListText, toggleCardsText, includ
               viewport={{ once: true }}
               variants={cardVariants}
               whileHover={{ y: -5 }}
-              className="price-card rounded-2xl border border-border bg-card p-5 shadow-sm transition-all hover:shadow-md hover:border-border"
+              className="price-card rounded-card border border-border bg-card p-5 shadow-card transition-all hover:border-border"
             >
               <h2 className="font-serif text-xl text-foreground">{item.title}</h2>
               <p className="mt-2 text-lg font-semibold text-primary">{item.price}</p>

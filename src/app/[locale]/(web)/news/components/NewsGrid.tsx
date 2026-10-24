@@ -34,7 +34,7 @@ const cardVariants: Variants = {
 
 export function NewsGrid({ items, openText }: Props) {
   return (
-    <Container className="pb-12 md:pb-16">
+    <Container>
       <MotionViewport className="news-grid grid grid-cols-1 gap-6 md:grid-cols-2 xl:grid-cols-3">
         {items.map((item, i) => (
           <motion.article
@@ -44,7 +44,7 @@ export function NewsGrid({ items, openText }: Props) {
             whileInView="visible"
             viewport={{ once: true }}
             variants={cardVariants}
-            className="news-listing-card overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all hover:shadow-md hover:border-border"
+            className="news-listing-card overflow-hidden rounded-card border border-border bg-card shadow-card transition-all hover:border-border"
           >
             <div className="relative h-[250px] md:h-[250px] overflow-hidden">
               <Image
@@ -62,7 +62,7 @@ export function NewsGrid({ items, openText }: Props) {
               <p className="mt-2 text-sm text-muted-foreground">{item.subtitle}</p>
               <Link
                 href={`/news/${item.slug}`}
-                className="news-card-action mt-auto inline-flex w-fit rounded-xl bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-transform active:scale-95"
+                className="news-card-action mt-auto inline-flex w-fit rounded-control bg-primary px-4 py-2 text-xs font-semibold text-primary-foreground transition-transform active:scale-95"
               >
                 {openText}
               </Link>

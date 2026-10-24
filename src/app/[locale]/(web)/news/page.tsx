@@ -26,7 +26,7 @@ export default async function NewsPage({ params, searchParams }: Props) {
   );
 
   return (
-    <div className="pb-16 md:pb-24">
+    <div className="public-page-flow">
       <NewsHero title={t("title")} subtitle={t("subtitle")} />
       {items.length ? <NewsGrid items={items} openText={t("open")} /> : <Container className="py-10 md:py-14"><p className="empty-state text-base text-muted-foreground">{home("reviewPending")}</p></Container>}
       <Container>
