@@ -2,21 +2,27 @@ import "@/src/styles/globals.css";
 import { AppProviders } from "@/src/components/providers/AppProviders";
 import { NextIntlClientProvider } from "next-intl";
 import { getMessages, setRequestLocale } from "next-intl/server";
-import { Inter, Fraunces } from "next/font/google";
+import localFont from "next/font/local";
 import { routing } from "@/src/i18n/routing";
 import { headers } from "next/headers";
 import type { ReactNode } from "react";
 
-const inter = Inter({
-  subsets: ["latin", "cyrillic"],
+const inter = localFont({
+  src: "../../../public/fonts/inter/Inter-variable.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-sans",
   display: "swap",
+  fallback: ["system-ui", "Arial", "sans-serif"],
 });
 
-const fraunces = Fraunces({
-  subsets: ["latin", "latin-ext"],
+const fraunces = localFont({
+  src: "../../../public/fonts/fraunces/Fraunces-variable.woff2",
+  weight: "100 900",
+  style: "normal",
   variable: "--font-serif",
   display: "swap",
+  fallback: ["Georgia", "serif"],
 });
 
 type Props = {
